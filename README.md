@@ -27,8 +27,10 @@ Stellt die RTE Funktionen für das Ansteuern der LEDs über I2C zur Verfügung.
 ## RTE-Funktionen
 
 void RTE_INIT_DIO_INTERFACE();
+
 void RTE_DINIT_DIO_INTERFACE();
 
 void RTE_DIO_READ_DATA(DIO_Devices device);
+
 void RTE_DIO_WRITE_DATA(DIO_Devices device, DATA_TO_SEND dataToSend);
 
