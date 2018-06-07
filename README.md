@@ -1,9 +1,13 @@
-# OTHR_AUTOSARSS18
-This repository stores the code and documentations for the AUTOSAR course in the summer semester 2018
+# RTE Funktionen für LEDs
 
-## Goal
-The goal of this project is to control a NXT Brick (Brick 2) from another NXT Brick (Brick 1).
-Brick 1 gets the driving information from a joystick.
-Also on brick 1 there is an ultrasonic sensor and two buttons.
-The brick 2 gets the information via bluetooth from brick 1 and react to them by driving and blinking four LEDs.
+Stellt die RTE Funktionen für das Ansteuern der LEDs über I2C zur Verfügung.
+
+## Defines zu setzen
+
+#define LED_EXTERN --> Schaltet den Code für die Ansteuerung der LEDs ein
+#define DIO_EXTERN --> Schaltet die Logik für externe DIO-Geräte ein
+
+#define LED_I2C_PORT NXT_PORT_S1 --> Setzt den Port, an dem der I2C Expander angschlossen ist
+#define LED_I2C_ADRESS 0x20 --> Setzt die Adresse des I2C Expander
+#define LED_NUMBER_OF_LEDS 4 --> Setzt Anzahl der angeschlossenen LEDs
 
