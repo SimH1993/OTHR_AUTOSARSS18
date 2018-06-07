@@ -1,7 +1,7 @@
 #include "RTE_LED.h"
 
 /***************************************************************************************
- * 																				RTE Functions															 
+ * 				    				RTE Functions															 
  ***************************************************************************************/
 
 void RTE_INIT_DIO_INTERFACE(){
@@ -26,7 +26,7 @@ void RTE_INIT_DIO_INTERFACE(){
 		
 		#endif
 		
-	//i2c_enable(LED_I2C_PORT);
+	i2c_enable(LED_I2C_PORT);
 		
 	#endif
 }
@@ -35,7 +35,7 @@ void RTE_DINIT_DIO_INTERFACE(){
 	
     #ifdef DIO_EXTERN
 
-	//i2c_disable(LED_I2C_PORT);
+	i2c_disable(LED_I2C_PORT);
 	
     #endif
 }
@@ -61,7 +61,7 @@ void RTE_DIO_WRITE_DATA(DIO_Devices device, DATA_TO_SEND dataToSend){
 }
 
 /***************************************************************************************
- * 																DIO Hardware Abstraction																 
+ * 							DIO Hardware Abstraction																 
  ***************************************************************************************/
 
 #ifdef DIO_EXTERN
@@ -100,7 +100,7 @@ void dio_interface_readDataFromExternal(DIO_Devices device){
 }
 
 /***************************************************************************************
- * 																I2C Hardware Abstraction																 
+ * 								I2C Hardware Abstraction																 
  ***************************************************************************************/
 
 void I2C_writeData(DATA_TO_SEND dataToSend){
@@ -162,7 +162,7 @@ void I2C_writeData(DATA_TO_SEND dataToSend){
         
     };
     
- //   ecrobot_send_i2c(LED_I2C_PORT,LED_I2C_ADRESS,data,&data,sizeof(data));
+   ecrobot_send_i2c(LED_I2C_PORT,LED_I2C_ADRESS,data,&data,sizeof(data));
 
  #endif
 
