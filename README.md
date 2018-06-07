@@ -1,7 +1,7 @@
 # I2C Expander - Verwendung mit LEDs
 
 
-![Aufbau auf dem Steckbrett](https://github.com/SimH1993/OTHR_AUTOSARSS18/blob/I2C_LEDs/I2C_LEDs/Schaltplan%20AUTOSAR_Steckplatine.png)
+![Aufbau auf dem Steckbrett](https://github.com/SimH1993/OTHR_AUTOSARSS18/blob/I2C_LEDs/Schaltplan%20AUTOSAR_Steckplatine.png)
 
 ## I2C Verbindung aufbauen
 
