@@ -1,0 +1,3 @@
+As git only allows non-empty directories, this file serves as a dummy so that the src-folder is not empty anymore.
+
+Eclipse needs the src-folder to build projects, even when it's empty
