@@ -15,33 +15,45 @@
       <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//PortType/INTERNAL"/>
       <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//PortType/EXTERNAL"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="autosarMetaModel.ecore#//TriggerPortType">
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//TriggerPortType/INPUT"/>
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//TriggerPortType/OUTPUT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="autosarMetaModel.ecore#//ServerClientPortType">
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//ServerClientPortType/SERVER"/>
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//ServerClientPortType/CLIENT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="autosarMetaModel.ecore#//SenderReceiverPortType">
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//SenderReceiverPortType/SENDER"/>
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//SenderReceiverPortType/RECEIVER"/>
+    </genEnums>
     <genClasses image="false" ecoreClass="autosarMetaModel.ecore#//BaseClass">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//BaseClass/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//BaseClass/name"/>
     </genClasses>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//ServerClientPort"/>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//ServerClientPort">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//ServerClientPort/type"/>
+    </genClasses>
     <genClasses ecoreClass="autosarMetaModel.ecore#//SWC">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//SWC/runnable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//SWC/port"/>
     </genClasses>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//TriggerPort"/>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//SenderReceiverPort"/>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//Runnable">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//Runnable/input"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//Runnable/output"/>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//TriggerPort">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//TriggerPort/type"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="autosarMetaModel.ecore#//HandlerInterface"/>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//SenderReceiverPort">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//SenderReceiverPort/type"/>
+    </genClasses>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//Runnable"/>
     <genClasses image="false" ecoreClass="autosarMetaModel.ecore#//Port">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//Port/portNumber"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//Port/connection"/>
     </genClasses>
     <genClasses ecoreClass="autosarMetaModel.ecore#//CommunicationManager">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//CommunicationManager/bt_address"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//CommunicationManager/operationMode"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="autosarMetaModel.ecore#//Connection"/>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//SoundHandler"/>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//DisplayHandler"/>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//TasterHandler">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//TasterHandler/taster"/>
+    <genClasses image="false" ecoreClass="autosarMetaModel.ecore#//Connection">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//Connection/input"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//Connection/output"/>
     </genClasses>
     <genClasses image="false" ecoreClass="autosarMetaModel.ecore#//ADCInterface"/>
     <genClasses ecoreClass="autosarMetaModel.ecore#//Motor"/>
@@ -50,27 +62,22 @@
     </genClasses>
     <genClasses ecoreClass="autosarMetaModel.ecore#//Taster"/>
     <genClasses ecoreClass="autosarMetaModel.ecore#//Ultraschall"/>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//Brick">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//Brick/swc"/>
-    </genClasses>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//UltraschallHandler">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//UltraschallHandler/ultraschall"/>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//System">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//System/swc"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//System/brick"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//System/connection"/>
     </genClasses>
     <genClasses image="false" ecoreClass="autosarMetaModel.ecore#//ActuatorSensor">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//ActuatorSensor/portNr"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//ActuatorSensor/portType"/>
     </genClasses>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//I2CHandler"/>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//MotorHandler">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//MotorHandler/motor"/>
-    </genClasses>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//I2C"/>
     <genClasses ecoreClass="autosarMetaModel.ecore#//InternADC"/>
     <genClasses ecoreClass="autosarMetaModel.ecore#//LEDPort">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//LEDPort/address"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//LEDPort/index"/>
     </genClasses>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//LEDHandler">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//LEDHandler/ledport"/>
-    </genClasses>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//Brick"/>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//HardwarePort"/>
   </genPackages>
 </genmodel:GenModel>
