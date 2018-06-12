@@ -5,7 +5,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="BaseClass" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ServerClientPort" eSuperTypes="#//Port">
+  <eClassifiers xsi:type="ecore:EClass" name="ServerClientPort" eSuperTypes="#//SoftwarePort">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ServerClientPortType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SWC" eSuperTypes="#//BaseClass">
@@ -14,10 +14,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="port" upperBound="-1" eType="#//Port"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TriggerPort" eSuperTypes="#//Port">
+  <eClassifiers xsi:type="ecore:EClass" name="TriggerPort" eSuperTypes="#//SoftwarePort">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//TriggerPortType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SenderReceiverPort" eSuperTypes="#//Port">
+  <eClassifiers xsi:type="ecore:EClass" name="SenderReceiverPort" eSuperTypes="#//SoftwarePort">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//SenderReceiverPortType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Runnable" eSuperTypes="#//BaseClass"/>
@@ -31,18 +31,13 @@
         eType="#//OperationMode"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Connection" abstract="true" interface="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="input" lowerBound="1" eType="#//Port"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="input" lowerBound="1" eType="#//SoftwarePort"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="output" lowerBound="1"
-        eType="#//Port"/>
+        eType="#//SoftwarePort"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ADCInterface" abstract="true" interface="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Motor" eSuperTypes="#//ActuatorSensor"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ExternADC" eSuperTypes="#//ADCInterface">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Taster" eSuperTypes="#//ActuatorSensor"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Ultraschall" eSuperTypes="#//ActuatorSensor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Motor" eSuperTypes="#//ECUPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Taster" eSuperTypes="#//ECUPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Ultraschall" eSuperTypes="#//ECUPort"/>
   <eClassifiers xsi:type="ecore:EClass" name="System" eSuperTypes="#//BaseClass">
     <eStructuralFeatures xsi:type="ecore:EReference" name="swc" upperBound="-1" eType="#//SWC"
         containment="true"/>
@@ -58,21 +53,22 @@
   <eClassifiers xsi:type="ecore:EClass" name="ActuatorSensor" abstract="true" eSuperTypes="#//BaseClass #//Connection">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="portNr" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="portType" lowerBound="1"
-        eType="#//PortType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="I2C" eSuperTypes="#//ActuatorSensor"/>
-  <eClassifiers xsi:type="ecore:EEnum" name="PortType">
-    <eLiterals name="INTERNAL"/>
-    <eLiterals name="EXTERNAL" value="1"/>
+  <eClassifiers xsi:type="ecore:EClass" name="I2CExpander" eSuperTypes="#//ActuatorSensor">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" lowerBound="1" eType="#//IC2Mode"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InternADC" eSuperTypes="#//ADCInterface #//ActuatorSensor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ADC" eSuperTypes="#//ActuatorSensor"/>
   <eClassifiers xsi:type="ecore:EClass" name="LEDPort">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Brick"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Brick">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hardwareconnection" upperBound="-1"
+        eType="#//HardwareConnection" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="TriggerPortType">
     <eLiterals name="INPUT"/>
     <eLiterals name="OUTPUT" value="1"/>
@@ -85,5 +81,15 @@
     <eLiterals name="SENDER"/>
     <eLiterals name="RECEIVER" value="1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="HardwarePort" eSuperTypes="#//Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ECUPort" abstract="true" eSuperTypes="#//Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SoftwarePort" abstract="true" eSuperTypes="#//Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HardwareConnection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hardwareport" lowerBound="1"
+        eType="#//ECUPort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="IC2Mode">
+    <eLiterals name="DIO"/>
+    <eLiterals name="ADC" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DIO" eSuperTypes="#//ActuatorSensor"/>
 </ecore:EPackage>
