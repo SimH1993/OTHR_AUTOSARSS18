@@ -21,11 +21,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//SenderReceiverPortType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Runnable" eSuperTypes="#//BaseClass"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Port" abstract="true" eSuperTypes="#//BaseClass">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="portNumber" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Connection" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="Port" abstract="true" eSuperTypes="#//BaseClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Connection" abstract="true" eSuperTypes="#//BaseClass">
     <eStructuralFeatures xsi:type="ecore:EReference" name="input" lowerBound="1" eType="#//SoftwarePort"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="output" lowerBound="1"
         eType="#//SoftwarePort"/>
@@ -55,13 +52,14 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" lowerBound="1" eType="#//IC2Mode"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ADC" eSuperTypes="#//ActuatorSensor"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Brick">
+  <eClassifiers xsi:type="ecore:EClass" name="Brick" eSuperTypes="#//BaseClass">
     <eStructuralFeatures xsi:type="ecore:EReference" name="hardwareconnection" upperBound="-1"
         eType="#//HardwareConnection" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="bluetoothMode" lowerBound="1"
         eType="#//OperationMode"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="bluetoothMAC" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="swc" upperBound="-1" eType="#//SWC"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="TriggerPortType">
     <eLiterals name="INPUT"/>
@@ -77,7 +75,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ECUPort" abstract="true" eSuperTypes="#//Port"/>
   <eClassifiers xsi:type="ecore:EClass" name="SoftwarePort" abstract="true" eSuperTypes="#//Port"/>
-  <eClassifiers xsi:type="ecore:EClass" name="HardwareConnection">
+  <eClassifiers xsi:type="ecore:EClass" name="HardwareConnection" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="hardwareport" lowerBound="1"
         eType="#//ECUPort"/>
   </eClassifiers>
@@ -91,4 +89,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="LED" eSuperTypes="#//ECUPort"/>
   <eClassifiers xsi:type="ecore:EClass" name="LocalConnection" eSuperTypes="#//Connection"/>
   <eClassifiers xsi:type="ecore:EClass" name="BluetoothConnection" eSuperTypes="#//Connection"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JoystickTaster" eSuperTypes="#//ECUPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JoystickHorizontal" eSuperTypes="#//ECUPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JoystickVertical" eSuperTypes="#//ECUPort"/>
 </ecore:EPackage>
