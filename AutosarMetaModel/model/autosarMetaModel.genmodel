@@ -47,10 +47,6 @@
     <genClasses image="false" ecoreClass="autosarMetaModel.ecore#//Port">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//Port/portNumber"/>
     </genClasses>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//CommunicationManager">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//CommunicationManager/bt_address"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//CommunicationManager/operationMode"/>
-    </genClasses>
     <genClasses image="false" ecoreClass="autosarMetaModel.ecore#//Connection">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//Connection/input"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//Connection/output"/>
@@ -71,18 +67,21 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//I2CExpander/mode"/>
     </genClasses>
     <genClasses ecoreClass="autosarMetaModel.ecore#//ADC"/>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//LEDPort">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//LEDPort/address"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//LEDPort/index"/>
-    </genClasses>
     <genClasses ecoreClass="autosarMetaModel.ecore#//Brick">
       <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//Brick/hardwareconnection"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//Brick/bluetoothMode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//Brick/bluetoothMAC"/>
     </genClasses>
     <genClasses ecoreClass="autosarMetaModel.ecore#//ECUPort"/>
     <genClasses ecoreClass="autosarMetaModel.ecore#//SoftwarePort"/>
     <genClasses ecoreClass="autosarMetaModel.ecore#//HardwareConnection">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//HardwareConnection/hardwareport"/>
     </genClasses>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//DIO"/>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//DIO">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//DIO/pin"/>
+    </genClasses>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//LED"/>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//LocalConnection"/>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//BluetoothConnection"/>
   </genPackages>
 </genmodel:GenModel>

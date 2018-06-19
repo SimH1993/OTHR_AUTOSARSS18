@@ -25,12 +25,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="portNumber" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CommunicationManager" eSuperTypes="#//BaseClass #//Connection">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bt_address" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationMode" lowerBound="1"
-        eType="#//OperationMode"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Connection" abstract="true" interface="true">
+  <eClassifiers xsi:type="ecore:EClass" name="Connection" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="input" lowerBound="1" eType="#//SoftwarePort"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="output" lowerBound="1"
         eType="#//SoftwarePort"/>
@@ -50,7 +45,7 @@
     <eLiterals name="MASTER"/>
     <eLiterals name="SLAVE" value="1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ActuatorSensor" abstract="true" eSuperTypes="#//BaseClass #//Connection">
+  <eClassifiers xsi:type="ecore:EClass" name="ActuatorSensor" abstract="true" eSuperTypes="#//BaseClass #//HardwareConnection">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="portNr" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
@@ -60,14 +55,13 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" lowerBound="1" eType="#//IC2Mode"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ADC" eSuperTypes="#//ActuatorSensor"/>
-  <eClassifiers xsi:type="ecore:EClass" name="LEDPort">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Brick">
     <eStructuralFeatures xsi:type="ecore:EReference" name="hardwareconnection" upperBound="-1"
         eType="#//HardwareConnection" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bluetoothMode" lowerBound="1"
+        eType="#//OperationMode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bluetoothMAC" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="TriggerPortType">
     <eLiterals name="INPUT"/>
@@ -91,5 +85,10 @@
     <eLiterals name="DIO"/>
     <eLiterals name="ADC" value="1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DIO" eSuperTypes="#//ActuatorSensor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DIO" eSuperTypes="#//ActuatorSensor">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pin" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LED" eSuperTypes="#//ECUPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LocalConnection" eSuperTypes="#//Connection"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BluetoothConnection" eSuperTypes="#//Connection"/>
 </ecore:EPackage>
