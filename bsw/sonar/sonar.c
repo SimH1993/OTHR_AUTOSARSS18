@@ -13,7 +13,7 @@ void sonar_initialize_sensor()
 	if(!sonar_sensor_initialized)
 	{
 		ecrobot_init_sonar_sensor(SONAR_SENSOR_PORT);
-		sonar_sensor_initialised = 1;
+		sonar_sensor_initialized = 1;
 	}
 }
 
