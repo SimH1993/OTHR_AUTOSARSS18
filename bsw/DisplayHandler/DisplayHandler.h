@@ -1,5 +1,5 @@
 #define DISPLAY_MAX_X		15
-#define DISPLAY_MAX_Y		17
+#define DISPLAY_MAX_Y		8
 #define DISPLAY_EMPTY_LINE	"               "
 
 //Public functions

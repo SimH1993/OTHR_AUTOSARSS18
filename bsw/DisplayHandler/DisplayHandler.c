@@ -29,7 +29,7 @@ void display_clear_line(int y)
 
 void display_write(const char *str)
 {
-	if(display_line_cnt >= 7)
+	if(display_line_cnt >= DISPLAY_MAX_Y)
 	{
 		display_clear(0);
 		display_goto_xy(0, 0);
