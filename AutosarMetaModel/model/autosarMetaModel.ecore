@@ -22,11 +22,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Runnable" eSuperTypes="#//BaseClass"/>
   <eClassifiers xsi:type="ecore:EClass" name="Port" abstract="true" eSuperTypes="#//BaseClass"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Connection" abstract="true" eSuperTypes="#//BaseClass">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="input" lowerBound="1" eType="#//SoftwarePort"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="output" lowerBound="1"
-        eType="#//SoftwarePort"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Motor" eSuperTypes="#//ECUPort"/>
   <eClassifiers xsi:type="ecore:EClass" name="Taster" eSuperTypes="#//ECUPort"/>
   <eClassifiers xsi:type="ecore:EClass" name="Ultraschall" eSuperTypes="#//ECUPort"/>
@@ -87,9 +82,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="pin" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LED" eSuperTypes="#//ECUPort"/>
-  <eClassifiers xsi:type="ecore:EClass" name="LocalConnection" eSuperTypes="#//Connection"/>
-  <eClassifiers xsi:type="ecore:EClass" name="BluetoothConnection" eSuperTypes="#//Connection"/>
   <eClassifiers xsi:type="ecore:EClass" name="JoystickTaster" eSuperTypes="#//ECUPort"/>
   <eClassifiers xsi:type="ecore:EClass" name="JoystickHorizontal" eSuperTypes="#//ECUPort"/>
   <eClassifiers xsi:type="ecore:EClass" name="JoystickVertical" eSuperTypes="#//ECUPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Connection" eSuperTypes="#//BaseClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="input" lowerBound="1" eType="#//SoftwarePort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="output" lowerBound="1"
+        eType="#//SoftwarePort"/>
+  </eClassifiers>
 </ecore:EPackage>

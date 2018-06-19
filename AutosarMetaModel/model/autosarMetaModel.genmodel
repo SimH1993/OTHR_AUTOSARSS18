@@ -45,17 +45,13 @@
     </genClasses>
     <genClasses ecoreClass="autosarMetaModel.ecore#//Runnable"/>
     <genClasses image="false" ecoreClass="autosarMetaModel.ecore#//Port"/>
-    <genClasses image="false" ecoreClass="autosarMetaModel.ecore#//Connection">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//Connection/input"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//Connection/output"/>
-    </genClasses>
     <genClasses ecoreClass="autosarMetaModel.ecore#//Motor"/>
     <genClasses ecoreClass="autosarMetaModel.ecore#//Taster"/>
     <genClasses ecoreClass="autosarMetaModel.ecore#//Ultraschall"/>
     <genClasses ecoreClass="autosarMetaModel.ecore#//System">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//System/swc"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//System/brick"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//System/connection"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//System/connection"/>
     </genClasses>
     <genClasses image="false" ecoreClass="autosarMetaModel.ecore#//ActuatorSensor">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//ActuatorSensor/portNr"/>
@@ -80,10 +76,12 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//DIO/pin"/>
     </genClasses>
     <genClasses ecoreClass="autosarMetaModel.ecore#//LED"/>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//LocalConnection"/>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//BluetoothConnection"/>
     <genClasses ecoreClass="autosarMetaModel.ecore#//JoystickTaster"/>
     <genClasses ecoreClass="autosarMetaModel.ecore#//JoystickHorizontal"/>
     <genClasses ecoreClass="autosarMetaModel.ecore#//JoystickVertical"/>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//Connection">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//Connection/input"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//Connection/output"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>
