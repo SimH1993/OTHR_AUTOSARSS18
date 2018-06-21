@@ -27,6 +27,15 @@
       <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//IC2Mode/DIO"/>
       <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//IC2Mode/ADC"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="autosarMetaModel.ecore#//BrickPort">
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//BrickPort/A"/>
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//BrickPort/B"/>
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//BrickPort/C"/>
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//BrickPort/S1"/>
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//BrickPort/S2"/>
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//BrickPort/S3"/>
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//BrickPort/S4"/>
+    </genEnums>
     <genClasses image="false" ecoreClass="autosarMetaModel.ecore#//BaseClass">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//BaseClass/name"/>
     </genClasses>
@@ -48,10 +57,10 @@
     <genClasses ecoreClass="autosarMetaModel.ecore#//Motor"/>
     <genClasses ecoreClass="autosarMetaModel.ecore#//Taster"/>
     <genClasses ecoreClass="autosarMetaModel.ecore#//Ultraschall"/>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//System">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//System/swc"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//System/brick"/>
-      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//System/connection"/>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//AutosarSystem">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//AutosarSystem/swc"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//AutosarSystem/brick"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//AutosarSystem/connection"/>
     </genClasses>
     <genClasses image="false" ecoreClass="autosarMetaModel.ecore#//ActuatorSensor">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//ActuatorSensor/portNr"/>

@@ -25,7 +25,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Motor" eSuperTypes="#//ECUPort"/>
   <eClassifiers xsi:type="ecore:EClass" name="Taster" eSuperTypes="#//ECUPort"/>
   <eClassifiers xsi:type="ecore:EClass" name="Ultraschall" eSuperTypes="#//ECUPort"/>
-  <eClassifiers xsi:type="ecore:EClass" name="System" eSuperTypes="#//BaseClass">
+  <eClassifiers xsi:type="ecore:EClass" name="AutosarSystem" eSuperTypes="#//BaseClass">
     <eStructuralFeatures xsi:type="ecore:EReference" name="swc" upperBound="-1" eType="#//SWC"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="brick" upperBound="-1"
@@ -89,5 +89,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="input" lowerBound="1" eType="#//SoftwarePort"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="output" lowerBound="1"
         eType="#//SoftwarePort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="BrickPort">
+    <eLiterals name="A"/>
+    <eLiterals name="B" value="1"/>
+    <eLiterals name="C" value="2"/>
+    <eLiterals name="S1" value="3"/>
+    <eLiterals name="S2" value="4"/>
+    <eLiterals name="S3" value="5"/>
+    <eLiterals name="S4" value="6"/>
   </eClassifiers>
 </ecore:EPackage>
