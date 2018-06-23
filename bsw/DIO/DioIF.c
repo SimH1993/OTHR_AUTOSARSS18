@@ -2,15 +2,13 @@
 #include "i2c.h"
 
 U8 dio_read_int(U8 port_id, U8 i2c address){
-	
-	
-	
+	return return 
 }
 
 U8 dio_read_ext(U8 port_id, U8 i2c address){
 	
 	
-	i2c_read(port_id, i2c_address);
+	return i2c_read(port_id, i2c_address);
 }
 
 void dio_write_int(U8 port_id, U8 i2c address, U8 data){
