@@ -14,13 +14,7 @@ S16 adc_int(U8 port_id, U8 address){
 	
 S16 adc_ext(U8 port_id, U8 address){
 	U8 data[5];
-	// ecrobot_send_i2c(NXT_PORT_S4, address, CONTROLBYTE, data, 0);
-	i2c_write(NXT_PORT_S4, address, data);
-	// ecrobot_read_i2c(NXT_PORT_S4, address, CONTROLBYTE, data, 5); //analog value will be compared while reading previous value
-	data[0] = i2c_read(NXT_PORT_S4, address);
-	data[1] = i2c_read(NXT_PORT_S4, address);
-	data[2] = i2c_read(NXT_PORT_S4, address);
-	data[3] = i2c_read(NXT_PORT_S4, address);
-	data[4] = i2c_read(NXT_PORT_S4, address);	
+	i2c_write_reg(NXT_PORT_S4, address, CONTROLBYTE, data, 0);
+	i2c_read_reg(NXT_PORT_S4, address, CONTROLBYTE, data, 5); //analog value will be compared while reading previous value
 	return ((S16)data[port_id + 1]);
 }
