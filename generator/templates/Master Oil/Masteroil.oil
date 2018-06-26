@@ -50,7 +50,7 @@ CPU ATMEL_AT91SAM7S256
 		PRIORITY = 11;
 		ACTIVATION = 1;
 		SCHEDULE = NON;
-		STACKSIZE = STACKSIZE_VALUE;
+		STACKSIZE = 512;
 	};
 	
 	EVENT ComEvent_send
@@ -60,9 +60,9 @@ CPU ATMEL_AT91SAM7S256
 	
 	COUNTER CounterOne
 	{
-		MINCYCLE = <MINCYCLE_VALUE>;
-		MAXALLOWEDVALUE = <MAXALLOWEDVALUE_VALUE>;
-		TICKSPERBASE = <TICKSPERBASE_VALUE>;
+		MINCYCLE = 1;
+		MAXALLOWEDVALUE = 5000;
+		TICKSPERBASE = 1;
 	};
 	
 	ALARM ComAlarm_receive
@@ -86,6 +86,6 @@ CPU ATMEL_AT91SAM7S256
 	//////End of region \\\\\\\\\\\
 	
 	//////This is the region for RTE generated TASKS\\\\\\
-	___Tasks____
+	___TASKS___
 	//////End of region \\\\\\\\\\\
 }; 
