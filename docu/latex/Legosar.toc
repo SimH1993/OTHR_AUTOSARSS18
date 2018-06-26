@@ -1,0 +1,4 @@
+\select@language {american}
+\vspace {-\cftbeforechapskip }
+\select@language {ngerman}
+\contentsline {chapter}{\numberline {A}{Anhang}}{1}{appendix.A}
