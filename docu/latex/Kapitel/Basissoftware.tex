@@ -1,20 +1,51 @@
 \chapter{Basissoftware}
 
 
-\section{Schichtenmodell}
+\section{Schichtenarchitektur}
 
+Die in AUTOSAR definierte Schichtenarchitektur soll eine einfachere Portierung von Software auf unterschiedliche Hardware ermöglichen. Mussten bislang bei ungünstig konzipierten Software-Architekturen verschiedene Stellen bis hin zur Anwendungsschicht umfangreich angepasst werden, müssen mit AUTOSAR lediglich alle mikrocontroller-spezifischen Treiber im MCAL ersetzt werden. Dadurch reduziert sich der Implementierungs- und Testaufwand sowie das damit verbundene Risiko deutlich. Softwarekomponenten können so durch die hardwareunabhängige Schnittstellen leicht auf unterschiedliche Steuergeräte übertragen werden.
+In AUTOSAR unterscheidet man grundsätzlich die folgende Schichten:
+
+\begin{itemize}
+\item Anwendungsschicht
+\item Runtime Environment (RTE)
+\item Service Layer
+\item ECU Abstraction Layer
+\item Microscontroller Abstraction Layer (MCAL)
+\end{itemize}
+
+
+Die Umsetzung des Projekts erforderte konkrete Implementierungen sowohl im Bereich der Service Layer als auch in der ECU Hardware Abstraction.
 
 %Allgemeiner Aufbau des Schichtenmodells
 
 \subsection{Service Layer}
 
+Die Service Layer enthält im Allgemeinen die Betriebsystem-Funktionen und stellt verschiedene Arten von Hintergrunddiensten wie Netzwerkdienste, Speicherverwaltung und Buskommunikationsdienste für die Anwendungsschicht bereit. Sie ist die höchste Schicht der Basissoftware und ist damit essentiell für die Anwendungsschicht. Die Implementierung ist in den meisten Fällen hardwareunabhängig und damit leicht austauschbar.
+
+
+
+
 % Beschreibung Aufgaben der Service Layer
 
-\subsubsection{Motor Handler}
+
+
+\subsubsection{Sound Handler}
+
+Der Sound Handler stellt der RTE spezifische Funktionen zur Audiowiedergabe zur Verfügung.  
+Als Funktionalität implementiert der Sound Handler dabei sowohl die einfache Wiedergabe eines Tons oder einer WAV-Datei als auch die Mehrfachwiedergabe mit optionaler Pause. Umgesetzt wird dies durch die folgenden Methoden:
+
+\begin{lstlisting}[frame=single]  
+void play_single_wav(U32 freq, U32 ms, U32 vol);
+void play_single_wav(U32 file, U32 length, U32 freq, U32 vol);
+
+void play_multiple_tones(U32 freq, U32 ms, U32 vol, U32 rep, U32 pause);
+void play_multiple_wavs(const CHAR *file, U32 length, S32 freq, U32 vol, U32 rep, U32 pause);
+\end{lstlisting}
 
 % Beschreibung der aufrufbaren Funktionen von RTE und MCAL, Methodendeklaration
 
-\subsubsection{Sound Handler}
+\subsubsection{Motor Handler}
 
 % Beschreibung der aufrufbaren Funktionen von RTE und MCAL, Methodendeklaration
 
@@ -27,6 +58,8 @@
 % Beschreibung der aufrufbaren Funktionen von RTE und MCAL, Methodendeklaration
 
 \subsection{ECU Hardware Abstraction}
+
+Die ECU Hardware Abstraction Layer versteckt den konkreten Aufbau des Steuergeräts und bietet einen einheitlichen Zugriff auf alle Funktionalitäten eines Steuergeräts wie Kommunikation, Speicher oder IO - unabhängig davon, ob diese Funktionalitäten Bestandteil des Mikrocontrollers sind oder durch Peripheriekomponenten realisiert werden.
 
 % Beschreibung Aufgaben der ECU Abstraction Layer
 
