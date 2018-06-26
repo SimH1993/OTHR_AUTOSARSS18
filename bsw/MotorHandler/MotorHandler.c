@@ -24,7 +24,3 @@ void motor_set_speed(S8 x, S8 y)
 	motor_current_speed = y;
 }
 
-S8 motor_read_speed()
-{
-	return motor_current_speed;
-}
