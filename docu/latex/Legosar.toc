@@ -1,5 +1,22 @@
 \babel@toc {american}{}
 \vspace {-\cftbeforechapskip }
+<<<<<<< HEAD
+\select@language {ngerman}
+\contentsline {chapter}{\numberline {1}{Basissoftware}}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}{Schichtenmodell}}{1}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}{Service Layer}}{3}{subsection.1.1.1}
+\contentsline {subsubsection}{\numberline {1.1.1.1}{Motor Handler}}{3}{subsubsection.1.1.1.1}
+\contentsline {subsubsection}{\numberline {1.1.1.2}{Sound Handler}}{3}{subsubsection.1.1.1.2}
+\contentsline {subsubsection}{\numberline {1.1.1.3}{Communication Manager}}{3}{subsubsection.1.1.1.3}
+\contentsline {subsubsection}{\numberline {1.1.1.4}{Display Handler}}{3}{subsubsection.1.1.1.4}
+\contentsline {subsection}{\numberline {1.1.2}{ECU Hardware Abstraction}}{3}{subsection.1.1.2}
+\contentsline {subsubsection}{\numberline {1.1.2.1}{Ultraschall Hardware Abstraction}}{3}{subsubsection.1.1.2.1}
+\contentsline {subsubsection}{\numberline {1.1.2.2}{ADC Hardware Abstraction}}{3}{subsubsection.1.1.2.2}
+\contentsline {subsubsection}{\numberline {1.1.2.3}{DIO Hardware Abstraction}}{3}{subsubsection.1.1.2.3}
+\contentsline {subsubsection}{\numberline {1.1.2.4}{I2C Hardware Abstraction}}{3}{subsubsection.1.1.2.4}
+\contentsline {chapter}{\numberline {A}{Anhang}}{4}{appendix.A}
+=======
 \babel@toc {ngerman}{}
 \contentsline {chapter}{\numberline {1}{Hardwareaufbau}}{1}{chapter.1}
 \contentsline {chapter}{\numberline {A}{Anhang}}{2}{appendix.A}
+>>>>>>> 11ffc776ba51a6022f203530fa44d420f09ab673

@@ -3,5 +3,13 @@
 \BOOKMARK [1][-]{lot.1}{Tabellenverzeichnis}{}% 3
 \BOOKMARK [1][-]{lol.1}{Listings}{}% 4
 \BOOKMARK [1][-]{acronyms.1}{Acronyms}{}% 5
+<<<<<<< HEAD
+\BOOKMARK [0][]{chapter.1}{1 Basissoftware}{}% 6
+\BOOKMARK [1][-]{section.1.1}{1.1 Schichtenmodell}{chapter.1}% 7
+\BOOKMARK [2][-]{subsection.1.1.1}{1.1.1 Service Layer}{section.1.1}% 8
+\BOOKMARK [2][-]{subsection.1.1.2}{1.1.2 ECU Hardware Abstraction}{section.1.1}% 9
+\BOOKMARK [0][]{appendix.A}{A Anhang}{}% 10
+=======
 \BOOKMARK [0][]{chapter.1}{1 Hardwareaufbau}{}% 6
 \BOOKMARK [0][]{appendix.A}{A Anhang}{}% 7
+>>>>>>> 11ffc776ba51a6022f203530fa44d420f09ab673
