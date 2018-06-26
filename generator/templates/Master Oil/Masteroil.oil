@@ -76,4 +76,16 @@ CPU ATMEL_AT91SAM7S256
 		
 		AUTOSTART = FALSE;
 	};
+	
+	//////This is the region for RTE generated Alarms\\\\\\
+	___ALARM_REPLACE___
+	//////End of region \\\\\\\\\\\
+	
+	//////This is the region for RTE generated events\\\\\\
+	___EVENT_REPLACE___
+	//////End of region \\\\\\\\\\\
+	
+	//////This is the region for RTE generated TASKS\\\\\\
+	___Tasks____
+	//////End of region \\\\\\\\\\\
 }; 
