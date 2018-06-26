@@ -1,0 +1,1 @@
+statische und dynamische werte

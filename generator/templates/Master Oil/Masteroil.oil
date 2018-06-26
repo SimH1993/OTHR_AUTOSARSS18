@@ -1,0 +1,79 @@
+//****************************************************************************
+// @Module        CONFIG
+// @Filename      CONFIG.h
+// @Project       ATUOSARSS18
+//----------------------------------------------------------------------------
+// @Description   This oil file contains all tasks for 
+//                the Project.
+//
+//----------------------------------------------------------------------------
+// @Date          21.06.2018 11:52:51
+//
+
+//============================================================================
+//@includes
+#include "CONFIG.oil"
+
+//============================================================================
+CPU ATMEL_AT91SAM7S256
+{
+	OS LEJOS_OSEK
+	{
+		STATUS = EXTENDED;
+		STARTUPHOOK = FALSE;
+		ERRORHOOK = FALSE;
+		SHUTDOWNHOOK = FALSE;
+		PRETASKHOOK = FALSE;
+		POSTTASKHOOK = FALSE;
+		USEGETSERVICEID = FALSE;
+		USEPARAMETERACCESS = FALSE;
+		USERESSCHEDULER = FALSE;
+	}; 
+
+	APPMODE appmode1{};
+	
+
+	TASK ComTask_send
+	{
+		AUTOSTART = FALSE;
+		PRIORITY = 100;
+		ACTIVATION = 1;
+		SCHEDULE = NONE;
+		STACKSIZE = STACKSIZE_VALUE;
+		
+		EVENT = ComEvent_send;
+	};
+	
+	TASK ComTask_receive
+	{
+		AUTOSTART = FALSE;
+		PRIORITY = 100;
+		ACTIVATION = 1;
+		SCHEDULE = NONE;
+		STACKSIZE = STACKSIZE_VALUE;
+	};
+	
+	EVENT ComEvent_send
+	{
+		MASK = AUTO;
+	};
+	
+	COUNTER CounterOne
+	{
+		MINCYCLE = MINCYCLE_VALUE;
+		MAXALLOWEDVALUE = MAXALLOWEDVALUE_VALUE;
+		TICKSPERBASE = TICKSPERBASE_VALUE;
+	};
+	
+	ALARM ComAlarm_receive
+	{
+		COUNTER = COUNTER_VALUE;
+		
+		ACTION = ACTIVATETASK
+		{
+			TASK = ComTask_receive;
+		};
+		
+		AUTOSTART = FALSE;
+	};
+}; 
