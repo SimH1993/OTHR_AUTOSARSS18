@@ -2,3 +2,14 @@
 *.log
 *.lof
 .DS_Store
+docu/latex/Anhang/Anhang.aux
+docu/latex/Anhang/literatur.aux
+docu/latex/Legosar.aux
+docu/latex/Legosar.lof
+docu/latex/Legosar.log
+docu/latex/Legosar.lol
+docu/latex/Legosar.lot
+docu/latex/Legosar.out
+docu/latex/Legosar.synctex.gz
+docu/latex/Legosar.tex
+docu/latex/Legosar.toc

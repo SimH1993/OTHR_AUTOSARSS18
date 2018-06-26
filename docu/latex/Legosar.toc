@@ -1,4 +1,5 @@
-\select@language {american}
+\babel@toc {american}{}
 \vspace {-\cftbeforechapskip }
-\select@language {ngerman}
-\contentsline {chapter}{\numberline {A}{Anhang}}{1}{appendix.A}
+\babel@toc {ngerman}{}
+\contentsline {chapter}{\numberline {1}{Hardwareaufbau}}{1}{chapter.1}
+\contentsline {chapter}{\numberline {A}{Anhang}}{2}{appendix.A}
