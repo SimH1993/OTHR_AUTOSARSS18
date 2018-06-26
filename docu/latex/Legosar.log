@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.6.26)  26 JUN 2018 10:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.6.26)  26 JUN 2018 10:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1277,7 +1277,7 @@ Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'american'.
 
 (./Legosar.aux (./Gestaltung/Titlepage.aux) (./Gestaltung/Contents.aux)
-(./Anhang/Anhang.aux) (./Anhang/literatur.aux))
+(./Kapitel/Hardwareaufbau.aux) (./Anhang/Anhang.aux) (./Anhang/literatur.aux))
 \openout1 = `Legosar.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
@@ -1418,7 +1418,7 @@ Package epstopdf Info: Source file: <Logo/oth_logo_neu.eps>
 erted-to.pdf Logo/oth_logo_neu.eps>
 (epstopdf)             \includegraphics on input line 6.
 Package epstopdf Info: Output file is already uptodate.
-<Logo/oth_logo_neu-eps-converted-to.pdf, id=28, 1092.08pt x 189.70876pt>
+<Logo/oth_logo_neu-eps-converted-to.pdf, id=32, 1092.08pt x 189.70876pt>
 File: Logo/oth_logo_neu-eps-converted-to.pdf Graphic file (type pdf)
 <use Logo/oth_logo_neu-eps-converted-to.pdf>
 Package pdftex.def Info: Logo/oth_logo_neu-eps-converted-to.pdf  used on input 
@@ -1637,12 +1637,7 @@ Package atveryend Info: Empty hook `BeforeClearDocument' on input line 76.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 76.
 
 (./Legosar.aux (./Gestaltung/Titlepage.aux) (./Gestaltung/Contents.aux)
-(./Kapitel/Hardwareaufbau.aux) (./Anhang/Anhang.aux) (./Anhang/literatur.aux)
-
-Package mparhack Warning: Marginpars may have changed.
-(mparhack)                Rerun to get them right.
-
-)
+(./Kapitel/Hardwareaufbau.aux) (./Anhang/Anhang.aux) (./Anhang/literatur.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 76.
 
 
@@ -1799,18 +1794,12 @@ Anhang/literatur.tex
  ***********
 
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 76.
-
-Package rerunfilecheck Warning: File `Legosar.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Legosar.out':
-(rerunfilecheck)             Before: AA822F8688BBF80A04270CCE077DA695;289
-(rerunfilecheck)             After:  44C12DD7FB097E96448FED9B6635E7D2;339.
+Package rerunfilecheck Info: File `Legosar.out' has not changed.
+(rerunfilecheck)             Checksum: 44C12DD7FB097E96448FED9B6635E7D2;339.
  ) 
 Here is how much of TeX's memory you used:
- 27757 strings out of 492646
- 506321 string characters out of 6129563
+ 27759 strings out of 492646
+ 506361 string characters out of 6129563
  871529 words of memory out of 5000000
  31236 multiletter control sequences out of 15000+600000
  583514 words of font info for 90 fonts, out of 8000000 for 9000
@@ -1823,10 +1812,10 @@ mf-dist/fonts/type1/public/bera/fvmr8a.pfb></usr/local/texlive/2018/texmf-dist/
 fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/t
 ype1/urw/palatino/uplr8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/ur
 w/palatino/uplri8a.pfb>
-Output written on Legosar.pdf (7 pages, 69502 bytes).
+Output written on Legosar.pdf (7 pages, 71466 bytes).
 PDF statistics:
- 114 PDF objects out of 1000 (max. 8388607)
- 96 compressed objects within 1 object stream
+ 118 PDF objects out of 1000 (max. 8388607)
+ 100 compressed objects within 1 object stream
  26 named destinations out of 1000 (max. 500000)
- 13878 words of extra memory for PDF output out of 14400 (max. 10000000)
+ 13886 words of extra memory for PDF output out of 14400 (max. 10000000)
 

@@ -13,3 +13,5 @@ docu/latex/Legosar.out
 docu/latex/Legosar.synctex.gz
 docu/latex/Legosar.tex
 docu/latex/Legosar.toc
+*.gz
+*.log
