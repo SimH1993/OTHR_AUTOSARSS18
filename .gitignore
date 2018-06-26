@@ -1,4 +1,4 @@
-/docu/*.aux
-/docu/*.log
-/docu/*.lof
+*.aux
+*.log
+*.lof
 .DS_Store
