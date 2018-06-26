@@ -10,9 +10,9 @@
 #define LED_Right_Up_ON      0xFE
 #define LED_Right_Down_ON    0xFD
 
-#define LEDs_FlashingLeft   (LED_Left_Up_ON & LED_Left_Down_ON)
-#define LEDs_FlashingRight  (LED_Right_Up_ON & LED_Right_Down_ON)
-#define LEDs_FlashingAll    (LEDs_FlashingLeft & LEDs_FlashingRight)
+#define LEDs_FlashingLeft   (LED_Left_Up_ON | LED_Left_Down_ON)
+#define LEDs_FlashingRight  (LED_Right_Up_ON | LED_Right_Down_ON)
+#define LEDs_FlashingAll    (LEDs_FlashingLeft | LEDs_FlashingRight)
 
 #define LEDs_All_OFF        0xEF
 
