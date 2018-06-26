@@ -49,3 +49,8 @@
 		bufferSize [U8]: Size of the data buffer
 */
 #define i2c_write_reg(port_id, i2c_address, regAddress, buffer, bufferSize) (ecrobot_send_i2c(port_id, i2c_address, regAddress, buffer, bufferSize);)
+
+/*
+	i2c_init - Initialize the I2C Port
+*/
+#define i2c_init(port_id) (ecrobot_init_i2c(port_id, LOWSPEED))

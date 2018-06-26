@@ -4,17 +4,24 @@
 
 #define CONTROLBYTE (0x04)
 
+
 const adc_read_fct_t AdcIfFctPtr={adc_int, adc_ext};
 
-S16 adc_int(U8 port_id, U8 address){
-	//return ecrobot_get_RCX_sensor(port)>>2; //convert to 8 bit value
-	// Make the init call of the i2c
+U8 adc_int_init(U8 port_id){
+	ecrobot_set_RCX_power_source(port_id);
 	return 0;
 }
+
+U8 adc_int(U8 port_id, U8 address, U8 icPin){
+	return ecrobot_get_RCX_sensor(port_id)>>2; //convert to 8 bit value
+}
 	
-S16 adc_ext(U8 port_id, U8 address){
+U8 adc_ext(U8 port_id, U8 address, U8 icPin){
 	U8 data[5];
-	i2c_write_reg(NXT_PORT_S4, address, CONTROLBYTE, data, 0);
-	i2c_read_reg(NXT_PORT_S4, address, CONTROLBYTE, data, 5); //analog value will be compared while reading previous value
-	return ((S16)data[port_id + 1]);
+	if ( icPin > 4){
+		return 0x00;
+	}
+	i2c_write_reg(port_id, address, CONTROLBYTE, data, 0);
+	i2c_read_reg(port_id, address, CONTROLBYTE, data, 5); //analog value will be compared while reading previous value
+	return data[icPin + 1];
 }
