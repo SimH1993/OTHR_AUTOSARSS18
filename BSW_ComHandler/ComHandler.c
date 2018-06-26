@@ -5,7 +5,8 @@
 
 //User includes
 #include "ComHandler.h"
-#include "../Utility/Utility.h"
+#include "Utility.h"
+
 
 
 //Globals
@@ -54,7 +55,7 @@ U8 com_init(U8 is_master)
 		com_initialized = 1;
 		
 		ActivateTask(ComTask_send); //This can also be replaced with an alarm to send at a fixed interval instead of sending each packet separately
-		SetAbsAlarm(ComAlarm_receive, 0, COM_RECEIVE_SPEED);
+		SetRelAlarm(ComAlarm_receive, 1, COM_RECEIVE_SPEED);
 		
 		return 1;
 	}
@@ -145,6 +146,7 @@ TASK(ComTask_send)
 	while(com_initialized)
 	{
 		WaitEvent(ComEvent_send);
+		ClearEvent(ComEvent_send);
 		if(!com_initialized)
 			break;
 		
@@ -157,7 +159,8 @@ TASK(ComTask_send)
 			}
 			else
 			{
-				ecrobot_send_bt_packet(com_send_buff, 254);
+				U32 len = ecrobot_send_bt_packet(com_send_buff, com_send_len);
+				add_lognum(len);
 				com_send_len = 0;
 			}
 		}
