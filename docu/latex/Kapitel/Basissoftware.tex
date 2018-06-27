@@ -72,8 +72,38 @@ Die ECU Hardware Abstraction Layer versteckt den konkreten Aufbau des Steuerger�
 % Beschreibung der aufrufbaren Funktionen von RTE und MCAL, Methodendeklaration, ADC Interfaces, Zusammenspiel mit I2C
 \subsubsection{DIO Hardware Abstraction}
 
+Die DIO Hardware Abstraction stellt der RTE ein Interface zur Ansteuerung der internen und externen digitalen Ein- und Ausgänge zur Verfügung.
+
+\begin{lstlisting}[frame=single,caption={DIO Interface},captionpos=b]  
+#define DIO_Read_Data(DIOIndex, Port, Adresse) \
+	DioIfReadFctPtr[DIOIndex](Port, Adresse)
+	
+#define DIO_Write_Data(DIOIndex, Port, Adresse, Data) \
+	DioIfWriteFctPtr[DIOIndex](Port, Adresse, Data)
+\end{lstlisting}\newline\newline
+%
+%
+Generell ist das Interface für die Ansteuerung aller digitalen IO-Ports konzipiert worden.
+Der Funktionen \textit{Read} und \textit{Write} wird ein Index übergeben. Dieser verweist in einem Array auf die dazugehörige interne oder externe Funktion.\newline\newline
+%
+Um die Taster des Roboters auszulesen, muss somit ein Funktionsaufruf der \textit{Read}-Funktion mit dem Index 0 getätigt werden.
+
+\begin{lstlisting}[frame=single,caption={Aufruf der internen DIO-Read Funktion},captionpos=b]  
+U8 dio_read_int(U8 port_id, U8 i2c address){
+	return ecrobot_get_touch_sensor(port_id);
+}
+\end{lstlisting}\newline\newline
+Das Ansteuern der LEDs geschieht über den Funktionsaufruf \textit{Write}. Hier muss der Index 1 übergeben werden, da sich die LEDs an einem externen IO-Port befinden. Da auch die ADC Hardware Abstraction mit dem I$^2$C Expander arbeitet, wird an dieser Stelle der Zugriff über die I$^2$C Hardware Abstraction erfolgen. Diese ist in Kapitel \ref{i2cabstraction} beschrieben.
+
+\begin{lstlisting}[frame=single,caption={Aufruf der I$^2$C Hardware Abstraction},captionpos=b]  
+void dio_write_ext(U8 port_id, U8 i2c address, U8 data){
+	i2c_write(port_id, i2c_address, data);
+}
+\end{lstlisting}\newline\newline
+ 
+
 % Beschreibung der aufrufbaren Funktionen von RTE und MCAL, Methodendeklaration, DIO Interfaces, Zusammenspiel mit I2C
 
-\subsubsection{I2C Hardware Abstraction}
+\subsubsection{I$^2$C Hardware Abstraction} \label{i2cabstraction}
 
 % Beschreibung des I2C Aufbaus, Methodenaufrufe

@@ -16,3 +16,6 @@ docu/latex/Legosar.toc
 *.gz
 *.log
 *.synctex(busy)
+*.bbl
+*.blg
+*.synctex
