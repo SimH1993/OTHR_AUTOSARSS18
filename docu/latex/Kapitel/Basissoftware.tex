@@ -47,15 +47,50 @@ void play_multiple_wavs(const CHAR *file, U32 length, S32 freq, U32 vol, U32 rep
 
 \subsubsection{Motor Handler}
 
+Der Motor Handler erlaubt die Ansteuerung der Motoren. 
+
+%TODO
+
+\begin{lstlisting}[frame=single]  
+void motor_set_speed(S8 speed_left, S8 speed_right);
+
+S8 motor_read_speed();
+\end{lstlisting}
+
+
 % Beschreibung der aufrufbaren Funktionen von RTE und MCAL, Methodendeklaration
 
-\subsubsection{Communication Manager}
+\subsubsection{Communication Handler}
+
+Der Communication Handler ist für die Bluetooth Verbindung zwischwen zwei Geräten zuständig. Da eine Bluetooth-Verbindung eine Master-Slave Verbindung ist, muss die physische Slave-Adresse im Code definiert werden.
+Diese wurde mithilfe eines simplen konstangten Byte-Array gelöst. Für die RTE wird eine initialize, send, recv und terminate Funktion zur Verfügung gestellt, wobei die send und recv Funktion mit einem Ringbuffer arbeiten und somit asynchron sind.
+Um Threadsafety zu gewährleisten, werden in diesen beiden Funktionen für das Lesen und Schreiben des Ringbuffers alle Interrupts mithilfe der Funktion \textit{DisableAllInterrupts} deaktiviert und bei Verlassen der Funktion mithilfe von \textit{EnableAllInterrupts} wieder aktiviert.
+Es gibt 2 Tasks, einen für send und einen für recv, welche dann die Ringbuffer befüllen oder auslesesen. Diese Tasks sind in der OIL-Datei mit \textit{SCHEDULE = NON} deklariert, damit diese nicht unterbrochen werden können und weiterhin Threadsafety ohne Implementierung von einem Mutex oder Semaphor gewährleistet ist.
+Damit Pakete nicht auseinander gerissen werden, muss ein einzelnes receive-Runnable im Application Layer definiert werden, welches dann die Zusammensetzung für empfangene Daten zu einem ganzen Paket übernimmt und die anderen Runnables benachrichtigt.
+
+\begin{lstlisting}[frame=single]  
+//Returns 1 on success, 0 on failure
+U8 com_init(U8 is_master);
+//Returns number of sent bytes, 0 on error [Async]		
+U32 com_send(U8 *buff, U32 len);
+//Returns number of received bytes, 0 on error [Async]	
+U32 com_recv(U8 *buff, U32 len);	
+void com_terminate();
+\end{lstlisting}
 
 % Beschreibung der aufrufbaren Funktionen von RTE und MCAL, Methodendeklaration, Tasks, Events, Counter
 
 \subsubsection{Display Handler}
+Der Display Handler bietet Funkionalität zum Darstellen von Textausgaben auf dem Display des Bricks an.
+Ganze Strings und einzelne Zeichen können entweder fortlaufend oder an einer bestimmten Stelle des Monitors angezeigt werden.
+Mit der Funktion \textit{display\_clear\_line} können ganze Zeilen gelöscht werden. Folgende Funktionen stehen zur Verfügung:
 
-% Beschreibung der aufrufbaren Funktionen von RTE und MCAL, Methodendeklaration
+\begin{lstlisting}[frame=single]  
+void display_write_xy(int x, int y, const char *str);
+void display_clear_line(int y);
+void display_write(const char *str);
+\end{lstlisting}
+
 
 \subsection{ECU Hardware Abstraction}
 
