@@ -11,6 +11,7 @@ import autosarMetaModel.*;
 public class Test {
 	
 	public static void main(String[] args) {
+		AutosarMetaModelPackage.eINSTANCE.eClass();
 		ResourceSet resourceSet = new ResourceSetImpl();
 		
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put
