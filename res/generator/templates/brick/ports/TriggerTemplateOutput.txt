@@ -1,0 +1,5 @@
+//GENERATED
+void Rte_Trigger_<PORT_NAME>(){
+	<FUNCTION_BODY>
+}
+

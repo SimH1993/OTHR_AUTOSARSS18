@@ -1,0 +1,5 @@
+//GENERATED
+int Rte_Read_<PORT_NAME>(){
+	<FUNCTION_BODY>
+}
+

@@ -1,0 +1,4 @@
+EVENT <EVENT_NAME>
+{ 
+	MASK = <MASK>;
+};

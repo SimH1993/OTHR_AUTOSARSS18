@@ -1,0 +1,5 @@
+//GENERATED
+void Rte_Write_<PORT_NAME>(int value){
+	<FUNCTION_BODY>
+}
+
