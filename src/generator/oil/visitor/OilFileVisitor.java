@@ -43,15 +43,11 @@ public class OilFileVisitor extends AbstractVisitor {
 	protected void visitOilFile(OilFile oilFile) {
 		super.visitOilFile(oilFile);
 		String execute = null;
-		try {
-			execute = new FileGenerator("templates/Masteroil.oil")
-					.addReplacement("___ALARM_REPLACE___", alarmStringBuilder.toString())
-					.addReplacement("___EVENT_REPLACE___", eventStringBuilder.toString())
-					.addReplacement("___TASKS___", taskStringBuilder.toString()).execute();
-			result = execute;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		execute = new FileGenerator("templates/Masteroil.oil")
+				.addReplacement("___ALARM_REPLACE___", alarmStringBuilder.toString())
+				.addReplacement("___EVENT_REPLACE___", eventStringBuilder.toString())
+				.addReplacement("___TASKS___", taskStringBuilder.toString()).execute();
+		result = execute;
 	}
 
 	@Override
@@ -63,45 +59,30 @@ public class OilFileVisitor extends AbstractVisitor {
 			stringJoiner.add("EVENT = " + event.getName() + ";");
 		}
 
-		try {
-			String execute = new FileGenerator("templates\\task_template.txt")
-					.addReplacement("<TASK_NAME>", task.getName())
-					.addReplacement("<AUTOSTART>", task.getAutostart().toString())
-					.addReplacement("<PRIORITY>", task.getPriority() + "")
-					.addReplacement("<SCHEDULE>", task.getSchedule())
-					.addReplacement("<STACKSIZE_VALUE>", task.getStackSize() + "") // TODO - do we change stacksize
-					.addReplacement("<EVENT>", stringJoiner.toString()).execute();
-			taskStringBuilder.append(execute).append("\n");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		String execute = new FileGenerator("templates\\task_template.txt").addReplacement("<TASK_NAME>", task.getName())
+				.addReplacement("<AUTOSTART>", task.getAutostart().toString())
+				.addReplacement("<PRIORITY>", task.getPriority() + "").addReplacement("<SCHEDULE>", task.getSchedule())
+				.addReplacement("<STACKSIZE_VALUE>", task.getStackSize() + "") // TODO - do we change stacksize
+				.addReplacement("<EVENT>", stringJoiner.toString()).execute();
+		taskStringBuilder.append(execute).append("\n");
 	}
 
 	@Override
 	protected void visitEvent(Event event) {
 		super.visitEvent(event);
-		try {
-			String execute = new FileGenerator("templates\\event_template.txt")
-					.addReplacement("<EVENT_NAME>", event.getName()).addReplacement("<MASK>", event.getMask())
-					.execute();
-			eventStringBuilder.append(execute).append("\n");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		String execute = new FileGenerator("templates\\event_template.txt")
+				.addReplacement("<EVENT_NAME>", event.getName()).addReplacement("<MASK>", event.getMask()).execute();
+		eventStringBuilder.append(execute).append("\n");
 	}
 
 	@Override
 	protected void visitAlarm(Alarm alarm) {
 		super.visitAlarm(alarm);
-		try {
-			String execute = new FileGenerator("templates\\alarm_template.txt")
-					.addReplacement("<ALARM_NAME>", alarm.getName()).addReplacement("<COUNTER>", Constants.counterName)
-					.addReplacement("<ACTION>", alarm.getAction().toString())
-					.addReplacement("<AUTOSTART>", alarm.getAutostart().toString()).execute();
-			alarmStringBuilder.append(execute).append("\n");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		String execute = new FileGenerator("templates\\alarm_template.txt")
+				.addReplacement("<ALARM_NAME>", alarm.getName()).addReplacement("<COUNTER>", Constants.counterName)
+				.addReplacement("<ACTION>", alarm.getAction().toString())
+				.addReplacement("<AUTOSTART>", alarm.getAutostart().toString()).execute();
+		alarmStringBuilder.append(execute).append("\n");
 	}
 
 	public static void main(String[] args) {

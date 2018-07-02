@@ -1,6 +1,5 @@
 package generator.brick;
 
-import java.io.IOException;
 import java.nio.file.Path;
 
 import autosarMetaModel.Runnable;
@@ -20,13 +19,9 @@ public class RunnableGenerator {
 	}
 
 	public void generate() {
-		try {
-			new FileGenerator("templates\\brick\\runnable.c").addReplacement("<SWC_NAME>", swc.getName())
-					.addReplacement("<RUNNABLE_NAME>", runnable.getName().replace(' ', '_'))
-					.execute(rootPath.resolve("SWC_" + swc.getName() + "_Runnable_" + runnable.getName() + ".c"));
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		new FileGenerator("templates\\brick\\runnable.c").addReplacement("<SWC_NAME>", swc.getName())
+				.addReplacement("<RUNNABLE_NAME>", runnable.getName().replace(' ', '_'))
+				.execute(rootPath.resolve("SWC_" + swc.getName() + "_Runnable_" + runnable.getName() + ".c"));
 	}
 
 }

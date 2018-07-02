@@ -15,7 +15,7 @@ import generator.brick.BrickGenerator;
 
 public class MainGenerator {
 
-	public final static Path rootPath = Paths.get("C:\\Users\\loych\\Downloads\\generated");
+	public final static Path rootPath = Paths.get("C:\\Users\\loc34770\\Downloads\\generated");
 
 	private final AutosarSystem system;
 
@@ -28,7 +28,7 @@ public class MainGenerator {
 	public void prepare() {
 		createBluetoothIds();
 		for (Brick b : system.getBrick()) {
-			BrickGenerator brickGenerator = new BrickGenerator(b, rootPath);
+			BrickGenerator brickGenerator = new BrickGenerator(system, b, rootPath);
 			brickGenerator.generate();
 		}
 	}

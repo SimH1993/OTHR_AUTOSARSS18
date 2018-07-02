@@ -1,6 +1,5 @@
 package generator.brick;
 
-import java.io.IOException;
 import java.nio.file.Path;
 
 import autosarMetaModel.Brick;
@@ -19,16 +18,20 @@ public class SwcGenerator {
 	private final Path rootPath;
 
 	private final StringBuilder generatedFunctions;
+	private MasterCModel masterC;
 
-	public SwcGenerator(Brick brick, SWC swc, OilFile oilFile, Path rootPath) {
+	public SwcGenerator(Brick brick, SWC swc, OilFile oilFile, Path rootPath, MasterCModel masterC) {
 		this.brick = brick;
 		this.swc = swc;
 		this.oilFile = oilFile;
 		this.rootPath = rootPath;
+		this.masterC = masterC;
 		generatedFunctions = new StringBuilder(swc.getPort().size() * 150);
 	}
 
 	private void prepare() {
+		masterC.getIncludes().append("#include \""+getFileName()+"\"\n");
+		
 		for (autosarMetaModel.Runnable r : swc.getRunnable()) {
 			new RunnableGenerator(swc, r, rootPath).generate();
 		}
@@ -45,12 +48,19 @@ public class SwcGenerator {
 	}
 
 	private void persist() {
-		try {
-			new FileGenerator("templates\\brick\\swcTemplate.c").append(generatedFunctions.toString())
-					.execute(rootPath.resolve("SWC_" + swc.getName() + ".c"));
-		} catch (IOException e) {
-			e.printStackTrace();
+		StringBuilder includes = new StringBuilder();
+		for(autosarMetaModel.Runnable r : swc.getRunnable()) {
+			includes.append("#include \"" + "SWC_" + swc.getName() + "_Runnable_" + r.getName() + ".c"+ "\"\n");
 		}
+		
+		new FileGenerator("templates\\brick\\swcTemplate.c")
+		.addReplacement("<INCLUDES>", includes.toString())
+				.append(generatedFunctions.toString())
+				.execute(rootPath.resolve(getFileName()));
+	}
+	
+	private String getFileName() {
+		return "SWC_" + swc.getName() + ".c";
 	}
 
 	public void generate() {

@@ -1,7 +1,5 @@
 package generator.brick.ports;
 
-import java.io.IOException;
-
 import autosarMetaModel.TriggerPort;
 import autosarMetaModel.TriggerPortType;
 import generator.brick.ports.SoftwarePortGenerator;
@@ -17,19 +15,11 @@ public class TriggerPortGenerator extends SoftwarePortGenerator {
 	@Override
 	public String generate() {
 		if (port.getType() == TriggerPortType.INPUT) {
-			try {
-				return generateByTemplate("TriggerTemplateInput.txt").addReplacement("<PORT_NAME>", port.getName())
-						.execute();
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
+			return generateByTemplate("TriggerTemplateInput.txt").addReplacement("<PORT_NAME>", port.getName())
+					.execute();
 		} else {
-			try {
-				return generateByTemplate("TriggerTemplateOutput.txt").addReplacement("<PORT_NAME>", port.getName())
-						.execute();
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
+			return generateByTemplate("TriggerTemplateOutput.txt").addReplacement("<PORT_NAME>", port.getName())
+					.execute();
 		}
 	}
 }

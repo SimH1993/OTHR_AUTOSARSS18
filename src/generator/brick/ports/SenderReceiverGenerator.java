@@ -16,19 +16,11 @@ public class SenderReceiverGenerator extends SoftwarePortGenerator {
 	@Override
 	public String generate() {
 		if (port.getType() == SenderReceiverPortType.RECEIVER) {
-			try {
-				return new FileGenerator("templates\\brick\\ports\\SenderReceiverTemplateReceiver.txt")
-						.addReplacement("<PORT_NAME>", port.getName()).execute();
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
+			return new FileGenerator("templates\\brick\\ports\\SenderReceiverTemplateReceiver.txt")
+					.addReplacement("<PORT_NAME>", port.getName()).execute();
 		} else {
-			try {
-				return new FileGenerator("templates\\brick\\ports\\SenderReceiverTemplateSender.txt")
-						.addReplacement("<PORT_NAME>", port.getName()).execute();
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
+			return new FileGenerator("templates\\brick\\ports\\SenderReceiverTemplateSender.txt")
+					.addReplacement("<PORT_NAME>", port.getName()).execute();
 		}
 	}
 }

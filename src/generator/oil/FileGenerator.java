@@ -29,12 +29,16 @@ public class FileGenerator {
 		return this;
 	}
 
-	public void execute(Path output) throws IOException {
-		Files.write(output, Collections.singletonList(execute()), StandardOpenOption.TRUNCATE_EXISTING,
-				StandardOpenOption.CREATE);
+	public void execute(Path output) {
+		try {
+			Files.write(output, Collections.singletonList(execute()), StandardOpenOption.TRUNCATE_EXISTING,
+					StandardOpenOption.CREATE);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
-	public String execute() throws IOException {
+	public String execute() {
 		String lines = readFile();
 		for (Map.Entry<String, String> entry : replacements.entrySet()) {
 			lines = lines.replace(entry.getKey(), entry.getValue());
@@ -43,7 +47,11 @@ public class FileGenerator {
 		return lines;
 	}
 
-	private String readFile() throws IOException {
-		return ResourceLoader.load(inputPath);
+	private String readFile() {
+		try {
+			return ResourceLoader.load(inputPath);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }
