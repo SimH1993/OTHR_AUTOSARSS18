@@ -17,7 +17,6 @@ public class Util {
             if (o instanceof Connection) {
                 Connection conn = (Connection) o;
                 System.out.println(conn);
-                System.out.println("BluetoothConnection: " + conn.isBluetoothConnection());
             }
         }
     }

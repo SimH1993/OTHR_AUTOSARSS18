@@ -16,6 +16,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TriggerPort" eSuperTypes="#//SoftwarePort">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//TriggerPortType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="runnable" eType="#//Runnable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SenderReceiverPort" eSuperTypes="#//SoftwarePort">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//SenderReceiverPortType"/>

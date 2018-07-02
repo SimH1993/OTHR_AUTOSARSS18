@@ -48,6 +48,7 @@
     </genClasses>
     <genClasses ecoreClass="autosarMetaModel.ecore#//TriggerPort">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//TriggerPort/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//TriggerPort/runnable"/>
     </genClasses>
     <genClasses ecoreClass="autosarMetaModel.ecore#//SenderReceiverPort">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//SenderReceiverPort/type"/>
