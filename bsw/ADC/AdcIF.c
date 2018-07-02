@@ -1,11 +1,8 @@
+#include "ecrobot_interface.h"
 #include "AdcIf.h"
-#include "ecrobot.h"
 #include "i2c.h"
 
 #define CONTROLBYTE (0x04)
-
-
-const adc_read_fct_t AdcIfFctPtr={adc_int, adc_ext};
 
 U8 adc_int_init(U8 port_id){
 	ecrobot_set_RCX_power_source(port_id);
@@ -25,3 +22,5 @@ U8 adc_ext(U8 port_id, U8 address, U8 icPin){
 	i2c_read_reg(port_id, address, CONTROLBYTE, data, 5); //analog value will be compared while reading previous value
 	return data[icPin + 1];
 }
+
+const adc_read_fct_t AdcIfFctPtr[2]={&adc_int, &adc_ext};

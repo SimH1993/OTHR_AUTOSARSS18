@@ -19,7 +19,7 @@
 		buffer [U8*]: Pointer to the buffer the data will be written to
 		bufferSize [U8]: Size of the buffer
 */
-#define i2c_read(port_id, i2c_address, buffer, bufferSize) (i2c_read_reg(port_id, i2c_address, 0, buffer, bufferSize);)
+#define i2c_read(port_id, i2c_address, buffer, bufferSize) i2c_read_reg(port_id, i2c_address, 0, buffer, bufferSize)
 
 /*
 	i2c_read_reg - Reads some data from a specific register of an I2C connected device
@@ -29,7 +29,7 @@
 		buffer [U8*]: Pointer to the data buffer that will be written to
 		bufferSize [U8]: Size of the data buffer
 */
-#define i2c_read_reg(port_id, i2c_address, regAddress, buffer, bufferSize) (ecrobot_read_i2c(port_id, i2c_address, regAddress, buffer, bufferSize);)
+#define i2c_read_reg(port_id, i2c_address, regAddress, buffer, bufferSize) ecrobot_read_i2c(port_id, i2c_address, regAddress, buffer, bufferSize)
 
 /*
 	i2c_write - Write some data to a specific register of an I2C connected device
@@ -38,7 +38,7 @@
 		buffer [U8*]: Pointer to the data buffer
 		bufferSize [U8]: Size of the data buffer
 */
-#define i2c_write(port_id, i2c_address, buffer, bufferSize) (i2c_write_reg(port_id, i2c_address, 0, buffer, bufferSize);)
+#define i2c_write(port_id, i2c_address, buffer, bufferSize) i2c_write_reg(port_id, i2c_address, 0, buffer, bufferSize)
 
 /*
 	i2c_write_reg - Write some data to a specific register of an I2C connected device
@@ -48,9 +48,9 @@
 		buffer [U8*]: Pointer to the data buffer
 		bufferSize [U8]: Size of the data buffer
 */
-#define i2c_write_reg(port_id, i2c_address, regAddress, buffer, bufferSize) (ecrobot_send_i2c(port_id, i2c_address, regAddress, buffer, bufferSize);)
+#define i2c_write_reg(port_id, i2c_address, regAddress, buffer, bufferSize) ecrobot_send_i2c(port_id, i2c_address, regAddress, buffer, bufferSize)
 
 /*
 	i2c_init - Initialize the I2C Port
 */
-#define i2c_init(port_id) (ecrobot_init_i2c(port_id, LOWSPEED))
+#define i2c_init(port_id) ecrobot_init_i2c(port_id, LOWSPEED)
