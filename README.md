@@ -1,9 +1,31 @@
-# OTHR_AUTOSARSS18
-This repository stores the code and documentations for the AUTOSAR course in the summer semester 2018
+![Aufbau auf dem Steckbrett](https://github.com/SimH1993/OTHR_AUTOSARSS18/blob/I2C_LEDs/Schaltplan%20AUTOSAR_Steckplatine.png)
 
-## Goal
-The goal of this project is to control a NXT Brick (Brick 2) from another NXT Brick (Brick 1).
-Brick 1 gets the driving information from a joystick.
-Also on brick 1 there is an ultrasonic sensor and two buttons.
-The brick 2 gets the information via bluetooth from brick 1 and react to them by driving and blinking four LEDs.
+## I2C Verbindung aufbauen
 
+	i2c_enable(NXT_PORT_S1);
+	
+	
+## I2C Verbindung beenden
+
+	void ecrobot_device_terminate()
+	{
+		i2c_disable(NXT_PORT_S1);
+	}
+
+## Beispiel: Schalte alle LEDs an
+	
+	#define LEDs_All_ON        0x0
+
+	static U8 dataToSend = LEDs_All_ON;
+
+	while (i2c_busy(NXT_PORT_S1) != 0);
+	ecrobot_send_i2c(NXT_PORT_S1,0x20,dataToSend,&dataToSend,sizeof(dataToSend));
+
+## Beispiel: Schalte alle LEDs aus
+	
+	#define LEDs_All_OFF        0xEF
+
+	static U8 dataToSend = LEDs_All_OFF;
+
+	while (i2c_busy(NXT_PORT_S1) != 0);
+	ecrobot_send_i2c(NXT_PORT_S1,0x20,dataToSend,&dataToSend,sizeof(dataToSend));
