@@ -7,11 +7,16 @@ U8 dio_read_ext(U8 port_id, U8 i2c_address){
 	return dioStatus;
 }
 
-U8 pinState = 0xFF;
+U8 pinState = 0xAA;
 
 void dio_write_ext(U8 port_id, U8 i2c_address, U8 pin, U8 level){
-	pinState = (pinState | (1 << pin)) & ((~level) << pin);
-	i2c_write(port_id, i2c_address, &pinState, 1);
+	pin = pin & 0x07; // Can't select any pin higher than 7 (0-7)
+	level = level & 0x01; // Level can only be 1 (high) or 0 (low)
+	U8 newPinState = (pinState | (1 << pin)) & (~(level << pin));
+	if ( newPinState != pinState) {
+		pinState = newPinState;
+		i2c_write(port_id, i2c_address, &pinState, 1);
+	}
 }
 
 const dio_read_fct_t DioIfReadFctPtr[1] = {&dio_read_ext};

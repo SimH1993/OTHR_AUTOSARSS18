@@ -4,4 +4,4 @@ TARGET_SOURCES := helloWorld.c \
 					DioIF.c
 TOPPERS_OSEK_OIL_SOURCE := ./helloWorld.oil
 O_PATH ?= build
-include ../../../../../nxtOSEK/ecrobot/ecrobot.mak 
+include ../../../../../../nxtOSEK/ecrobot/ecrobot.mak 

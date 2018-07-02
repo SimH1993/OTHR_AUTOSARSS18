@@ -1,4 +1,3 @@
-#include "ecrobot_interface.h"
 #include "AdcIf.h"
 #include "i2c.h"
 
