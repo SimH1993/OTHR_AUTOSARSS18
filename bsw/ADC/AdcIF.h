@@ -1,3 +1,5 @@
+#include "ecrobot_interface.h"
+
 typedef U8(*adc_read_fct_t)(U8, U8, U8);
 extern const adc_read_fct_t AdcIfFctPtr[];
 #define ADC_Read_Value(ADCIndex, Port, I2C_Adress, ICpin) \
