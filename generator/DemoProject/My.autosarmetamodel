@@ -1,39 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <autosarMetaModel:AutosarSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:autosarMetaModel="http://www.example.org/autosarMetaModel" name="AutosarSystem">
   <swc name="1">
-    <runnable name="JoystickAuslesen"/>
-    <runnable name="UltraschallAuslesen"/>
-    <runnable name="FlankenErkennung"/>
+    <runnable name="JoystickAuslesen">
+      <triggerevent xsi:type="autosarMetaModel:TimeTrigger" name="TriggerJoystickAuslesen"/>
+    </runnable>
+    <runnable name="UltraschallAuslesen">
+      <triggerevent xsi:type="autosarMetaModel:TimeTrigger" name="TriggerUltraschallAuslesen"/>
+    </runnable>
+    <runnable name="FlankenErkennung">
+      <triggerevent xsi:type="autosarMetaModel:TimeTrigger" name="TriggerFlankenErkennung"/>
+    </runnable>
     <port xsi:type="autosarMetaModel:JoystickTaster" name="Taster"/>
     <port xsi:type="autosarMetaModel:JoystickHorizontal" name="JostickHorizontal"/>
     <port xsi:type="autosarMetaModel:JoystickVertical" name="JoystickVertical"/>
     <port xsi:type="autosarMetaModel:SenderReceiverPort" name="OutJoystick"/>
     <port xsi:type="autosarMetaModel:SenderReceiverPort" name="OutUltraschall"/>
-    <port xsi:type="autosarMetaModel:TriggerPort" name="OutFlankenerkennung"/>
+    <port xsi:type="autosarMetaModel:TriggerPort" name="OutFlankenerkennung" type="OUTPUT"/>
     <port xsi:type="autosarMetaModel:Ultraschall" name="Ultraschall"/>
     <port xsi:type="autosarMetaModel:Taster" name="BlinkerTaster"/>
     <port xsi:type="autosarMetaModel:SenderReceiverPort" name="OutJoystickTaster"/>
   </swc>
   <swc name="2">
-    <runnable name="WerteBerechnen"/>
+    <runnable name="WerteBerechnen">
+      <triggerevent xsi:type="autosarMetaModel:TimeTrigger" name="TriggerWerteBerechnen"/>
+    </runnable>
     <port xsi:type="autosarMetaModel:SenderReceiverPort" name="InJoystick" type="RECEIVER"/>
     <port xsi:type="autosarMetaModel:SenderReceiverPort" name="OutMotorspeed"/>
     <port xsi:type="autosarMetaModel:SenderReceiverPort" name="InMotorRPM" type="RECEIVER"/>
   </swc>
   <swc name="3">
-    <runnable name="Motorsteuerung"/>
-    <runnable name="Blinkersteuerung"/>
-    <runnable name="Drehzahlsteuerung"/>
+    <runnable name="Motorsteuerung">
+      <triggerevent xsi:type="autosarMetaModel:TimeTrigger" name="TriggerMotorsteuerung"/>
+    </runnable>
+    <runnable name="Blinkersteuerung">
+      <triggerevent xsi:type="autosarMetaModel:TriggerPortTrigger" name="TriggerBlinkersteuerung"/>
+    </runnable>
+    <runnable name="Drehzahlsteuerung">
+      <triggerevent xsi:type="autosarMetaModel:TimeTrigger" name="TriggerDrehzahlsteuerung"/>
+    </runnable>
     <port xsi:type="autosarMetaModel:Motor" name="Links"/>
     <port xsi:type="autosarMetaModel:Motor" name="Rechts"/>
     <port xsi:type="autosarMetaModel:LED" name="Blinker"/>
     <port xsi:type="autosarMetaModel:SenderReceiverPort" name="InMotorspeed" type="RECEIVER"/>
     <port xsi:type="autosarMetaModel:SenderReceiverPort" name="OutMotorRPM"/>
-    <port xsi:type="autosarMetaModel:TriggerPort" name="InFlankensteuerung" runnable="//@swc.2/@runnable.1"/>
+    <port xsi:type="autosarMetaModel:TriggerPort" name="InFlankensteuerung"/>
   </swc>
   <swc name="4">
-    <runnable name="DisplayAusgabe"/>
-    <runnable name="SoundAusgabe"/>
+    <runnable name="DisplayAusgabe">
+      <triggerevent xsi:type="autosarMetaModel:TimeTrigger" name="TriggerDisplayAusgabe"/>
+    </runnable>
+    <runnable name="SoundAusgabe">
+      <triggerevent xsi:type="autosarMetaModel:TimeTrigger" name="TriggerSoundAusgabe"/>
+    </runnable>
     <port xsi:type="autosarMetaModel:SenderReceiverPort" name="InJoystickSound" type="RECEIVER"/>
     <port xsi:type="autosarMetaModel:SenderReceiverPort" name="InUltraschall" type="RECEIVER"/>
   </swc>

@@ -16,12 +16,14 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TriggerPort" eSuperTypes="#//SoftwarePort">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//TriggerPortType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="runnable" eType="#//Runnable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SenderReceiverPort" eSuperTypes="#//SoftwarePort">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//SenderReceiverPortType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Runnable" eSuperTypes="#//BaseClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Runnable" eSuperTypes="#//BaseClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="triggerevent" lowerBound="1"
+        eType="#//TriggerEvent" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Port" abstract="true" eSuperTypes="#//BaseClass"/>
   <eClassifiers xsi:type="ecore:EClass" name="Motor" eSuperTypes="#//ECUPort"/>
   <eClassifiers xsi:type="ecore:EClass" name="Taster" eSuperTypes="#//ECUPort"/>
@@ -100,4 +102,10 @@
     <eLiterals name="S3" value="5"/>
     <eLiterals name="S4" value="6"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TriggerEvent" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TimeTrigger" eSuperTypes="#//TriggerEvent #//BaseClass">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="milliseconds" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="100"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TriggerPortTrigger" eSuperTypes="#//BaseClass #//TriggerEvent"/>
 </ecore:EPackage>

@@ -48,12 +48,13 @@
     </genClasses>
     <genClasses ecoreClass="autosarMetaModel.ecore#//TriggerPort">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//TriggerPort/type"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//TriggerPort/runnable"/>
     </genClasses>
     <genClasses ecoreClass="autosarMetaModel.ecore#//SenderReceiverPort">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//SenderReceiverPort/type"/>
     </genClasses>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//Runnable"/>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//Runnable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//Runnable/triggerevent"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="autosarMetaModel.ecore#//Port"/>
     <genClasses ecoreClass="autosarMetaModel.ecore#//Motor"/>
     <genClasses ecoreClass="autosarMetaModel.ecore#//Taster"/>
@@ -93,5 +94,10 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//Connection/input"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//Connection/output"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="autosarMetaModel.ecore#//TriggerEvent"/>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//TimeTrigger">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//TimeTrigger/milliseconds"/>
+    </genClasses>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//TriggerPortTrigger"/>
   </genPackages>
 </genmodel:GenModel>
