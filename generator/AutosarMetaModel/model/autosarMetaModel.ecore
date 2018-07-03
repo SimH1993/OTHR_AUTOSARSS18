@@ -107,5 +107,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="milliseconds" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="100"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TriggerPortTrigger" eSuperTypes="#//BaseClass #//TriggerEvent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TriggerPortTrigger" eSuperTypes="#//BaseClass #//TriggerEvent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="triggerport" lowerBound="1"
+        eType="#//TriggerPort"/>
+  </eClassifiers>
 </ecore:EPackage>

@@ -98,6 +98,8 @@
     <genClasses ecoreClass="autosarMetaModel.ecore#//TimeTrigger">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//TimeTrigger/milliseconds"/>
     </genClasses>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//TriggerPortTrigger"/>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//TriggerPortTrigger">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//TriggerPortTrigger/triggerport"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

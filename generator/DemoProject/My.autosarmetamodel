@@ -33,7 +33,7 @@
       <triggerevent xsi:type="autosarMetaModel:TimeTrigger" name="TriggerMotorsteuerung"/>
     </runnable>
     <runnable name="Blinkersteuerung">
-      <triggerevent xsi:type="autosarMetaModel:TriggerPortTrigger" name="TriggerBlinkersteuerung"/>
+      <triggerevent xsi:type="autosarMetaModel:TriggerPortTrigger" name="TriggerBlinkersteuerung" triggerport="//@swc.2/@port.5"/>
     </runnable>
     <runnable name="Drehzahlsteuerung">
       <triggerevent xsi:type="autosarMetaModel:TimeTrigger" name="TriggerDrehzahlsteuerung"/>
