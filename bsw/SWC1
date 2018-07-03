@@ -1,0 +1,50 @@
+#include sonar.h
+#include AdcIF.h
+
+DeclareEvent(TASTERPORT);
+DeclareTask(SWC1)
+
+
+U8 joystickdata[5];
+void Joystick_auslesen()
+{
+	joystickdata = ADC_Read_Value(1,<ADCPORT>,<I2C_ADRESS>,<ICPIN>);
+	
+	
+};
+
+S32 sonar = 0;
+void Ultraschall_auslesen()
+{
+	sonar = sonar_read_distance(<SENSORPROT>);	
+};
+
+u8 tastegedruckt = 0;
+u8 port = 0;
+//u8 tastermask =0;
+void Flankenerkennung(u8 TASTER_PORT)
+{
+	//port ist 1 oder 0 für aktiv oder nichtaktiv
+	port = RTE_ADC(<TOUCHPORT>);
+	
+	
+	//if(tastermask&(1<<TASTER_PORT))
+	if(!tastegedruckt && port)
+		tastegedruckt = 1;
+		SetEvent(SWC3,TASTERPORT);
+
+	
+	if(port == 0){
+		tastegedruckt = 0;
+	}
+	
+};
+
+
+TASK(SWC1) {
+	while(1){
+		Joystick_auslesen();
+		Ultraschall_auslesen();
+		Flankenerkennung(TASTER_PORT);
+	}
+}
