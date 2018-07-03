@@ -3,5 +3,3 @@
 #include "ecrobot_interface.h" 
 <INCLUDES>
 
-<DECLARES>
-

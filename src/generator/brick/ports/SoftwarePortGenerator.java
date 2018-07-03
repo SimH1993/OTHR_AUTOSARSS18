@@ -1,14 +1,16 @@
 package generator.brick.ports;
 
+import java.util.Map;
+
 import autosarMetaModel.SenderReceiverPort;
 import autosarMetaModel.SoftwarePort;
 import autosarMetaModel.TriggerPort;
 import generator.oil.FileGenerator;
 
 public abstract class SoftwarePortGenerator {
-	public static SoftwarePortGenerator of(SoftwarePort port) {
+	public static SoftwarePortGenerator of(SoftwarePort port, Map<SenderReceiverPort, Integer> localSenderReceiverIds) {
 		if (port instanceof SenderReceiverPort) {
-			return new SenderReceiverGenerator((SenderReceiverPort) port);
+			return new SenderReceiverGenerator((SenderReceiverPort) port, localSenderReceiverIds);
 		} else if (port instanceof TriggerPort) {
 			return new TriggerPortGenerator((TriggerPort) port);
 		} else {

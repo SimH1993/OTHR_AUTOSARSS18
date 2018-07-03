@@ -1,7 +1,7 @@
 //****************************************************************************
-// @Module        CONFIG
-// @Filename      CONFIG.h
-// @Project       ATUOSARSS18
+// @Module        master
+// @Filename      master.oil
+// @Project       AUTOSARSS18
 //----------------------------------------------------------------------------
 // @Description   This oil file contains all tasks for 
 //                the Project.
@@ -12,7 +12,7 @@
 
 //============================================================================
 //@includes
-#include "CONFIG.oil"
+#include "implementation.oil"
 
 //============================================================================
 CPU ATMEL_AT91SAM7S256
@@ -61,7 +61,7 @@ CPU ATMEL_AT91SAM7S256
 	COUNTER CounterOne
 	{
 		MINCYCLE = 1;
-		MAXALLOWEDVALUE = <MAXALLOWEDVALUE>;
+		MAXALLOWEDVALUE = 2000000;
 		TICKSPERBASE = 1;
 	};
 	

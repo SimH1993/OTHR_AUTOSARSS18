@@ -18,6 +18,7 @@ import autosarMetaModel.SenderReceiverPort;
 import autosarMetaModel.helper.ModelHelper;
 import generator.oil.FileGenerator;
 import generator.oil.model.OilFile;
+import generator.oil.visitor.OilFileVisitor;
 
 public class BrickGenerator {
 
@@ -44,7 +45,7 @@ public class BrickGenerator {
 
 	private void process() {
 		for (SWC swc : brick.getSwc()) {
-			SwcGenerator swcGenerator = new SwcGenerator(brick, swc, oilFile, rootPath, masterC);
+			SwcGenerator swcGenerator = new SwcGenerator(brick, swc, oilFile, rootPath, masterC, localSenderReceiverIds);
 			swcGenerator.generate();
 		}
 
@@ -84,8 +85,17 @@ public class BrickGenerator {
 		generateLocalSenderReceiverIds();
 		prepare();
 		process();
+		generateOil();
 	}
 	
+	private void generateOil() {
+		try {
+			new OilFileVisitor(oilFile).generateOil(rootPath.resolve("master.oil"));
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	private void generateLocalSenderReceiverIds() {
 		int connectionIndex = 0;
 		for(Connection c : system.getConnection()) {

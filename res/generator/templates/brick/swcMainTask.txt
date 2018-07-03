@@ -1,0 +1,13 @@
+TASK(SWC_<SWC_NAME>_Main){
+
+	U32 taskEvents;
+	
+	while(1){
+	
+		WaitEvent(<EVENT_LIST>);
+
+		GetEvent(SWC_<SWC_NAME>_Main, &taskEvents);
+		<FUNCTION_BODY>
+	}
+	TerminateTask();
+}

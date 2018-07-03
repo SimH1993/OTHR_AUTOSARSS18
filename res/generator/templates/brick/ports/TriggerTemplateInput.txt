@@ -1,5 +1,0 @@
-//GENERATED
-void Rte_Wait_<PORT_NAME>(){
-	<FUNCTION_BODY>
-}
-
