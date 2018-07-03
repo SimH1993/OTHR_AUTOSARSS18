@@ -107,7 +107,7 @@ Die ECU Hardware Abstraction Layer versteckt den konkreten Aufbau des Steuerger�
 % Beschreibung der aufrufbaren Funktionen von RTE und MCAL, Methodendeklaration, ADC Interfaces, Zusammenspiel mit I2C
 \subsubsection{DIO Hardware Abstraction} \label{dio}
 
-Die DIO Hardware Abstraction stellt der RTE ein Interface zur Ansteuerung der internen und externen digitalen Ein- und Ausgänge zur Verfügung.
+Die DIO Hardware Abstraction stellt der RTE ein Interface zur Ansteuerung externen digitalen Ein- und Ausgänge zur Verfügung. Da der NXT Brick keinen interne DIO Einheit besitzt wird hier nur das Interface für die externe DIO Ansteuerung genutzt.
 
 \begin{lstlisting}[frame=single,caption={DIO Interface},captionpos=b]  
 #define DIO_Read_Data(DIOIndex, Port, Adresse) \
@@ -115,41 +115,38 @@ Die DIO Hardware Abstraction stellt der RTE ein Interface zur Ansteuerung der in
 	
 #define DIO_Write_Data(DIOIndex, Port, Adresse, Data) \
 	DioIfWriteFctPtr[DIOIndex](Port, Adresse, Data)
-\end{lstlisting}\newline\newline
-%
-%
+\end{lstlisting}
 Generell ist das Interface für die Ansteuerung aller digitalen IO-Ports konzipiert worden.
-Der Funktionen \textit{Read} und \textit{Write} wird ein Index übergeben. Dieser verweist in einem Array auf die dazugehörige interne oder externe Funktion.\newline\newline
-%
+Der Funktionen \textit{Read} und \textit{Write} wird ein Index übergeben. Dieser verweist in einem Array auf die dazugehörige interne oder externe Funktion.\\
 Um die Taster des Roboters auszulesen, muss somit ein Funktionsaufruf der \textit{Read}-Funktion mit dem Index 0 getätigt werden.
 
 \begin{lstlisting}[frame=single,caption={Aufruf der internen DIO-Read Funktion},captionpos=b]  
 U8 dio_read_int(U8 port_id, U8 i2c address){
 	return ecrobot_get_touch_sensor(port_id);
 }
-\end{lstlisting}\newline\newline
+\end{lstlisting}
 Das Ansteuern der LEDs geschieht über den Funktionsaufruf \textit{Write}. Hier muss der Index 1 übergeben werden, da sich die LEDs an einem externen IO-Port befinden. Da auch die ADC Hardware Abstraction mit dem I$^2$C Expander arbeitet, wird an dieser Stelle der Zugriff über die I$^2$C Hardware Abstraction erfolgen. Dieser ist in Kapitel \ref{i2cabstraction} beschrieben.
 
 \begin{lstlisting}[frame=single,caption={Aufruf der I$^2$C Hardware Abstraction},captionpos=b]  
 void dio_write_ext(U8 port_id, U8 i2c address, U8 data){
 	i2c_write(port_id, i2c_address, data);
 }
-\end{lstlisting}\newline\newline
+\end{lstlisting}
  
 % Beschreibung der aufrufbaren Funktionen von RTE und MCAL, Methodendeklaration, DIO Interfaces, Zusammenspiel mit I2C
 
 \subsubsection{I$^2$C Hardware Abstraction} \label{i2cabstraction}
 
 Die I$^2$C Hardware Abstraction ermöglicht den Zugriff auf einen externen I$^2$C-Expander. Hierfür kann z.B. über die bereits beschriebene DIO Hardware Abstraction \ref{dio} die Funktion \textit{i2c\_read} oder \textit{i2c\_write}
-aufgerufen werden.\newline\newline
+aufgerufen werden.\\
 \begin{lstlisting}[frame=single,caption={Aufruf der \textit{i2c\_write}-Funktion},captionpos=b]
 
 void i2c_write(U8 port_id, U8 i2c_address, U8 data){
 	
 	ecrobot_send_i2c(port_id,i2c_address,data,&data,sizeof(data));
 }
-\end{lstlisting}\newline\newline
-Die Funktion erhält als Übergabeparameter einen Port, an dem der Expander am Roboter angeschlossen ist, eine Adresse, mit der der richtige IC angesprochen werden kann und ein Datum, dass gesendet werden soll.\newline\newline
+\end{lstlisting}
+Die Funktion erhält als Übergabeparameter einen Port, an dem der Expander am Roboter angeschlossen ist, eine Adresse, mit der der richtige IC angesprochen werden kann und ein Datum, dass gesendet werden soll.\\
 \begin{lstlisting}[frame=single,caption={Aufruf der \textit{i2c\_read}-Funktion},captionpos=b]  
 U8 i2c_read(U8 port_id, U8 i2c_address){
 	
@@ -157,7 +154,7 @@ U8 i2c_read(U8 port_id, U8 i2c_address){
 	ecrobot_read_i2c(port_id, i2c_address, buffer, &buffer, sizeof(buffer));
 	return buffer;
 }
-\end{lstlisting}\newline\newline
+\end{lstlisting}
 Die Funktion erhält als Übergabeparameter einen Port, an dem der Expander am Roboter angeschlossen ist und eine Adresse, mit der der richtige IC angesprochen werden kann. Als Rückgabewert wird das Datum, das gelesen wurde zurückgegeben.
 
 
