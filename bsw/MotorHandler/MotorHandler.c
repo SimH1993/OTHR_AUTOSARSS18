@@ -13,13 +13,10 @@ S8 motor_current_speed = 0;
 
 
 //Functions
-void motor_set_speed(S8 x, S8 y)
+void motor_set_speed(U32 port_left, U32 port_right, S8 speed_left, S8 speed_right)
 {
-	S8 speed_left = x < 0 ? (y * (100 + x)) / 100 : y;
-	S8 speed_right = x > 0 ? (y * (100 - x)) / 100 : y;
-	
-	ecrobot_set_motor_speed(MOTOR_LEFT, speed_left);
-	ecrobot_set_motor_speed(MOTOR_RIGHT, speed_right);
+	ecrobot_set_motor_speed(port_left, speed_left);
+	ecrobot_set_motor_speed(port_right, speed_right);
 	
 	motor_current_speed = y;
 }
