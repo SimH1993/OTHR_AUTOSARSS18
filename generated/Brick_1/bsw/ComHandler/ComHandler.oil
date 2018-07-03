@@ -1,0 +1,64 @@
+#include "implementation.oil"
+
+CPU ATMEL_AT91SAM7S256
+{
+	OS LEJOS_OSEK
+	{
+		STATUS = EXTENDED;
+		STARTUPHOOK = FALSE;
+		ERRORHOOK = FALSE;
+		SHUTDOWNHOOK = FALSE;
+		PRETASKHOOK = FALSE;
+		POSTTASKHOOK = FALSE;
+		USEGETSERVICEID = FALSE;
+		USEPARAMETERACCESS = FALSE;
+		USERESSCHEDULER = FALSE;
+	}; 
+
+	APPMODE appmode1{};
+	
+
+	TASK ComTask_send
+	{
+		AUTOSTART = FALSE;
+		PRIORITY = 11;
+		ACTIVATION = 1;
+		SCHEDULE = NON;
+		STACKSIZE = 512;
+		
+		EVENT = ComEvent_send;
+	};
+	
+	TASK ComTask_receive
+	{
+		AUTOSTART = FALSE;
+		PRIORITY = 11;
+		ACTIVATION = 1;
+		SCHEDULE = NON;
+		STACKSIZE = 512;
+	};
+	
+	EVENT ComEvent_send
+	{
+		MASK = AUTO;
+	};
+	
+	COUNTER CounterOne
+	{
+		MINCYCLE = 1;
+		MAXALLOWEDVALUE = 5000;
+		TICKSPERBASE = 1;
+	};
+	
+	ALARM ComAlarm_receive
+	{
+		COUNTER = CounterOne;
+		
+		ACTION = ACTIVATETASK
+		{
+			TASK = ComTask_receive;
+		};
+		
+		AUTOSTART = FALSE;
+	};
+}; 
