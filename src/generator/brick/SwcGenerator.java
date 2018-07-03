@@ -73,7 +73,8 @@ public class SwcGenerator {
 		}
 
 		new FileGenerator("templates\\brick\\swcTemplate.c").addReplacement("<INCLUDES>", includes.toString())
-				.append(generatedFunctions.toString()).append(mainTaskBuilder.toString())
+				.addReplacement("<ACCESS_FUNCTIONS>",generatedFunctions.toString())
+				.addReplacement("<TASK>",mainTaskBuilder.toString())
 				.execute(rootPath.resolve(getFileName()));
 	}
 

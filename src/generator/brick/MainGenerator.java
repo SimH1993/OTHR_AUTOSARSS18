@@ -1,4 +1,4 @@
-package generator.oil;
+package generator.brick;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,7 +15,7 @@ import generator.brick.BrickGenerator;
 
 public class MainGenerator {
 
-	public final static Path rootPath = Paths.get("C:\\Users\\loc34770\\Downloads\\generated");
+	public final static Path rootPath = Paths.get("C:\\Users\\lisa9\\Desktop\\generated");
 
 	private final AutosarSystem system;
 
