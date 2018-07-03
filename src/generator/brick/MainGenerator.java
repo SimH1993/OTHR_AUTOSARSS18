@@ -2,6 +2,7 @@ package generator.brick;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +29,7 @@ public class MainGenerator {
 	public void prepare() {
 		createBluetoothIds();
 		for (Brick b : system.getBrick()) {
-			BrickGenerator brickGenerator = new BrickGenerator(system, b, rootPath);
+			BrickGenerator brickGenerator = new BrickGenerator(system, b, rootPath, Collections.unmodifiableMap(connectionIdMap));
 			brickGenerator.generate();
 		}
 	}

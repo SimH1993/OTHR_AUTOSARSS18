@@ -28,10 +28,12 @@ public class BrickGenerator {
 	private final AutosarSystem system;
 	private final MasterCModel masterC = new MasterCModel();
 	private Map<SenderReceiverPort, Integer> localSenderReceiverIds = new HashMap<>();
+	private Map<Connection, Integer> remoteConnectionIdMap;
 
-	public BrickGenerator(AutosarSystem system, Brick brick, Path rootpath) {
+	public BrickGenerator(AutosarSystem system, Brick brick, Path rootpath, Map<Connection, Integer> remoteConnectionIdMap) {
 		this.system = system;
 		this.brick = brick;
+		this.remoteConnectionIdMap = remoteConnectionIdMap;
 		this.rootPath = rootpath.resolve("Brick_" + brick.getName().replace(" ", "_"));
 	}
 
