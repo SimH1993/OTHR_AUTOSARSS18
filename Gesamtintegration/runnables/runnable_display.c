@@ -1,5 +1,6 @@
-#include "DisplayHandler.h"
+#include "../BSW/DisplayHandler/DisplayHandler.h"
 
+#define RTE_READ_RUNNABLE_DISPLAY_WRITE()	0
 
 typedef struct
 {
@@ -19,14 +20,12 @@ static const DISPLAY_DATA display_data[] =
 };
 
 
-void runnable_display_write() {
-	
-	
-	int id = rte_read_runnable_display_write();
+void runnable_display_write()
+{
+	int id = RTE_READ_RUNNABLE_DISPLAY_WRITE();
 	DISPLAY_DATA *cur_data = &display_data[id];
 	
 	display_clear(0);	
-	
 	display_write(cur_data->str);	
 }
 

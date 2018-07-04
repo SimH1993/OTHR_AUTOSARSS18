@@ -21,5 +21,4 @@ void runnable_joystick(){
 	RTE_JOYSTICK_X_WRITE(joystickXPercent);
 	RTE_JOYSTICK_Y_WRITE(joystickYPercent);
 	RTE_JOYSTICK_TASTER_WRITE(joystickButton);
-	
-};
+}
