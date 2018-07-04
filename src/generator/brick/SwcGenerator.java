@@ -1,11 +1,14 @@
 package generator.brick;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.StringJoiner;
 
 import autosarMetaModel.BaseClass;
 import autosarMetaModel.Brick;
+import autosarMetaModel.ECUPort;
 import autosarMetaModel.Port;
 import autosarMetaModel.SWC;
 import autosarMetaModel.SenderReceiverPort;
@@ -13,6 +16,7 @@ import autosarMetaModel.SoftwarePort;
 import autosarMetaModel.TimeTrigger;
 import autosarMetaModel.TriggerEvent;
 import generator.brick.ports.SoftwarePortGenerator;
+import generator.brick.ports.ecu.EcuPortGenerator;
 import generator.oil.FileGenerator;
 import generator.oil.model.Autostart;
 import generator.oil.model.Event;
@@ -50,8 +54,13 @@ public class SwcGenerator {
 	private void prepare() {
 		masterC.getIncludes().append("#include \"" + getFileName() + "\"\n");
 
+		try {
+			Files.createDirectories(rootPath.getParent().resolve("runnables"));
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 		for (autosarMetaModel.Runnable r : swc.getRunnable()) {
-			new RunnableGenerator(swc, r, rootPath).generate();
+			new RunnableGenerator(swc, r, rootPath.getParent().resolve("runnables")).generate();
 		}
 	}
 
@@ -61,6 +70,15 @@ public class SwcGenerator {
 				SoftwarePort swPort = (SoftwarePort) p;
 				String generate = SoftwarePortGenerator.of(swPort, localSenderReceiverIds, remoteConnectionIdMap).generate();
 				generatedFunctions.append(generate);
+			} if(p instanceof ECUPort) {
+				try {
+					String generate = EcuPortGenerator.of(brick, (ECUPort) p).generate();
+					generatedFunctions.append(generate);
+				} catch(Exception e) {
+					if(!e.getMessage().equals("NOT NEEDED")) {
+						e.printStackTrace();
+					}
+				}
 			}
 		}
 
@@ -71,7 +89,7 @@ public class SwcGenerator {
 	private void persist() {
 		StringBuilder includes = new StringBuilder();
 		for (autosarMetaModel.Runnable r : swc.getRunnable()) {
-			includes.append("#include \"" + "SWC_" + swc.getName() + "_Runnable_" + r.getName() + ".c" + "\"\n");
+			includes.append("#include \"..\\runnables\\" + "Runnable_" + r.getName() + ".c" + "\"\n");
 		}
 
 		new FileGenerator("templates\\brick\\swcTemplate.c").addReplacement("<INCLUDES>", includes.toString())
@@ -90,7 +108,8 @@ public class SwcGenerator {
 		for (autosarMetaModel.Runnable r : swc.getRunnable()) {
 			String eventName = ((BaseClass) r.getTriggerevent()).getName();
 			String runnableStarter = new FileGenerator("templates/brick/RunnableRunner.txt")
-					.addReplacement("<EVENT_NAME>", eventName).addReplacement("<RUNNABLE_NAME>", "SWC_" + swc.getName() + "_Runnable_" + r.getName()).execute();
+					.addReplacement("<EVENT_NAME>", eventName)
+					.addReplacement("<RUNNABLE_NAME>", "runnable_" + r.getName()).execute();
 
 			methodCalls.append(runnableStarter.toString() + "\n");
 			eventList.add(eventName);

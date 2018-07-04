@@ -9,13 +9,18 @@ import java.util.StringJoiner;
 
 import org.eclipse.emf.common.util.EList;
 
+import autosarMetaModel.ActuatorSensor;
 import autosarMetaModel.AutosarSystem;
 import autosarMetaModel.Brick;
 import autosarMetaModel.Connection;
+import autosarMetaModel.HardwareConnection;
+import autosarMetaModel.Motor;
 import autosarMetaModel.OperationMode;
 import autosarMetaModel.SWC;
 import autosarMetaModel.SenderReceiverPort;
 import autosarMetaModel.SoftwarePort;
+import autosarMetaModel.Taster;
+import autosarMetaModel.Ultraschall;
 import autosarMetaModel.helper.ModelHelper;
 import generator.oil.FileGenerator;
 import generator.oil.model.OilFile;
@@ -79,10 +84,48 @@ public class BrickGenerator {
 		if (brick.getBluetoothMode() == OperationMode.MASTER) {
 			fileGenerator.append("#define COM_CONNECT_IS_MASTER\n");
 		}
+		String motorDefines = generateMotorDefines();
+		fileGenerator.append(motorDefines);
+		fileGenerator.append(generateSonarDefines());
+		fileGenerator.append(generateTouchSensorDefines());
 
 		fileGenerator.append("#endif");
 		fileGenerator.execute(rootPath.resolve("defines.h"));
-
+	}
+	
+	private String generateMotorDefines() {
+		StringBuilder defines = new StringBuilder();
+		for(HardwareConnection conn : brick.getHardwareconnection()) {
+			ActuatorSensor actuatorSensor = (ActuatorSensor) conn;
+			if(conn.getHardwareport() instanceof Motor) {
+				Motor motor = (Motor) conn.getHardwareport();
+				defines.append("#define MOTOR_" + motor.getKind().toString() + "	" + actuatorSensor.getPortNr().toString() + "\n");
+			}
+		}
+		
+		return defines.toString();
+	}
+	
+	private String generateSonarDefines() {
+		String result = "";
+		for(HardwareConnection conn : brick.getHardwareconnection()) {
+			ActuatorSensor actuatorSensor = (ActuatorSensor) conn;
+			if(conn.getHardwareport() instanceof Ultraschall) {
+				result = "#define SONAR_SENSOR_PORT\t" + actuatorSensor.getPortNr().toString()+ "\n";
+			}
+		}
+		return result;
+	}
+	
+	private String generateTouchSensorDefines() {
+		String result = "";
+		for(HardwareConnection conn : brick.getHardwareconnection()) {
+			ActuatorSensor actuatorSensor = (ActuatorSensor) conn;
+			if(conn.getHardwareport() instanceof Taster) {
+				result = "#define TOUCH_SENSOR_PORT\t" + actuatorSensor.getPortNr().toString()+ "\n";
+			}
+		}
+		return result;
 	}
 
 	public void generate() {

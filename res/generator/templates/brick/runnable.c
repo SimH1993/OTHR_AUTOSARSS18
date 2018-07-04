@@ -1,5 +1,5 @@
 
 
-void swc_<SWC_NAME>_<RUNNABLE_NAME>(){
+void runnable_<RUNNABLE_NAME>(){
     //TODO - user code
 }

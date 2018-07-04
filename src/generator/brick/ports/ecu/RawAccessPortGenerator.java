@@ -1,14 +1,16 @@
 package generator.brick.ports.ecu;
 
 import autosarMetaModel.ADC;
+import autosarMetaModel.AccessMode;
 import autosarMetaModel.ActuatorSensor;
 import autosarMetaModel.Brick;
 import autosarMetaModel.ECUPort;
 import autosarMetaModel.HardwareConnection;
 import autosarMetaModel.I2CExpander;
 import autosarMetaModel.IC2Mode;
+import autosarMetaModel.RawAccess;
 
-public class RawAccessPortGenerator {
+public class RawAccessPortGenerator extends EcuPortGenerator {
 	private ECUPort port;
 	private Brick brick;
 	private ActuatorSensor connection;
@@ -17,6 +19,22 @@ public class RawAccessPortGenerator {
 		this.brick = brick;
 		this.port = port;
 		findConnectionConfiguration();
+	}
+
+	public String generate() {
+		StringBuilder result = new StringBuilder();
+		if (connection instanceof RawAccess) {
+			RawAccess raw = (RawAccess) connection;
+			AccessMode accessMode = raw.getAccessMode();
+			if (accessMode == AccessMode.READ || accessMode == AccessMode.BOTH) {
+				result.append(generateRead() + "\n");
+			}
+			if (accessMode == AccessMode.WRITE || accessMode == AccessMode.BOTH) {
+				result.append(generateWrite() + "\n");
+			}
+		}
+
+		return result.toString();
 	}
 
 	public String generateRead() {
@@ -35,13 +53,14 @@ public class RawAccessPortGenerator {
 		return result;
 	}
 
-	private ActuatorSensor findConnectionConfiguration() {
+	private void findConnectionConfiguration() {
 		for (HardwareConnection conn : brick.getHardwareconnection()) {
 			if (conn.getHardwareport().equals(port)) {
 				connection = (ActuatorSensor) conn;
 			}
 		}
-		throw new RuntimeException("Port is not configured");
+		if (connection == null)
+			throw new RuntimeException("Port is not configured");
 	}
 
 	private String getMode() {

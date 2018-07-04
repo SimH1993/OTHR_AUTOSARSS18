@@ -14,9 +14,15 @@ public class FileGenerator {
 	private final String inputPath;
 	private final Map<String, String> replacements = new HashMap<>();
 	private final StringBuilder appendments = new StringBuilder();
+	private final boolean overwrite;
 
 	public FileGenerator(String inputPath) {
+		this(inputPath, true);
+	}
+
+	public FileGenerator(String inputPath, boolean overwrite) {
 		this.inputPath = inputPath;
+		this.overwrite = overwrite;
 	}
 
 	public FileGenerator addReplacement(String original, String replacement) {
@@ -31,6 +37,9 @@ public class FileGenerator {
 
 	public void execute(Path output) {
 		try {
+			if (Files.exists(output) && !overwrite) {
+				return;
+			}
 			Files.write(output, Collections.singletonList(execute()), StandardOpenOption.TRUNCATE_EXISTING,
 					StandardOpenOption.CREATE);
 		} catch (IOException e) {

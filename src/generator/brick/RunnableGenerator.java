@@ -19,9 +19,9 @@ public class RunnableGenerator {
 	}
 
 	public void generate() {
-		new FileGenerator("templates\\brick\\runnable.c").addReplacement("<SWC_NAME>", swc.getName())
+		new FileGenerator("templates\\brick\\runnable.c", false)
 				.addReplacement("<RUNNABLE_NAME>", runnable.getName().replace(' ', '_'))
-				.execute(rootPath.resolve("SWC_" + swc.getName() + "_Runnable_" + runnable.getName() + ".c"));
+				.execute(rootPath.resolve("Runnable_" + runnable.getName() + ".c"));
 	}
 
 }
