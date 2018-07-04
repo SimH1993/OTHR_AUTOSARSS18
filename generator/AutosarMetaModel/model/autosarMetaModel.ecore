@@ -40,16 +40,13 @@
     <eLiterals name="MASTER"/>
     <eLiterals name="SLAVE" value="1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ActuatorSensor" abstract="true" eSuperTypes="#//BaseClass #//HardwareConnection">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="portNr" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="I2CExpander" eSuperTypes="#//ActuatorSensor">
+  <eClassifiers xsi:type="ecore:EClass" name="I2CExpander" eSuperTypes="#//RawAccess">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" lowerBound="1" eType="#//IC2Mode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pin" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ADC" eSuperTypes="#//ActuatorSensor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ADC" eSuperTypes="#//RawAccess"/>
   <eClassifiers xsi:type="ecore:EClass" name="Brick" eSuperTypes="#//BaseClass">
     <eStructuralFeatures xsi:type="ecore:EReference" name="hardwareconnection" upperBound="-1"
         eType="#//HardwareConnection" containment="true"/>
@@ -81,9 +78,6 @@
     <eLiterals name="DIO"/>
     <eLiterals name="ADC" value="1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DIO" eSuperTypes="#//ActuatorSensor">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pin" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LED" eSuperTypes="#//ECUPort"/>
   <eClassifiers xsi:type="ecore:EClass" name="JoystickTaster" eSuperTypes="#//ECUPort"/>
   <eClassifiers xsi:type="ecore:EClass" name="JoystickHorizontal" eSuperTypes="#//ECUPort"/>
@@ -94,13 +88,13 @@
         eType="#//SoftwarePort"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="BrickPort">
-    <eLiterals name="A"/>
-    <eLiterals name="B" value="1"/>
-    <eLiterals name="C" value="2"/>
-    <eLiterals name="S1" value="3"/>
-    <eLiterals name="S2" value="4"/>
-    <eLiterals name="S3" value="5"/>
-    <eLiterals name="S4" value="6"/>
+    <eLiterals name="NXT_PORT_A" literal="NXT_PORT_A"/>
+    <eLiterals name="NXT_PORT_B" value="1"/>
+    <eLiterals name="NXT_PORT_C" value="2"/>
+    <eLiterals name="NXT_PORT_S1" value="3"/>
+    <eLiterals name="NXT_PORT_S2" value="4"/>
+    <eLiterals name="NXT_PORT_S3" value="5" literal="NXT_PORT_S3"/>
+    <eLiterals name="NXT_PORT_S4" value="6"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TriggerEvent" abstract="true" interface="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="TimeTrigger" eSuperTypes="#//TriggerEvent #//BaseClass">
@@ -110,5 +104,18 @@
   <eClassifiers xsi:type="ecore:EClass" name="TriggerPortTrigger" eSuperTypes="#//BaseClass #//TriggerEvent">
     <eStructuralFeatures xsi:type="ecore:EReference" name="triggerport" lowerBound="1"
         eType="#//TriggerPort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RawAccess" abstract="true" eSuperTypes="#//ActuatorSensor">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="accessMode" lowerBound="1"
+        eType="#//AccessMode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AccessMode">
+    <eLiterals name="READ"/>
+    <eLiterals name="WRITE" value="1"/>
+    <eLiterals name="BOTH" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActuatorSensor" eSuperTypes="#//HardwareConnection #//BaseClass">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="portNr" lowerBound="1"
+        eType="#//BrickPort"/>
   </eClassifiers>
 </ecore:EPackage>

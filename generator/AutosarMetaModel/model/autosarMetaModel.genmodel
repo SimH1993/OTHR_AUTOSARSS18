@@ -28,13 +28,18 @@
       <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//IC2Mode/ADC"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="autosarMetaModel.ecore#//BrickPort">
-      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//BrickPort/A"/>
-      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//BrickPort/B"/>
-      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//BrickPort/C"/>
-      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//BrickPort/S1"/>
-      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//BrickPort/S2"/>
-      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//BrickPort/S3"/>
-      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//BrickPort/S4"/>
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//BrickPort/NXT_PORT_A"/>
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//BrickPort/NXT_PORT_B"/>
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//BrickPort/NXT_PORT_C"/>
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//BrickPort/NXT_PORT_S1"/>
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//BrickPort/NXT_PORT_S2"/>
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//BrickPort/NXT_PORT_S3"/>
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//BrickPort/NXT_PORT_S4"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="autosarMetaModel.ecore#//AccessMode">
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//AccessMode/READ"/>
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//AccessMode/WRITE"/>
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//AccessMode/BOTH"/>
     </genEnums>
     <genClasses image="false" ecoreClass="autosarMetaModel.ecore#//BaseClass">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//BaseClass/name"/>
@@ -64,12 +69,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//AutosarSystem/brick"/>
       <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//AutosarSystem/connection"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="autosarMetaModel.ecore#//ActuatorSensor">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//ActuatorSensor/portNr"/>
-    </genClasses>
     <genClasses ecoreClass="autosarMetaModel.ecore#//I2CExpander">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//I2CExpander/address"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//I2CExpander/mode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//I2CExpander/pin"/>
     </genClasses>
     <genClasses ecoreClass="autosarMetaModel.ecore#//ADC"/>
     <genClasses ecoreClass="autosarMetaModel.ecore#//Brick">
@@ -82,9 +85,6 @@
     <genClasses ecoreClass="autosarMetaModel.ecore#//SoftwarePort"/>
     <genClasses ecoreClass="autosarMetaModel.ecore#//HardwareConnection">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//HardwareConnection/hardwareport"/>
-    </genClasses>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//DIO">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//DIO/pin"/>
     </genClasses>
     <genClasses ecoreClass="autosarMetaModel.ecore#//LED"/>
     <genClasses ecoreClass="autosarMetaModel.ecore#//JoystickTaster"/>
@@ -100,6 +100,12 @@
     </genClasses>
     <genClasses ecoreClass="autosarMetaModel.ecore#//TriggerPortTrigger">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//TriggerPortTrigger/triggerport"/>
+    </genClasses>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//RawAccess">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//RawAccess/accessMode"/>
+    </genClasses>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//ActuatorSensor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//ActuatorSensor/portNr"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
