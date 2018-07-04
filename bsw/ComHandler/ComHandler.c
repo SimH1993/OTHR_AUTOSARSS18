@@ -150,17 +150,6 @@ void com_terminate()
 
 //Private functions and tasks
 
-
-//Hooks -> have to be moved later
-void user_1ms_isr_type2(void)
-{
-	StatusType ercd = SignalCounter(CounterOne);
-	if(ercd != E_OK)
-		ShutdownOS(ercd);
-}
-
-
-
 //Send task, non preemp to avoid usage of locks/disabling irqs
 //Waits for a user event to be triggered, event is triggered by 'com_send' calls
 TASK(ComTask_send)
