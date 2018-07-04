@@ -25,7 +25,9 @@
         eType="#//TriggerEvent" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Port" abstract="true" eSuperTypes="#//BaseClass"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Motor" eSuperTypes="#//ECUPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Motor" eSuperTypes="#//ECUPort">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" lowerBound="1" eType="#//MotorKind"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Taster" eSuperTypes="#//ECUPort"/>
   <eClassifiers xsi:type="ecore:EClass" name="Ultraschall" eSuperTypes="#//ECUPort"/>
   <eClassifiers xsi:type="ecore:EClass" name="AutosarSystem" eSuperTypes="#//BaseClass">
@@ -117,5 +119,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="ActuatorSensor" eSuperTypes="#//HardwareConnection #//BaseClass">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="portNr" lowerBound="1"
         eType="#//BrickPort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MotorKind">
+    <eLiterals name="LEFT"/>
+    <eLiterals name="RIGHT" value="1"/>
   </eClassifiers>
 </ecore:EPackage>

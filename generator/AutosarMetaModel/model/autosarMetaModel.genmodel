@@ -41,6 +41,10 @@
       <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//AccessMode/WRITE"/>
       <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//AccessMode/BOTH"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="autosarMetaModel.ecore#//MotorKind">
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//MotorKind/LEFT"/>
+      <genEnumLiterals ecoreEnumLiteral="autosarMetaModel.ecore#//MotorKind/RIGHT"/>
+    </genEnums>
     <genClasses image="false" ecoreClass="autosarMetaModel.ecore#//BaseClass">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//BaseClass/name"/>
     </genClasses>
@@ -61,7 +65,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference autosarMetaModel.ecore#//Runnable/triggerevent"/>
     </genClasses>
     <genClasses image="false" ecoreClass="autosarMetaModel.ecore#//Port"/>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//Motor"/>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//Motor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//Motor/kind"/>
+    </genClasses>
     <genClasses ecoreClass="autosarMetaModel.ecore#//Taster"/>
     <genClasses ecoreClass="autosarMetaModel.ecore#//Ultraschall"/>
     <genClasses ecoreClass="autosarMetaModel.ecore#//AutosarSystem">
