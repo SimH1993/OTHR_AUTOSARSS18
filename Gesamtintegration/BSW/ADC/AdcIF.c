@@ -18,6 +18,8 @@ U8 adc_ext(U8 port_id, U8 address, U8 icPin){
 		return 0x00;
 	}
 	i2c_write_reg(port_id, address, CONTROLBYTE, data, 0);
+	i2c_read_reg(port_id, address, CONTROLBYTE, data, 5);
+	i2c_write_reg(port_id, address, CONTROLBYTE, data, 0);
 	i2c_read_reg(port_id, address, CONTROLBYTE, data, 5); //analog value will be compared while reading previous value
 	return data[icPin + 1];
 }
