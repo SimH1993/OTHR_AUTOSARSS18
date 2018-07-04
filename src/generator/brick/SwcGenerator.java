@@ -33,15 +33,17 @@ public class SwcGenerator {
 	private final StringBuilder mainTaskBuilder = new StringBuilder();
 	private MasterCModel masterC;
 	private Map<SenderReceiverPort, Integer> localSenderReceiverIds;
+	private Map<SoftwarePort, Integer> remoteConnectionIdMap;
 
 	public SwcGenerator(Brick brick, SWC swc, OilFile oilFile, Path rootPath, MasterCModel masterC,
-			Map<SenderReceiverPort, Integer> localSenderReceiverIds) {
+			Map<SenderReceiverPort, Integer> localSenderReceiverIds, Map<SoftwarePort, Integer> remoteConnectionIdMap) {
 		this.brick = brick;
 		this.swc = swc;
 		this.oilFile = oilFile;
 		this.rootPath = rootPath;
 		this.masterC = masterC;
 		this.localSenderReceiverIds = localSenderReceiverIds;
+		this.remoteConnectionIdMap = remoteConnectionIdMap;
 		generatedFunctions = new StringBuilder(swc.getPort().size() * 150);
 	}
 
@@ -57,7 +59,7 @@ public class SwcGenerator {
 		for (Port p : swc.getPort()) {
 			if (p instanceof SoftwarePort) {
 				SoftwarePort swPort = (SoftwarePort) p;
-				String generate = SoftwarePortGenerator.of(swPort, localSenderReceiverIds).generate();
+				String generate = SoftwarePortGenerator.of(swPort, localSenderReceiverIds, remoteConnectionIdMap).generate();
 				generatedFunctions.append(generate);
 			}
 		}

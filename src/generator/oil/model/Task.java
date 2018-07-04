@@ -9,7 +9,7 @@ public class Task {
     private String name;
     private Autostart autostart = Autostart.FALSE;
     //TODO - Priority default?
-    private int priority = 100;
+    private int priority = 10;
     private int activation = 1;
     private String schedule = "NON";
     //TODO - Redundant if variables work

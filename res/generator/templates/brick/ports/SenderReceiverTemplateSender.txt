@@ -1,5 +1,1 @@
-//GENERATED
-void Rte_Write_<PORT_NAME>(int value){
-	<FUNCTION_BODY>
-}
-
+#define RTE_WRITE_<PORT_NAME>(value) <MACRO_BODY>

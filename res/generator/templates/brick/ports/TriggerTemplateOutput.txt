@@ -1,5 +1,2 @@
 //GENERATED
-void Rte_Trigger_<PORT_NAME>(){
-	<FUNCTION_BODY>
-}
-
+#define RTE_TRIGGER_<PORT_NAME>() <MACRO_BODY>

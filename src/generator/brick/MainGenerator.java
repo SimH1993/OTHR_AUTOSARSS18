@@ -11,16 +11,17 @@ import org.eclipse.emf.common.util.EList;
 import autosarMetaModel.AutosarSystem;
 import autosarMetaModel.Brick;
 import autosarMetaModel.Connection;
+import autosarMetaModel.SoftwarePort;
 import autosarMetaModel.helper.ModelHelper;
 import generator.brick.BrickGenerator;
 
 public class MainGenerator {
 
-	public final static Path rootPath = Paths.get("C:\\Users\\lisa9\\Desktop\\generated");
+	public final static Path rootPath = Paths.get("C:\\Users\\loc34770\\Downloads\\generated");
 
 	private final AutosarSystem system;
 
-	private final Map<Connection, Integer> connectionIdMap = new HashMap<>();
+	private final Map<SoftwarePort, Integer> connectionIdMap = new HashMap<>();
 
 	public MainGenerator(AutosarSystem system) {
 		this.system = system;
@@ -44,7 +45,8 @@ public class MainGenerator {
 		int connectionIndx = 0;
 		for (Connection conn : connections) {
 			if (ModelHelper.isBluetoothConnection(conn)) {
-				connectionIdMap.put(conn, connectionIndx);
+				connectionIdMap.put(conn.getInput(), connectionIndx);
+				connectionIdMap.put(conn.getOutput(), connectionIndx);
 				connectionIndx++;
 			}
 		}

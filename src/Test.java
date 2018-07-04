@@ -1,7 +1,6 @@
 import autosarMetaModel.AutosarSystem;
 import autosarMetaModel.persistency.FileLoader;
-import generator.oil.MainGenerator;
-
+import generator.brick.MainGenerator;
 
 public class Test {
 	

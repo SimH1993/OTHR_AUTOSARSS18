@@ -1,6 +1,6 @@
 TASK(SWC_<SWC_NAME>_Main){
 
-	U32 taskEvents;
+	int taskEvents;
 	
 	while(1){
 	
