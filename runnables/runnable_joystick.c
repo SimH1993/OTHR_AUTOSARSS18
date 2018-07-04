@@ -1,8 +1,13 @@
-#include "../bsw/AdcIF.h"
+#include "AdcIF.h"
 
-U8 joystickdata[5];
+//TODO: @CodeGen: Generate defines for hardware
+//#define ADCPORT	NXT_PORT_A
+//#define I2C_ADDRESS ADDRESS
+//#define IC_PIN PIN
 
-void Joystick_auslesen(){
+void runnable_joystick(){
 
-	joystickdata = ADC_Read_Value(1,<ADCPORT>,<I2C_ADRESS>,<ICPIN>);
+	U8 data = ADC_Read_Value(1,ADCPORT,I2C_ADRESS,IC_PIN);	
+	rte_write_runnable_joystick(data);
+	
 };
