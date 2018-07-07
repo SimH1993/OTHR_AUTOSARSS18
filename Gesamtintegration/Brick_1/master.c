@@ -61,6 +61,8 @@ void ecrobot_device_initialize()
 	#ifdef SONAR_SENSOR_PORT
 	sonar_initialize_sensor(SONAR_SENSOR_PORT);
 	#endif
+	// Init adc intern
+	adc_int_init(NXT_PORT_S1);
 	#ifdef I2C_PORT
 	i2c_init(I2C_PORT); //TODO: MIssing, needs merge
 	#endif

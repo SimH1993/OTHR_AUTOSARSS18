@@ -42,7 +42,7 @@ if ( taskEvents & TriggerUltraschallAuslesen ) {
 
 if ( taskEvents & TriggerFlankenErkennung ) {
 	// Call runnable
-	//runnable_FlankenErkennung();
+	runnable_FlankenErkennung();
 	ClearEvent(TriggerFlankenErkennung);
 }
 
