@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<autosarMetaModel:AutosarSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:autosarMetaModel="http://www.example.org/autosarMetaModel" name="AutosarSystem">
+  <swc name="1">
+    <runnable name="JoystickAuslesen"/>
+    <runnable name="UltraschallAuslesen"/>
+    <runnable name="FlankenErkennung"/>
+    <port xsi:type="autosarMetaModel:JoystickTaster" name="Taster"/>
+    <port xsi:type="autosarMetaModel:JoystickHorizontal" name="JostickHorizontal"/>
+    <port xsi:type="autosarMetaModel:JoystickVertical" name="JoystickVertical"/>
+    <port xsi:type="autosarMetaModel:SenderReceiverPort" name="OutJoystick"/>
+    <port xsi:type="autosarMetaModel:SenderReceiverPort" name="OutUltraschall"/>
+    <port xsi:type="autosarMetaModel:TriggerPort" name="OutFlankenerkennung"/>
+    <port xsi:type="autosarMetaModel:Ultraschall" name="Ultraschall"/>
+    <port xsi:type="autosarMetaModel:Taster" name="BlinkerTaster"/>
+    <port xsi:type="autosarMetaModel:SenderReceiverPort" name="OutJoystickTaster"/>
+  </swc>
+  <swc name="2">
+    <runnable name="WerteBerechnen"/>
+    <port xsi:type="autosarMetaModel:SenderReceiverPort" name="InJoystick" type="RECEIVER"/>
+    <port xsi:type="autosarMetaModel:SenderReceiverPort" name="OutMotorspeed"/>
+    <port xsi:type="autosarMetaModel:SenderReceiverPort" name="InMotorRPM" type="RECEIVER"/>
+  </swc>
+  <swc name="3">
+    <runnable name="Motorsteuerung"/>
+    <runnable name="Blinkersteuerung"/>
+    <runnable name="Drehzahlsteuerung"/>
+    <port xsi:type="autosarMetaModel:Motor" name="Links"/>
+    <port xsi:type="autosarMetaModel:Motor" name="Rechts"/>
+    <port xsi:type="autosarMetaModel:LED" name="Blinker"/>
+    <port xsi:type="autosarMetaModel:SenderReceiverPort" name="InMotorspeed" type="RECEIVER"/>
+    <port xsi:type="autosarMetaModel:SenderReceiverPort" name="OutMotorRPM"/>
+    <port xsi:type="autosarMetaModel:TriggerPort" name="InFlankensteuerung"/>
+  </swc>
+  <swc name="4">
+    <runnable name="DisplayAusgabe"/>
+    <runnable name="SoundAusgabe"/>
+    <port xsi:type="autosarMetaModel:SenderReceiverPort" name="InJoystickSound" type="RECEIVER"/>
+    <port xsi:type="autosarMetaModel:SenderReceiverPort" name="InUltraschall" type="RECEIVER"/>
+  </swc>
+  <brick name="1" bluetoothMode="SLAVE" bluetoothMAC="544353453" swc="//@swc.0 //@swc.1 //@swc.3">
+    <hardwareconnection xsi:type="autosarMetaModel:ADC" name="JoystickHorizontal" hardwareport="//@swc.0/@port.1" portNr="1"/>
+    <hardwareconnection xsi:type="autosarMetaModel:ADC" name="JoystickVertical" hardwareport="//@swc.0/@port.2" portNr="2"/>
+    <hardwareconnection xsi:type="autosarMetaModel:DIO" name="JoystickButton" hardwareport="//@swc.0/@port.0" portNr="3" pin="3"/>
+    <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" name="Ultraschall" hardwareport="//@swc.0/@port.6" address="55"/>
+  </brick>
+  <brick name="2" bluetoothMAC="53245245" swc="//@swc.2">
+    <hardwareconnection xsi:type="autosarMetaModel:ADC" name="MotorLinks" hardwareport="//@swc.2/@port.0" portNr="1"/>
+    <hardwareconnection xsi:type="autosarMetaModel:ADC" name="MotorRechts" hardwareport="//@swc.2/@port.1" portNr="2"/>
+    <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" name="LED" hardwareport="//@swc.2/@port.2" portNr="3" address="44"/>
+  </brick>
+  <connection name="JoystickConnection" input="//@swc.0/@port.3" output="//@swc.1/@port.0"/>
+  <connection name="JoystickHupeConnection" input="//@swc.0/@port.8" output="//@swc.3/@port.0"/>
+  <connection name="UltraschallConnection" input="//@swc.0/@port.4" output="//@swc.3/@port.1"/>
+  <connection name="BlinkerConnection" input="//@swc.0/@port.5" output="//@swc.2/@port.5"/>
+  <connection name="MotorSpeedConnection" input="//@swc.1/@port.1" output="//@swc.2/@port.3"/>
+  <connection name="MotorRPMConnection" input="//@swc.2/@port.4" output="//@swc.1/@port.2"/>
+</autosarMetaModel:AutosarSystem>

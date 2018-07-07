@@ -1,0 +1,1 @@
+#define RTE_WRITE_<PORT_NAME>(value) <MACRO_BODY>
