@@ -124,4 +124,8 @@
     <eLiterals name="LEFT"/>
     <eLiterals name="RIGHT" value="1"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HardwareUltraschall" eSuperTypes="#//RawAccess"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HardwareMotor" eSuperTypes="#//RawAccess"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HardwareDisplay" eSuperTypes="#//RawAccess"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HardwareSound" eSuperTypes="#//RawAccess"/>
 </ecore:EPackage>

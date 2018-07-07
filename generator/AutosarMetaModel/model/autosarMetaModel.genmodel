@@ -113,5 +113,9 @@
     <genClasses ecoreClass="autosarMetaModel.ecore#//ActuatorSensor">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//ActuatorSensor/portNr"/>
     </genClasses>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//HardwareUltraschall"/>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//HardwareMotor"/>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//HardwareDisplay"/>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//HardwareSound"/>
   </genPackages>
 </genmodel:GenModel>

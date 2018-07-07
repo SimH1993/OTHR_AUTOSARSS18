@@ -53,16 +53,19 @@
     <port xsi:type="autosarMetaModel:SenderReceiverPort" name="InUltraschall" type="RECEIVER"/>
   </swc>
   <brick name="1" bluetoothMode="SLAVE" bluetoothMAC="00:22:83:23:12:65:00" swc="//@swc.0 //@swc.1 //@swc.3">
-    <hardwareconnection xsi:type="autosarMetaModel:ADC" hardwareport="//@swc.0/@port.1" name="JoystickHorizontal" portNr="NXT_PORT_B"/>
-    <hardwareconnection xsi:type="autosarMetaModel:ADC" hardwareport="//@swc.0/@port.2" name="JoystickVertical"/>
-    <hardwareconnection xsi:type="autosarMetaModel:ADC" hardwareport="//@swc.0/@port.0" name="JoystickButton" portNr="NXT_PORT_C"/>
-    <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.0/@port.6" name="Ultraschall" portNr="NXT_PORT_S2" address="55"/>
     <hardwareconnection xsi:type="autosarMetaModel:ADC" hardwareport="//@swc.0/@port.7" name="BlinkerTaster" portNr="NXT_PORT_S1"/>
+    <hardwareconnection xsi:type="autosarMetaModel:HardwareUltraschall" hardwareport="//@swc.0/@port.6" name="Ultraschall" portNr="NXT_PORT_S2"/>
+    <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.0/@port.1" name="JoystickHorizontalPin" portNr="NXT_PORT_S4" address="0x48" mode="ADC"/>
+    <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.0/@port.2" name="JoystickVerticalPin" portNr="NXT_PORT_S4" address="0x48" mode="ADC" pin="1"/>
+    <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.0/@port.0" name="JoystickButtonPin" portNr="NXT_PORT_S4" address="0x48" mode="ADC" pin="2"/>
   </brick>
   <brick name="2" bluetoothMAC="00:22:83:26:26:59:00" swc="//@swc.2">
     <hardwareconnection xsi:type="autosarMetaModel:ADC" hardwareport="//@swc.2/@port.0" name="MotorLinks"/>
     <hardwareconnection xsi:type="autosarMetaModel:ADC" hardwareport="//@swc.2/@port.1" name="MotorRechts" portNr="NXT_PORT_B"/>
-    <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.2/@port.2" name="LED" portNr="NXT_PORT_C" address="44"/>
+    <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.2/@port.2" name="LED1" portNr="NXT_PORT_S1" address="0x26"/>
+    <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.2/@port.2" name="LED2" portNr="NXT_PORT_S1" address="0x26" pin="1"/>
+    <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.2/@port.2" name="LED3" portNr="NXT_PORT_S1" address="0x26" pin="2"/>
+    <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.2/@port.2" name="LED4" portNr="NXT_PORT_S1" address="0x26" pin="3"/>
   </brick>
   <connection name="JoystickConnectionHorizontal" input="//@swc.0/@port.3" output="//@swc.1/@port.0"/>
   <connection name="JoystickHupeConnection" input="//@swc.0/@port.8" output="//@swc.3/@port.0"/>
