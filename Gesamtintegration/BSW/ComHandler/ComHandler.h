@@ -16,7 +16,7 @@ typedef struct
 } BT_NET_HEADER;
 
 //Public functions
-U8 com_init(U8 is_master);						//Returns 1 on success, 0 on failure
+U8 com_init();						//Returns 1 on success, 0 on failure
 U32 com_send(U8 *buff, U32 len);				//Returns number of sent bytes, 0 on error [Async]
 U8 com_send_packet(U8 id, U8 flags, int data);	//Returns 1 on success, 0 on failure [Async]
 U32 com_recv(U8 *buff, U32 len);				//Returns number of received bytes, 0 on error [Async]

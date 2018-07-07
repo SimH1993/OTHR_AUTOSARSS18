@@ -31,7 +31,8 @@ CPU ATMEL_AT91SAM7S256
 	}; 
 
 	APPMODE appmode1{};
-	/*
+	
+
 	TASK ComTask_send
 	{
 		AUTOSTART = FALSE;
@@ -56,7 +57,6 @@ CPU ATMEL_AT91SAM7S256
 	{
 		MASK = AUTO;
 	};
-	*/
 	
 	COUNTER CounterOne
 	{
@@ -65,7 +65,6 @@ CPU ATMEL_AT91SAM7S256
 		TICKSPERBASE = 1;
 	};
 	
-	/*
 	ALARM ComAlarm_receive
 	{
 		COUNTER = CounterOne;
@@ -77,115 +76,34 @@ CPU ATMEL_AT91SAM7S256
 		
 		AUTOSTART = FALSE;
 	};
-	*/
 	
 	//////This is the region for RTE generated Alarms\\\\\\ 
+	ALARM alarmSWC3_Motorsteuerung 
+{ 
+	COUNTER = CounterOne;
+	ACTION = SETEVENT { TASK = SWC_3_Main; EVENT = TriggerMotorsteuerung; };
+	AUTOSTART = TRUE { ALARMTIME = 100; CYCLETIME = 100; APPMODE = appmode1; };
+};
 
-	ALARM alarmSWC1_RunnableJoystick {
-		COUNTER = CounterOne;
-		ACTION = SETEVENT {
-			TASK = SWC_1_Main;
-			EVENT = evtSWC1_RunnableJoystick;
-		};
-		AUTOSTART = TRUE {
-			ALARMTIME = 50;
-			CYCLETIME = 100;
-			APPMODE = appmode1;
-		}; 
-	}; 
 
-	ALARM alarmSWC1_RunnableUltraschall {
-		COUNTER = CounterOne;
-		ACTION = SETEVENT {
-			TASK = SWC_1_Main;
-			EVENT = evtSWC1_RunnableUltraschall;
-		};
-		AUTOSTART = TRUE {
-			ALARMTIME = 50;
-			CYCLETIME = 100;
-			APPMODE = appmode1;
-		}; 
-	}; 
-	
-	ALARM alarmSWC1_RunnableFlankenErkennung {
-		COUNTER = CounterOne;
-		ACTION = SETEVENT {
-			TASK = SWC_1_Main;
-			EVENT = evtSWC1_RunnableFlankenErkennung;
-		};
-		AUTOSTART = TRUE {
-			ALARMTIME = 50;
-			CYCLETIME = 100;
-			APPMODE = appmode1;
-		}; 
-	}; 
-	
-	ALARM alarmSWC4_RunnableDisplay {
-		COUNTER = CounterOne;
-		ACTION = SETEVENT {
-			TASK = SWC_4_Main;
-			EVENT = evtSWC4_RunnableDisplay;
-		};
-		AUTOSTART = TRUE {
-			ALARMTIME = 50;
-			CYCLETIME = 100;
-			APPMODE = appmode1;
-		}; 
-	}; 
-	
-	ALARM alarmSWC4_RunnableSound {
-		COUNTER = CounterOne;
-		ACTION = SETEVENT {
-			TASK = SWC_4_Main;
-			EVENT = evtSWC4_RunnableSound;
-		};
-		AUTOSTART = TRUE {
-			ALARMTIME = 50;
-			CYCLETIME = 100;
-			APPMODE = appmode1;
-		}; 
-	}; 
-
-	
 	//////End of region \\\\\\\\\\\ 
 	
 	//////This is the region for RTE generated events\\\\\\ 
-	
-EVENT evtSWC1_RunnableJoystick {
+	EVENT TriggerMotorsteuerung
+{ 
 	MASK = AUTO;
-}; 	
-EVENT evtSWC1_RunnableUltraschall {
-	MASK = AUTO;
-}; 	
-EVENT evtSWC1_RunnableFlankenErkennung {
-	MASK = AUTO;
-}; 
+};
 
-EVENT evtSWC4_RunnableDisplay {
+EVENT TriggerBlinkersteuerung
+{ 
 	MASK = AUTO;
-}; 
-EVENT evtSWC4_RunnableSound {
-	MASK = AUTO;
-}; 
-	
+};
+
+
 	//////End of region \\\\\\\\\\\ 
 	
 	//////This is the region for RTE generated TASKS\\\\\\ 
-TASK SWC_1_Main
-{
-	AUTOSTART = TRUE { 
-		APPMODE = appmode1; 
-	};
-	PRIORITY = 10;
-	ACTIVATION = 1;
-	SCHEDULE = FULL;
-	STACKSIZE = 512;
-	EVENT = evtSWC1_RunnableJoystick;
-	EVENT = evtSWC1_RunnableUltraschall;
-	EVENT = evtSWC1_RunnableFlankenErkennung;
-};
-/*
-TASK SWC_2_Main
+	TASK SWC_3_Main
 {
 	AUTOSTART = TRUE { APPMODE = appmode1; };
 	PRIORITY = 10;
@@ -193,23 +111,9 @@ TASK SWC_2_Main
 	SCHEDULE = FULL;
 	STACKSIZE = 512;
 	
-	
+	EVENT = TriggerMotorsteuerung;
+    EVENT = TriggerBlinkersteuerung;
 };
-*/
-TASK SWC_4_Main
-{
-	AUTOSTART = TRUE { 
-		APPMODE = appmode1; 
-	};
-	PRIORITY = 10;
-	ACTIVATION = 1;
-	SCHEDULE = FULL;
-	STACKSIZE = 512;
-	EVENT = evtSWC4_RunnableDisplay;
-	EVENT = evtSWC4_RunnableSound;
-};
-
-
 
 
 	//////End of region \\\\\\\\\\\ 

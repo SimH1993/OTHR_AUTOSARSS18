@@ -7,8 +7,6 @@
 #include "ComHandler.h"
 #include "../Utility/Utility.h"
 
-
-
 //Globals
 U8 com_initialized = 0;
 
@@ -34,7 +32,7 @@ DeclareAlarm(ComAlarm_receive);
 
 
 //Basic exported functions
-U8 com_init(U8 is_master)
+U8 com_init()
 {
 	if(com_initialized)
 		return 1;
@@ -42,18 +40,18 @@ U8 com_init(U8 is_master)
 	SINT status;
 	for(int i = 0; (status = ecrobot_get_bt_status()) != BT_STREAM && i < (COM_CONNECT_TIMEOUT / 100); i++)
 	{
-		if(is_master)
-			ecrobot_init_bt_master(com_slave_addr, COM_CONNECT_PASSWD);
-		else
-			ecrobot_init_bt_slave(COM_CONNECT_PASSWD);
-		
+		#ifdef COM_CONNECT_IS_MASTER
+		ecrobot_init_bt_master(com_slave_addr, COM_CONNECT_PASSWD);
+		#else
+		ecrobot_init_bt_slave(COM_CONNECT_PASSWD);
+		#endif
 		systick_wait_ms(100);
 	}
 	
 	if(status == BT_STREAM)
 	{
 		com_initialized = 1;
-		
+		display_write("1.2\n");
 		ActivateTask(ComTask_send); //This can also be replaced with an alarm to send at a fixed interval instead of sending each packet separately
 		SetRelAlarm(ComAlarm_receive, 1, COM_RECEIVE_SPEED);
 		
@@ -89,7 +87,7 @@ U32 com_send(U8 *buff, U32 len)
 
 U8 com_send_packet(U8 id, U8 flags, int data)
 {
-	U8 buffer[sizeof(header) + sizeof(int)];
+	U8 buffer[sizeof(BT_NET_HEADER) + sizeof(int)];
 	BT_NET_HEADER *header = (BT_NET_HEADER*)buffer;
 	
 	header->id = id;
@@ -151,15 +149,6 @@ void com_terminate()
 //Private functions and tasks
 
 
-//Hooks -> have to be moved later
-void user_1ms_isr_type2(void)
-{
-	StatusType ercd = SignalCounter(CounterOne);
-	if(ercd != E_OK)
-		ShutdownOS(ercd);
-}
-
-
 
 //Send task, non preemp to avoid usage of locks/disabling irqs
 //Waits for a user event to be triggered, event is triggered by 'com_send' calls
@@ -182,7 +171,7 @@ TASK(ComTask_send)
 			else
 			{
 				U32 len = ecrobot_send_bt_packet(com_send_buff, com_send_len);
-				add_lognum(len);
+				//add_lognum(len);
 				com_send_len = 0;
 			}
 		}
@@ -216,11 +205,12 @@ TASK(ComTask_receive)
 	//Merged from runnable_bt_dispatcher
 	//Only 1 single int data now (fixed length)
 	U32 received = 0;
-	BT_NET_HEADER header;
+	U8 buffer[sizeof(BT_NET_HEADER) + sizeof(int)];
+	BT_NET_HEADER *header = (BT_NET_HEADER*)buffer;
 	
-	while(received < sizeof(header))
+	while(received < sizeof(BT_NET_HEADER))
 	{
-		U32 len = com_recv((U8*)header + received, sizeof(header) - received);
+		U32 len = com_recv((U8*)buffer + received, sizeof(BT_NET_HEADER) - received);
 		if(!len)
 			return;
 		
@@ -230,14 +220,14 @@ TASK(ComTask_receive)
 	received = 0;
 	while(received < sizeof(int))
 	{
-		U32 len = com_recv(dataBuff + received, sizeof(int) - received);
+		U32 len = com_recv(buffer + received, sizeof(int) - received);
 		if(!len)
 			return;
 		
 		received += len;
 	}
 	
-	rte_set_data(header.id, *(int*)dataBuff);
+	rte_set_data(header->id, *(int*)buffer);
 	
 	TerminateTask();
 }

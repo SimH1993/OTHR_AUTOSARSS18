@@ -1,5 +1,8 @@
 #ifndef DEFINES
 #define DEFINES
 
-#define COM_CONNECT_SLAVE_ADDRESS		{ 54, 43, 53, 45, 32, 55, 22 };
-#define COM_CONNECT_IS_MASTER#endif
+#define COM_CONNECT_SLAVE_ADDRESS		{ 0, 22, 83, 23, 18, 127, 0 }
+#define COM_CONNECT_IS_MASTER
+#define MOTOR_LEFT	NXT_PORT_A
+#define MOTOR_RIGHT	NXT_PORT_B
+#endif

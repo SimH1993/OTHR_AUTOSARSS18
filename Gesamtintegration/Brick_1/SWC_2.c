@@ -3,29 +3,18 @@
 #include "ecrobot_interface.h" 
 
 //GENERATED
-int Rte_Read_InJoystick(){
-	return localSenderReceiver[0];
-}
-
+#define RTE_READ_InJoystickHorizontal() localSenderReceiver[0]
 //GENERATED
-void Rte_Write_OutMotorspeed(int value){
-	//<FUNCTION_BODY>
-}
-
-//GENERATED
-int Rte_Read_InMotorRPM(){
-	//<FUNCTION_BODY>
-}
+#define RTE_READ_InJoystickVertical() localSenderReceiver[3]
+#define RTE_WRITE_OutMotorspeed(value) com_send_packet(1, 0, value)
 
 
-
-// #include "SWC_2_Runnable_WerteBerechnen.c"
-#include "../runnables/runnable_calculater.c"
+#include "..\runnables\Runnable_WerteBerechnen.c"
 
 
 TASK(SWC_2_Main){
 
-	int taskEvents;
+	EventMaskType taskEvents;
 	
 	while(1){
 	
@@ -34,7 +23,7 @@ TASK(SWC_2_Main){
 		GetEvent(SWC_2_Main, &taskEvents);
 		if ( taskEvents & TriggerWerteBerechnen ) {
 	// Call runnable
-	SWC_2_Runnable_WerteBerechnen();
+	runnable_WerteBerechnen();
 	ClearEvent(TriggerWerteBerechnen);
 }
 

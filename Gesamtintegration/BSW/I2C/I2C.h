@@ -1,3 +1,6 @@
+#ifndef __I2C_HEADER__
+#define __I2C_HEADER__
+
 //typedef U8(*i2c_read_fct_t)(U8 port_id, U8 i2c_address);
 //typedef void(*i2c_write_fct_t)(U8 port_id, U8 i2c_address, U8 data);
 
@@ -54,3 +57,5 @@
 	i2c_init - Initialize the I2C Port
 */
 #define i2c_init(port_id) ecrobot_init_i2c(port_id, LOWSPEED)
+
+#endif

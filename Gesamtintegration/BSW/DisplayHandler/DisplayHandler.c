@@ -21,6 +21,15 @@ void display_write_xy(int x, int y, const char *str)
 	display_line_cnt = y;
 }
 
+void display_write_xy_num(int x, int y, int num)
+{
+	display_goto_xy(x, y);
+	display_int(num,8);
+	display_update();
+	
+	display_line_cnt = y;
+}
+
 void display_clear_line(int y)
 {
 	display_goto_xy(0, y);
@@ -43,4 +52,19 @@ void display_write(const char *str)
 	display_line_cnt++;
 }
 
+void display_write_int(int num)
+{
+	if(display_line_cnt >= DISPLAY_MAX_Y)
+	{
+		display_clear(0);
+		display_goto_xy(0, 0);
+		display_line_cnt = 0;
+	}
+	
+	display_goto_xy(0, display_line_cnt);
+	display_int(num, 8);
+	display_update();
+	
+	display_line_cnt++;
+}
 //void display_clear(U32 updateToo) //already defined
