@@ -1,5 +1,5 @@
 #include "DioIF.h"
-#include "i2c.h"
+#include "../I2C/I2C.h"
 
 U8 dio_read_ext(U8 port_id, U8 i2c_address){
 	U8 dioStatus = 0;

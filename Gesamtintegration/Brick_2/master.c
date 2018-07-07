@@ -26,10 +26,15 @@ void user_1ms_isr_type2(void)
 		ShutdownOS(ercd);
 }
 
-#include "../BSW/ComHandler/ComHandler.c"
+#include "../BSW/ADC/AdcIF.h"
+#include "../BSW/ComHandler/ComHandler.h"
+#include "../BSW/DIO/DioIF.h"
+#include "../BSW/DisplayHandler/DisplayHandler.h"
 #include "../BSW/I2C/I2C.h"
+#include "../BSW/MotorHandler/MotorHandler.h"
 #include "../BSW/Sonar/Sonar.h"
-#include "../BSW/DisplayHandler/DisplayHandler.c"
+#include "../BSW/SoundHandler/SoundHandler.h"
+#include "../BSW/Utility/Utility.h"
 
 
 void ecrobot_device_initialize()

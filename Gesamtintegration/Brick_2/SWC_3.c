@@ -38,5 +38,3 @@ if ( taskEvents & TriggerBlinkersteuerung ) {
 	}
 	TerminateTask();
 }
-
-

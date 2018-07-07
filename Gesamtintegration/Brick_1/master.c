@@ -5,6 +5,7 @@
 
 int localSenderReceiver[4];
 int remotePorts[2];
+static const U8 com_slave_addr[7] = COM_CONNECT_SLAVE_ADDRESS;
 
 DeclareCounter(CounterOne);
 
@@ -29,8 +30,6 @@ DeclareTask(SWC_4_Main);
 
 void rte_set_data(int portId, int data){
 	remotePorts[portId] = data;
-	
-	
 }
 
 void user_1ms_isr_type2(void)
@@ -40,10 +39,15 @@ void user_1ms_isr_type2(void)
 		ShutdownOS(ercd);
 }
 
-#include "../BSW/ComHandler/ComHandler.c"
-#include "../BSW/I2C/I2C.h"
-#include "../BSW/Sonar/Sonar.h"
+#include "../BSW/ADC/AdcIF.h"
+#include "../BSW/ComHandler/ComHandler.h"
+#include "../BSW/DIO/DioIF.h"
 #include "../BSW/DisplayHandler/DisplayHandler.h"
+#include "../BSW/I2C/I2C.h"
+#include "../BSW/MotorHandler/MotorHandler.h"
+#include "../BSW/Sonar/Sonar.h"
+#include "../BSW/SoundHandler/SoundHandler.h"
+#include "../BSW/Utility/Utility.h"
 
 void ecrobot_device_initialize()
 {

@@ -51,7 +51,6 @@ U8 com_init()
 	if(status == BT_STREAM)
 	{
 		com_initialized = 1;
-		display_write("1.2\n");
 		ActivateTask(ComTask_send); //This can also be replaced with an alarm to send at a fixed interval instead of sending each packet separately
 		SetRelAlarm(ComAlarm_receive, 1, COM_RECEIVE_SPEED);
 		
@@ -170,8 +169,8 @@ TASK(ComTask_send)
 			}
 			else
 			{
-				U32 len = ecrobot_send_bt_packet(com_send_buff, com_send_len);
-				//add_lognum(len);
+				//U32 len = ecrobot_send_bt_packet(com_send_buff, com_send_len);
+				ecrobot_send_bt_packet(com_send_buff, com_send_len);
 				com_send_len = 0;
 			}
 		}

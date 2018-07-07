@@ -7,4 +7,4 @@ void runnable_UltraschallAuslesen()
 {
 	S32 data = RTE_ADC_READ_Ultraschall();		
 	RTE_WRITE_OutUltraschall(data);
-};
+}

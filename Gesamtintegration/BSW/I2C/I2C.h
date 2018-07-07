@@ -1,20 +1,5 @@
-#ifndef __I2C_HEADER__
-#define __I2C_HEADER__
-
-//typedef U8(*i2c_read_fct_t)(U8 port_id, U8 i2c_address);
-//typedef void(*i2c_write_fct_t)(U8 port_id, U8 i2c_address, U8 data);
-
-//extern const i2c_read_fct_t I2CReadFctPtr[1];
-//extern const i2c_write_fct_t I2CWriteFctPtr[1];
-
-//#define I2C_Read_Data(I2CIndex, Port, Adresse) \
-	I2CReadFctPtr[I2CIndex](Port, Adresse)
-	
-//#define I2C_Write_Data(I2CIndex, Port, Adresse, Data) \
-	I2CWriteFctPtr[I2CIndex](Port, Adresse, Data)
-//U8 i2c_read(U8 port_id, U8 i2c_address, U8 *buffer, U8 bufferSize);
-//U8 i2c_write(U8 port_id, U8 i2c_ddress, U8 *buffer, U8 bufferSize);
-
+#ifndef I2C_H_
+#define I2C_H_
 /*
 	i2c_read - Reads some data of an I2C connected device
 		port_id [U8]: The NXT-Port the I2C shall be used
@@ -58,4 +43,4 @@
 */
 #define i2c_init(port_id) ecrobot_init_i2c(port_id, LOWSPEED)
 
-#endif
+#endif /* I2C_H_ */

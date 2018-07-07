@@ -32,26 +32,3 @@ int memcmp(const void *str1, const void *str2, U32 count)
 	
 	return 0;
 }
-
-char *strcpy(char *dest, const char *src)
-{
-	char *save = dest;
-
-	while(*dest++ = *src++)
-		;
-	
-	return save;
-}
-
-char *strcat(char *dest, const char *src)
-{
-	char *rdest = dest;
-
-	while (*dest)
-		dest++;
-	
-	while (*dest++ = *src++)
-		;
-	
-	return rdest;
-}

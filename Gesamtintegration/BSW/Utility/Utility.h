@@ -1,3 +1,6 @@
+#ifndef UTILITY_H_
+#define UTILITY_H_
+
 void *memcpy(void *dest, const void *src, U32 len);
 int memcmp(const void *str1, const void *str2, U32 count);
 char *strcpy(char *dest, const char *src);
@@ -36,3 +39,5 @@ static inline int abs(int x)
 	
 	return x;
 }
+
+#endif /* UTILITY_H_ */
