@@ -1,6 +1,6 @@
 TASK(SWC_<SWC_NAME>_Main){
 
-	int taskEvents;
+	EventMaskType taskEvents;
 	
 	while(1){
 	

@@ -6,6 +6,7 @@ import autosarMetaModel.ActuatorSensor;
 import autosarMetaModel.Brick;
 import autosarMetaModel.ECUPort;
 import autosarMetaModel.HardwareConnection;
+import autosarMetaModel.HardwareUltraschall;
 import autosarMetaModel.I2CExpander;
 import autosarMetaModel.IC2Mode;
 import autosarMetaModel.RawAccess;
@@ -64,7 +65,7 @@ public class RawAccessPortGenerator extends EcuPortGenerator {
 	}
 
 	private String getMode() {
-		if (connection instanceof ADC) {
+		if (connection instanceof ADC || connection instanceof HardwareUltraschall) {
 			return "ADC";
 		} else if (connection instanceof I2CExpander) {
 			I2CExpander exp = (I2CExpander) connection;

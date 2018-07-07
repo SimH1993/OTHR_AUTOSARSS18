@@ -5,7 +5,7 @@ import generator.brick.MainGenerator;
 public class Test {
 	
 	public static void main(String[] args) {
-		AutosarSystem system = FileLoader.load("C:\\Users\\loc34770\\Downloads\\OTHR_AUTOSARSS18\\generator\\DemoProject\\My.autosarmetamodel");
+		AutosarSystem system = FileLoader.load("C:\\Users\\sct43297\\Downloads\\OTHR_AUTOSARSS18\\generator\\DemoProject\\My.autosarmetamodel");
 		new MainGenerator(system).generate();
 	}
 }

@@ -17,7 +17,7 @@ import generator.brick.BrickGenerator;
 
 public class MainGenerator {
 
-	public final static Path rootPath = Paths.get("C:\\Users\\loc34770\\Downloads\\generated");
+	public final static Path rootPath = Paths.get("C:\\Users\\sct43297\\Downloads\\generated");
 
 	private final AutosarSystem system;
 
