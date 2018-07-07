@@ -6,7 +6,6 @@ import autosarMetaModel.ActuatorSensor;
 import autosarMetaModel.Brick;
 import autosarMetaModel.ECUPort;
 import autosarMetaModel.HardwareConnection;
-import autosarMetaModel.HardwareUltraschall;
 import autosarMetaModel.I2CExpander;
 import autosarMetaModel.IC2Mode;
 import autosarMetaModel.RawAccess;
@@ -40,7 +39,8 @@ public class RawAccessPortGenerator extends EcuPortGenerator {
 
 	public String generateRead() {
 		String result = "#define RTE_<MODE>_READ_<PORT_NAME>()	<MODE>_Read_Value(<INTERN_EXTERN>, <PORT>, <I2C>, <PIN>)";
-		result = result.replace("<MODE>", getMode()).replace("<PORT_NAME>", port.getName())
+		result = result.replace("<MODE>", getMode())
+				.replace("<PORT_NAME>", port.getName())
 				.replace("<INTERN_EXTERN>", isExtern() ? "1" : "0").replace("<PORT>", getPort())
 				.replace("<I2C>", getIC2Address()).replace("<PIN>", getPin() + "");
 		return result;
@@ -48,7 +48,8 @@ public class RawAccessPortGenerator extends EcuPortGenerator {
 
 	public String generateWrite() {
 		String result = "#define RTE_<MODE>_WRITE_<PORT_NAME>(value)	<MODE>_Read_Value(<INTERN_EXTERN>, <PORT>, <I2C>, <PIN>, value)";
-		result = result.replace("<MODE>", getMode()).replace("<PORT_NAME>", port.getName())
+		result = result.replace("<MODE>", getMode())
+				.replace("<PORT_NAME>", port.getName())
 				.replace("<INTERN_EXTERN>", isExtern() ? "1" : "0").replace("<PORT>", getPort())
 				.replace("<I2C>", getIC2Address()).replace("<PIN>", getPin() + "");
 		return result;
@@ -65,7 +66,7 @@ public class RawAccessPortGenerator extends EcuPortGenerator {
 	}
 
 	private String getMode() {
-		if (connection instanceof ADC || connection instanceof HardwareUltraschall) {
+		if (connection instanceof ADC) {
 			return "ADC";
 		} else if (connection instanceof I2CExpander) {
 			I2CExpander exp = (I2CExpander) connection;

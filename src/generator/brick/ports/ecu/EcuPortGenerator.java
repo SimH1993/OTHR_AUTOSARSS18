@@ -2,6 +2,7 @@ package generator.brick.ports.ecu;
 
 import autosarMetaModel.ActuatorSensor;
 import autosarMetaModel.Brick;
+import autosarMetaModel.ECRobotAccess;
 import autosarMetaModel.ECUPort;
 import autosarMetaModel.HardwareConnection;
 import autosarMetaModel.RawAccess;
@@ -11,8 +12,9 @@ public abstract class EcuPortGenerator {
 		ActuatorSensor configuration = findConnectionConfiguration(brick, port);
 		if(configuration instanceof RawAccess) {
 			return new RawAccessPortGenerator(brick, port);
-		}
-		else {
+		} else if (configuration instanceof ECRobotAccess) {
+			return new ECRobotAccessPortGenerator(brick, port);
+		} else {
 			throw new RuntimeException("NOT NEEDED");
 		}
 	}
