@@ -115,7 +115,8 @@
     </genClasses>
     <genClasses ecoreClass="autosarMetaModel.ecore#//HardwareUltraschall"/>
     <genClasses ecoreClass="autosarMetaModel.ecore#//HardwareMotor"/>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//HardwareDisplay"/>
-    <genClasses ecoreClass="autosarMetaModel.ecore#//HardwareSound"/>
+    <genClasses ecoreClass="autosarMetaModel.ecore#//ECRobotAccess">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute autosarMetaModel.ecore#//ECRobotAccess/accessMode"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -36,8 +36,8 @@
     <runnable name="Blinkersteuerung">
       <triggerevent xsi:type="autosarMetaModel:TriggerPortTrigger" name="TriggerBlinkersteuerung" triggerport="//@swc.2/@port.4"/>
     </runnable>
-    <port xsi:type="autosarMetaModel:Motor" name="Links"/>
-    <port xsi:type="autosarMetaModel:Motor" name="Rechts"/>
+    <port xsi:type="autosarMetaModel:Motor" name="MotorLinks"/>
+    <port xsi:type="autosarMetaModel:Motor" name="MotorRechts"/>
     <port xsi:type="autosarMetaModel:LED" name="Blinker"/>
     <port xsi:type="autosarMetaModel:SenderReceiverPort" name="InMotorspeed" type="RECEIVER"/>
     <port xsi:type="autosarMetaModel:TriggerPort" name="InFlankenerkennung"/>
@@ -60,12 +60,12 @@
     <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.0/@port.0" name="JoystickButtonPin" portNr="NXT_PORT_S4" address="0x48" mode="ADC" pin="2"/>
   </brick>
   <brick name="2" bluetoothMAC="00:22:83:26:26:59:00" swc="//@swc.2">
-    <hardwareconnection xsi:type="autosarMetaModel:ADC" hardwareport="//@swc.2/@port.0" name="MotorLinks"/>
-    <hardwareconnection xsi:type="autosarMetaModel:ADC" hardwareport="//@swc.2/@port.1" name="MotorRechts" portNr="NXT_PORT_B"/>
     <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.2/@port.2" name="LED1" portNr="NXT_PORT_S1" address="0x26"/>
     <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.2/@port.2" name="LED2" portNr="NXT_PORT_S1" address="0x26" pin="1"/>
     <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.2/@port.2" name="LED3" portNr="NXT_PORT_S1" address="0x26" pin="2"/>
     <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.2/@port.2" name="LED4" portNr="NXT_PORT_S1" address="0x26" pin="3"/>
+    <hardwareconnection xsi:type="autosarMetaModel:HardwareMotor" hardwareport="//@swc.2/@port.0" name="MotorLinks" accessMode="WRITE"/>
+    <hardwareconnection xsi:type="autosarMetaModel:HardwareMotor" hardwareport="//@swc.2/@port.1" name="MotorRechts" portNr="NXT_PORT_B" accessMode="WRITE"/>
   </brick>
   <connection name="JoystickConnectionHorizontal" input="//@swc.0/@port.3" output="//@swc.1/@port.0"/>
   <connection name="JoystickHupeConnection" input="//@swc.0/@port.8" output="//@swc.3/@port.0"/>

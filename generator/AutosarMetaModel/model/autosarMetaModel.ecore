@@ -124,8 +124,10 @@
     <eLiterals name="LEFT"/>
     <eLiterals name="RIGHT" value="1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="HardwareUltraschall" eSuperTypes="#//RawAccess"/>
-  <eClassifiers xsi:type="ecore:EClass" name="HardwareMotor" eSuperTypes="#//RawAccess"/>
-  <eClassifiers xsi:type="ecore:EClass" name="HardwareDisplay" eSuperTypes="#//RawAccess"/>
-  <eClassifiers xsi:type="ecore:EClass" name="HardwareSound" eSuperTypes="#//RawAccess"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HardwareUltraschall" eSuperTypes="#//ECRobotAccess"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HardwareMotor" eSuperTypes="#//ECRobotAccess"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ECRobotAccess" abstract="true" eSuperTypes="#//ActuatorSensor">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="accessMode" lowerBound="1"
+        eType="#//AccessMode"/>
+  </eClassifiers>
 </ecore:EPackage>
