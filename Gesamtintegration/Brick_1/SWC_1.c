@@ -36,13 +36,13 @@ TASK(SWC_1_Main){
 
 if ( taskEvents & TriggerUltraschallAuslesen ) {
 	// Call runnable
-	runnable_UltraschallAuslesen();
+	//runnable_UltraschallAuslesen();
 	ClearEvent(TriggerUltraschallAuslesen);
 }
 
 if ( taskEvents & TriggerFlankenErkennung ) {
 	// Call runnable
-	runnable_FlankenErkennung();
+	//runnable_FlankenErkennung();
 	ClearEvent(TriggerFlankenErkennung);
 }
 

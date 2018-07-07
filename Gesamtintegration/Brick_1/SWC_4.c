@@ -23,7 +23,7 @@ TASK(SWC_4_Main){
 		GetEvent(SWC_4_Main, &taskEvents);
 		if ( taskEvents & TriggerDisplayAusgabe ) {
 	// Call runnable
-	runnable_DisplayAusgabe();
+	//runnable_DisplayAusgabe();
 	ClearEvent(TriggerDisplayAusgabe);
 }
 

@@ -163,7 +163,7 @@ EVENT TriggerSoundAusgabe
 	AUTOSTART = TRUE { APPMODE = appmode1; };
 	PRIORITY = 10;
 	ACTIVATION = 1;
-	SCHEDULE = FULL;
+	SCHEDULE = NON;
 	STACKSIZE = 512;
 	
 	EVENT = TriggerJoystickAuslesen;

@@ -5,4 +5,7 @@
 #define SONAR_SENSOR_PORT	NXT_PORT_S2
 #define TOUCH_SENSOR_PORT	NXT_PORT_S1
 
+// Manually added
+#define I2C_PORT NXT_PORT_S4
+
 #endif

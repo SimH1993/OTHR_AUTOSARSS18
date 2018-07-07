@@ -4,6 +4,7 @@ TARGET_SOURCES := master.c \
 					../BSW/ADC/AdcIF.c \
 					../BSW/ComHandler/ComHandler.c \
 					../BSW/DIO/DioIF.c \
+					../BSW/DisplayHandler/DisplayHandler.c \
 					../BSW/MotorHandler/MotorHandler.c \
 					../BSW/SoundHandler/SoundHandler.c \
 					../BSW/Utility/Utility.c 

@@ -57,12 +57,12 @@ void user_1ms_isr_type2(void)
 
 void ecrobot_device_initialize()
 {
-	com_init();
+	//com_init();
 	#ifdef SONAR_SENSOR_PORT
 	sonar_initialize_sensor(SONAR_SENSOR_PORT);
 	#endif
 	#ifdef I2C_PORT
-	i2c_enable(I2C_PORT); //TODO: MIssing, needs merge
+	i2c_init(I2C_PORT); //TODO: MIssing, needs merge
 	#endif
 }
 
