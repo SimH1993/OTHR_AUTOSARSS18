@@ -10,7 +10,7 @@
     <runnable name="FlankenErkennung">
       <triggerevent xsi:type="autosarMetaModel:TimeTrigger" name="TriggerFlankenErkennung"/>
     </runnable>
-    <port xsi:type="autosarMetaModel:JoystickTaster" name="Taster"/>
+    <port xsi:type="autosarMetaModel:JoystickTaster" name="JoystickTaster"/>
     <port xsi:type="autosarMetaModel:JoystickHorizontal" name="JostickHorizontal"/>
     <port xsi:type="autosarMetaModel:JoystickVertical" name="JoystickVertical"/>
     <port xsi:type="autosarMetaModel:SenderReceiverPort" name="OutJoystickHorizontal"/>
