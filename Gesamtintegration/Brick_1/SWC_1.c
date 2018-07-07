@@ -36,7 +36,7 @@ TASK(SWC_1_Main){
 
 if ( taskEvents & TriggerUltraschallAuslesen ) {
 	// Call runnable
-	//runnable_UltraschallAuslesen();
+	runnable_UltraschallAuslesen();
 	ClearEvent(TriggerUltraschallAuslesen);
 }
 
