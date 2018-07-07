@@ -2,6 +2,7 @@
 #include "kernel.h"
 #include "kernel_id.h"
 #include "ecrobot_interface.h" 
+#include "../BSW/SoundHandler/SoundHandler.h"
 
 //User includes
 #include "ComHandler.h"
@@ -40,16 +41,19 @@ U8 com_init()
 	SINT status;
 	for(int i = 0; (status = ecrobot_get_bt_status()) != BT_STREAM && i < (COM_CONNECT_TIMEOUT / 100); i++)
 	{
-		#ifdef COM_CONNECT_IS_MASTER
-		ecrobot_init_bt_master(com_slave_addr, COM_CONNECT_PASSWD);
-		#else
-		ecrobot_init_bt_slave(COM_CONNECT_PASSWD);
-		#endif
+		if (btIsmaster == 1){
+			ecrobot_init_bt_master(com_slave_addr, COM_CONNECT_PASSWD);
+		} else {
+			ecrobot_init_bt_slave(COM_CONNECT_PASSWD);
+		}
 		systick_wait_ms(100);
 	}
 	
 	if(status == BT_STREAM)
 	{
+		
+		play_single_tone(1000, 300, 50);
+		
 		com_initialized = 1;
 		ActivateTask(ComTask_send); //This can also be replaced with an alarm to send at a fixed interval instead of sending each packet separately
 		SetRelAlarm(ComAlarm_receive, 1, COM_RECEIVE_SPEED);

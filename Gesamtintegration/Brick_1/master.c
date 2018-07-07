@@ -5,7 +5,13 @@
 
 int localSenderReceiver[4];
 int remotePorts[2];
-static const U8 com_slave_addr[7] = COM_CONNECT_SLAVE_ADDRESS;
+const U8 com_slave_addr[7] = COM_CONNECT_SLAVE_ADDRESS;
+
+#ifdef COM_CONNECT_IS_MASTER
+const U8 btIsmaster = 1;
+#else
+const U8 btIsmaster = 0;
+#endif /* COM_CONNECT_IS_MASTER */
 
 DeclareCounter(CounterOne);
 

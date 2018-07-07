@@ -8,6 +8,7 @@
 
 //static const U8 com_slave_addr[7] = COM_CONNECT_SLAVE_ADDRESS;
 extern const U8 com_slave_addr[];
+extern const U8 btIsmaster;
 
 //Public globals
 extern U8 com_initialized;
