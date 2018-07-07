@@ -150,17 +150,6 @@ void com_terminate()
 
 //Private functions and tasks
 
-
-//Hooks -> have to be moved later
-void user_1ms_isr_type2(void)
-{
-	StatusType ercd = SignalCounter(CounterOne);
-	if(ercd != E_OK)
-		ShutdownOS(ercd);
-}
-
-
-
 //Send task, non preemp to avoid usage of locks/disabling irqs
 //Waits for a user event to be triggered, event is triggered by 'com_send' calls
 TASK(ComTask_send)
@@ -173,19 +162,7 @@ TASK(ComTask_send)
 			break;
 		
 		while(com_send_len > 0)
-		{
-			if(com_send_len >= 254)
-			{
-				ecrobot_send_bt_packet(com_send_buff, 254);
-				com_send_len -= 254;
-			}
-			else
-			{
-				U32 len = ecrobot_send_bt_packet(com_send_buff, com_send_len);
-				add_lognum(len);
-				com_send_len = 0;
-			}
-		}
+			com_send_len -= ecrobot_send_bt_packet(com_send_buff, com_send_len >= 254 ? 254 : com_send_len);
 	}
 	
 	TerminateTask();
