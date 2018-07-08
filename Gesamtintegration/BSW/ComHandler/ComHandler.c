@@ -171,36 +171,7 @@ TASK(ComTask_send)
 			break;
 		
 		while(com_send_len > 0)
-		{
-			if(com_send_len >= 254)
-			{	
-				ecrobot_send_bt_packet(com_send_buff, 254);
-				com_send_len -= 254;
-			}
-			else
-			{
-				//U32 len = ecrobot_send_bt_packet(com_send_buff, com_send_len);
-				ecrobot_send_bt_packet(com_send_buff, com_send_len);
-				display_goto_xy(0,0);
-				display_unsigned(com_send_buff[0], 6);
-				display_goto_xy(0,1);
-				display_unsigned(com_send_buff[1], 6);
-				display_goto_xy(0,2);
-				display_unsigned(com_send_buff[2], 6);
-				display_goto_xy(0,3);
-				display_unsigned(com_send_buff[3], 6);
-				display_goto_xy(0,4);
-				display_unsigned(com_send_buff[4], 6);
-				display_goto_xy(0,5);
-				display_unsigned(com_send_buff[5], 6);
-				display_goto_xy(0,6);
-				display_unsigned(com_send_buff[6], 6);
-				display_goto_xy(0,7);
-				display_unsigned(com_send_buff[7], 6);
-				display_update();
-				com_send_len = 0;
-			}
-		}
+			com_send_len -= ecrobot_send_bt_packet(com_send_buff, com_send_len >= 254 ? 254 : com_send_len);
 	}
 	
 	TerminateTask();
@@ -263,27 +234,23 @@ TASK(ComTask_receive)
 		U8 buffer[sizeof(BT_NET_HEADER) + sizeof(int)];
 		BT_NET_HEADER *header = (BT_NET_HEADER*)buffer;
 		
-		U8 breakCondition = 1;
-		
-		while((received < sizeof(BT_NET_HEADER)) && breakCondition)
+		while((received < sizeof(BT_NET_HEADER)))
 		{
 			U32 len = com_recv((U8*)buffer + received, sizeof(BT_NET_HEADER));
-			if(len == 0){
-				breakCondition = 0;
-			} else {
-				received += len;
-			}
+			if(len == 0)
+				goto _RecvFail;
+			
+			received += len;
 		}
 		
 		received = 0;
-		while((received < sizeof(int)) && breakCondition)
+		while((received < sizeof(int)))
 		{
-			U32 len = com_recv(buffer + received, sizeof(int));
-			if(len == 0){
-				breakCondition = 0;
-			} else {
-				received += len;
-			}
+			U32 len = com_recv(buffer + sizeof(BT_NET_HEADER) + received, sizeof(int));
+			if(len == 0)
+				goto _RecvFail;
+			
+			received += len;
 		}
 		
 		/*display_goto_xy(0,0);
@@ -294,9 +261,10 @@ TASK(ComTask_receive)
 		display_int(*(buffer+1), 6);
 		display_update();*/
 		
-		rte_set_data(header->id, *(int*)buffer);
+		rte_set_data(header->id, *(int*)(buffer + sizeof(BT_NET_HEADER)));
 		
 	}
 	
+_RecvFail:
 	TerminateTask();
 }
