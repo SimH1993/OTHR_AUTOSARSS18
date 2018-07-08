@@ -182,7 +182,6 @@ TASK(ComTask_send)
 //Waits for a timer interrupt, gets triggered each 33ms (see COM_RECEIVE_SPEED) by an alarm to poll for incoming data
 TASK(ComTask_receive)
 {
-
 	while(1)
 	{
 		WaitEvent(ComEvent_receive);
@@ -228,29 +227,36 @@ TASK(ComTask_receive)
 		// display_unsigned(com_recv_len, 6);
 		// display_update();
 		
-		U32 received = 0;
-		U8 buffer[sizeof(BT_NET_HEADER) + sizeof(int)];
-		BT_NET_HEADER *header = (BT_NET_HEADER*)buffer;
-		
-		while(received < sizeof(buffer))
+		//Receive all complete packets and handle them
+		while(com_recv_len >= sizeof(BT_NET_HEADER) + sizeof(int))
 		{
-			U32 len = com_recv((U8*)buffer + received, sizeof(buffer) - received);
-			if(len == 0)
+			U32 received = 0;
+			U8 buffer[sizeof(BT_NET_HEADER) + sizeof(int)];
+			BT_NET_HEADER *header = (BT_NET_HEADER*)buffer;
+			
+			while(received < sizeof(buffer))
+			{
+				U32 len = com_recv((U8*)buffer + received, sizeof(buffer) - received);
+				if(len == 0)
+					break;
+				
+				received += len;
+			}
+			
+			//Error on receiving due to len == 0
+			if(received < sizeof(buffer))
 				break;
 			
-			received += len;
-		}
-		
-		/*display_goto_xy(0,0);
-		display_unsigned(header->id, 6);
-		display_goto_xy(0,1);
-		display_int(*buffer, 6);
-		display_goto_xy(0,2);
-		display_int(*(buffer+1), 6);
-		display_update();*/
-		
-		if(received >= sizeof(buffer))
+			/*display_goto_xy(0,0);
+			display_unsigned(header->id, 6);
+			display_goto_xy(0,1);
+			display_int(*buffer, 6);
+			display_goto_xy(0,2);
+			display_int(*(buffer+1), 6);
+			display_update();*/
+			
 			rte_set_data(header->id, *(int*)(buffer + sizeof(BT_NET_HEADER)));
+		}
 	}
 	
 	TerminateTask();
