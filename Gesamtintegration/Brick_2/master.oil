@@ -35,7 +35,7 @@ CPU ATMEL_AT91SAM7S256
 
 	TASK ComTask_send
 	{
-		AUTOSTART = FALSE;
+		AUTOSTART = TRUE { APPMODE = appmode1; };
 		PRIORITY = 11;
 		ACTIVATION = 1;
 		SCHEDULE = NON;
@@ -46,11 +46,12 @@ CPU ATMEL_AT91SAM7S256
 	
 	TASK ComTask_receive
 	{
-		AUTOSTART = FALSE;
+		AUTOSTART = TRUE { APPMODE = appmode1; };
 		PRIORITY = 11;
 		ACTIVATION = 1;
 		SCHEDULE = NON;
 		STACKSIZE = 512;
+		EVENT = ComEvent_receive;
 	};
 	
 	EVENT ComEvent_send
@@ -68,13 +69,13 @@ CPU ATMEL_AT91SAM7S256
 	ALARM ComAlarm_receive
 	{
 		COUNTER = CounterOne;
-		
-		ACTION = ACTIVATETASK
-		{
-			TASK = ComTask_receive;
-		};
-		
-		AUTOSTART = FALSE;
+		ACTION = SETEVENT { TASK = ComTask_receive; EVENT = ComEvent_receive; };
+		AUTOSTART = TRUE { ALARMTIME = 50; CYCLETIME = 50; APPMODE = appmode1; };
+	};
+	
+	EVENT ComEvent_receive
+	{
+		MASK = AUTO;
 	};
 	
 	//////This is the region for RTE generated Alarms\\\\\\ 

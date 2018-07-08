@@ -29,6 +29,7 @@ DeclareTask(ComTask_send);
 DeclareTask(ComTask_receive);
 
 DeclareEvent(ComEvent_send);
+DeclareEvent(ComEvent_receive);
 DeclareAlarm(ComAlarm_receive);
 
 
@@ -55,8 +56,10 @@ U8 com_init()
 		play_single_tone(1000, 300, 50);
 		
 		com_initialized = 1;
-		ActivateTask(ComTask_send); //This can also be replaced with an alarm to send at a fixed interval instead of sending each packet separately
-		SetRelAlarm(ComAlarm_receive, 1, COM_RECEIVE_SPEED);
+		// Now done automatically in the oil
+		// ActivateTask(ComTask_send); //This can also be replaced with an alarm to send at a fixed interval instead of sending each packet separately
+		// CancelAlarm(ComAlarm_receive);
+		// SetRelAlarm(ComAlarm_receive, 100, 33);
 		
 		return 1;
 	}
@@ -82,8 +85,9 @@ U32 com_send(U8 *buff, U32 len)
 	
 	EnableAllInterrupts();
 	
-	if(ret)
+	if(ret) {
 		SetEvent(ComTask_send, ComEvent_send);
+	}
 	
 	return ret;
 }
@@ -95,7 +99,9 @@ U8 com_send_packet(U8 id, U8 flags, int data)
 	
 	header->id = id;
 	header->flags = flags;
-	*(int*)(buffer + sizeof(header)) = data;
+	buffer[0] = id;
+	buffer[1] = flags;
+	*(int*)(buffer + sizeof(BT_NET_HEADER)) = data;
 	
 	U32 sent = 0;
 	while(sent < sizeof(buffer))
@@ -167,7 +173,7 @@ TASK(ComTask_send)
 		while(com_send_len > 0)
 		{
 			if(com_send_len >= 254)
-			{
+			{	
 				ecrobot_send_bt_packet(com_send_buff, 254);
 				com_send_len -= 254;
 			}
@@ -175,6 +181,23 @@ TASK(ComTask_send)
 			{
 				//U32 len = ecrobot_send_bt_packet(com_send_buff, com_send_len);
 				ecrobot_send_bt_packet(com_send_buff, com_send_len);
+				display_goto_xy(0,0);
+				display_unsigned(com_send_buff[0], 6);
+				display_goto_xy(0,1);
+				display_unsigned(com_send_buff[1], 6);
+				display_goto_xy(0,2);
+				display_unsigned(com_send_buff[2], 6);
+				display_goto_xy(0,3);
+				display_unsigned(com_send_buff[3], 6);
+				display_goto_xy(0,4);
+				display_unsigned(com_send_buff[4], 6);
+				display_goto_xy(0,5);
+				display_unsigned(com_send_buff[5], 6);
+				display_goto_xy(0,6);
+				display_unsigned(com_send_buff[6], 6);
+				display_goto_xy(0,7);
+				display_unsigned(com_send_buff[7], 6);
+				display_update();
 				com_send_len = 0;
 			}
 		}
@@ -188,49 +211,92 @@ TASK(ComTask_send)
 //Waits for a timer interrupt, gets triggered each 33ms (see COM_RECEIVE_SPEED) by an alarm to poll for incoming data
 TASK(ComTask_receive)
 {
-	while(com_recv_len < COM_BUFF_SIZE)
-	{
-		U32 left_len = COM_BUFF_SIZE - com_recv_len;
-		if(left_len > 126)
-			left_len = 126;
+
+	while(1) {
 		
-		U32 len = ecrobot_read_bt_packet(tmp_buff, left_len);
-		if(!len)
-			break;
+		WaitEvent(ComEvent_receive);
+		ClearEvent(ComEvent_receive);
+
+		while(com_recv_len < COM_BUFF_SIZE)
+		{
+			U32 left_len = COM_BUFF_SIZE - com_recv_len;
+			if(left_len > 126)
+				left_len = 126;
+			
+			U32 len = ecrobot_read_bt_packet(tmp_buff, left_len);
+			if(!len)
+				break;
+			
+			U32 i;
+			for(i = 0; i < len; i++)
+				com_recv_buff[(com_recv_pos + com_recv_len + i) % COM_BUFF_SIZE] = tmp_buff[i];
+			
+			com_recv_len += len;
+			
+			// display_goto_xy(0,0);
+			// display_unsigned(tmp_buff[0], 6);
+			// display_goto_xy(0,1);
+			// display_unsigned(tmp_buff[1], 6);
+			// display_goto_xy(0,2);
+			// display_unsigned(tmp_buff[2], 6);
+			// display_goto_xy(0,3);
+			// display_unsigned(tmp_buff[3], 6);
+			// display_goto_xy(0,4);
+			// display_unsigned(tmp_buff[4], 6);
+			// display_goto_xy(0,5);
+			// display_unsigned(tmp_buff[5], 6);
+			// display_goto_xy(0,6);
+			// display_unsigned(tmp_buff[6], 6);
+			// display_goto_xy(0,7);
+			// display_unsigned(tmp_buff[7], 6);
+			// display_update();
+			
+		}
 		
-		U32 i;
-		for(i = 0; i < len; i++)
-			com_recv_buff[(com_recv_pos + com_recv_len + i) % COM_BUFF_SIZE] = tmp_buff[i];
+		// display_goto_xy(0,0);
+		// display_unsigned(com_recv_len, 6);
+		// display_update();
 		
-		com_recv_len += len;
+		//Merged from runnable_bt_dispatcher
+		//Only 1 single int data now (fixed length)
+		U32 received = 0;
+		U8 buffer[sizeof(BT_NET_HEADER) + sizeof(int)];
+		BT_NET_HEADER *header = (BT_NET_HEADER*)buffer;
+		
+		U8 breakCondition = 1;
+		
+		while((received < sizeof(BT_NET_HEADER)) && breakCondition)
+		{
+			U32 len = com_recv((U8*)buffer + received, sizeof(BT_NET_HEADER));
+			if(len == 0){
+				breakCondition = 0;
+			} else {
+				received += len;
+			}
+		}
+		
+		received = 0;
+		while((received < sizeof(int)) && breakCondition)
+		{
+			U32 len = com_recv(buffer + received, sizeof(int));
+			if(len == 0){
+				breakCondition = 0;
+			} else {
+				received += len;
+			}
+		}
+		
+		display_goto_xy(0,0);
+		display_unsigned(header->id, 6);
+		display_goto_xy(0,1);
+		display_int(*buffer, 6);
+		display_goto_xy(0,2);
+		display_int(*(buffer+1), 6);
+		display_update();
+		
+		rte_set_data(header->id, *(int*)buffer);
+		
 	}
-	
-	//Merged from runnable_bt_dispatcher
-	//Only 1 single int data now (fixed length)
-	U32 received = 0;
-	U8 buffer[sizeof(BT_NET_HEADER) + sizeof(int)];
-	BT_NET_HEADER *header = (BT_NET_HEADER*)buffer;
-	
-	while(received < sizeof(BT_NET_HEADER))
-	{
-		U32 len = com_recv((U8*)buffer + received, sizeof(BT_NET_HEADER) - received);
-		if(!len)
-			return;
-		
-		received += len;
-	}
-	
-	received = 0;
-	while(received < sizeof(int))
-	{
-		U32 len = com_recv(buffer + received, sizeof(int) - received);
-		if(!len)
-			return;
-		
-		received += len;
-	}
-	
-	rte_set_data(header->id, *(int*)buffer);
 	
 	TerminateTask();
 }

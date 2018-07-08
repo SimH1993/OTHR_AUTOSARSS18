@@ -22,7 +22,6 @@ DeclareTask(SWC_3_Main);
 
 void rte_set_data(int portId, int data){
 	remotePorts[portId] = data;
-	
 	if(portId == 0) SetEvent(SWC_3_Main, TriggerBlinkersteuerung);
 }
 
@@ -52,7 +51,7 @@ void ecrobot_device_initialize()
 	sonar_initialize_sensor(SONAR_SENSOR_PORT);
 	#endif
 	#ifdef I2C_PORT
-	i2c_enable(I2C_PORT); //TODO: MIssing, needs merge
+	i2c_init(I2C_PORT); //TODO: MIssing, needs merge
 	#endif
 }
 
