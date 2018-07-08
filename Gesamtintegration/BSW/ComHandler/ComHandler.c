@@ -183,8 +183,8 @@ TASK(ComTask_send)
 TASK(ComTask_receive)
 {
 
-	while(1) {
-		
+	while(1)
+	{
 		WaitEvent(ComEvent_receive);
 		ClearEvent(ComEvent_receive);
 
@@ -232,11 +232,11 @@ TASK(ComTask_receive)
 		U8 buffer[sizeof(BT_NET_HEADER) + sizeof(int)];
 		BT_NET_HEADER *header = (BT_NET_HEADER*)buffer;
 		
-		while((received < sizeof(buffer)))
+		while(received < sizeof(buffer))
 		{
 			U32 len = com_recv((U8*)buffer + received, sizeof(buffer) - received);
 			if(len == 0)
-				goto _RecvFail;
+				goto break;
 			
 			received += len;
 		}
@@ -249,10 +249,9 @@ TASK(ComTask_receive)
 		display_int(*(buffer+1), 6);
 		display_update();*/
 		
-		rte_set_data(header->id, *(int*)(buffer + sizeof(BT_NET_HEADER)));
-		
+		if(received >= sizeof(buffer))
+			rte_set_data(header->id, *(int*)(buffer + sizeof(BT_NET_HEADER)));
 	}
 	
-_RecvFail:
 	TerminateTask();
 }
