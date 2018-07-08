@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<autosarMetaModel:AutosarSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:autosarMetaModel="http://www.example.org/autosarMetaModel">
+  <swc name="1">
+    <runnable name="TasterAuslesen"/>
+    <port xsi:type="autosarMetaModel:Taster" name="Taster"/>
+    <port xsi:type="autosarMetaModel:TriggerPort" name="OutTriggerMotor" type="OUTPUT"/>
+  </swc>
+  <swc name="2">
+    <runnable name="Motorsteuerung"/>
+    <port xsi:type="autosarMetaModel:Motor" name="MotorLinks"/>
+    <port xsi:type="autosarMetaModel:Motor" name="MotorRechts"/>
+    <port xsi:type="autosarMetaModel:TriggerPort" name="InTriggerMotor"/>
+  </swc>
+  <brick name="1" swc="//@swc.0">
+    <hardwareconnection xsi:type="autosarMetaModel:ADC" name="Taster" portNr="NXT_PORT_S1"/>
+  </brick>
+  <brick name="2" swc="//@swc.1">
+    <hardwareconnection xsi:type="autosarMetaModel:HardwareMotor" hardwareport="//@swc.1/@port.0" name="MotorLinks" accessMode="WRITE"/>
+    <hardwareconnection xsi:type="autosarMetaModel:HardwareMotor" hardwareport="//@swc.1/@port.1" name="MotorRechts" portNr="NXT_PORT_B" accessMode="WRITE"/>
+  </brick>
+  <connection name="Motorsteuerung" input="//@swc.0/@port.1" output="//@swc.1/@port.2"/>
+</autosarMetaModel:AutosarSystem>
