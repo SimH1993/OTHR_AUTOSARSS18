@@ -228,25 +228,13 @@ TASK(ComTask_receive)
 		// display_unsigned(com_recv_len, 6);
 		// display_update();
 		
-		//Merged from runnable_bt_dispatcher
-		//Only 1 single int data now (fixed length)
 		U32 received = 0;
 		U8 buffer[sizeof(BT_NET_HEADER) + sizeof(int)];
 		BT_NET_HEADER *header = (BT_NET_HEADER*)buffer;
 		
-		while((received < sizeof(BT_NET_HEADER)))
+		while((received < sizeof(buffer)))
 		{
-			U32 len = com_recv((U8*)buffer + received, sizeof(BT_NET_HEADER));
-			if(len == 0)
-				goto _RecvFail;
-			
-			received += len;
-		}
-		
-		received = 0;
-		while((received < sizeof(int)))
-		{
-			U32 len = com_recv(buffer + sizeof(BT_NET_HEADER) + received, sizeof(int));
+			U32 len = com_recv((U8*)buffer + received, sizeof(buffer) - received);
 			if(len == 0)
 				goto _RecvFail;
 			
