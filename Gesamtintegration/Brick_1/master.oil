@@ -58,6 +58,11 @@ CPU ATMEL_AT91SAM7S256
 		MASK = AUTO;
 	};
 	
+	EVENT ComEvent_receive
+	{
+		MASK = AUTO;
+	};
+	
 	COUNTER CounterOne
 	{
 		MINCYCLE = 1;

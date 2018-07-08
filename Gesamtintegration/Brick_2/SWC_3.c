@@ -26,16 +26,6 @@ TASK(SWC_3_Main){
 	// Call runnable
 	runnable_Motorsteuerung();
 	
-	// display_goto_xy(0,0);
-	// display_int(remotePorts[0], 6);
-	// display_goto_xy(0,1);
-	// display_int(remotePorts[1], 6);
-	// display_update();
-	
-	if (remotePorts[0]) {
-		ecrobot_sound_tone(1000, 100, 50);
-	}
-	
 	ClearEvent(TriggerMotorsteuerung);
 }
 

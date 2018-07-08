@@ -22,6 +22,12 @@ DeclareTask(SWC_3_Main);
 
 void rte_set_data(int portId, int data){
 	remotePorts[portId] = data;
+	display_goto_xy(0,0);
+	display_int(remotePorts[0], 6);
+	display_goto_xy(0,1);
+	display_int(remotePorts[1], 6);
+	display_update();
+	
 	if(portId == 0) SetEvent(SWC_3_Main, TriggerBlinkersteuerung);
 }
 

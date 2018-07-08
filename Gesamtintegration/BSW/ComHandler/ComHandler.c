@@ -250,7 +250,7 @@ TASK(ComTask_receive)
 			// display_goto_xy(0,7);
 			// display_unsigned(tmp_buff[7], 6);
 			// display_update();
-			
+			// ecrobot_sound_tone(1000, 50, 50);
 		}
 		
 		// display_goto_xy(0,0);
@@ -286,13 +286,13 @@ TASK(ComTask_receive)
 			}
 		}
 		
-		display_goto_xy(0,0);
+		/*display_goto_xy(0,0);
 		display_unsigned(header->id, 6);
 		display_goto_xy(0,1);
 		display_int(*buffer, 6);
 		display_goto_xy(0,2);
 		display_int(*(buffer+1), 6);
-		display_update();
+		display_update();*/
 		
 		rte_set_data(header->id, *(int*)buffer);
 		

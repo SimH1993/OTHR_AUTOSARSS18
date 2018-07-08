@@ -23,7 +23,7 @@ TASK(SWC_2_Main){
 		GetEvent(SWC_2_Main, &taskEvents);
 		if ( taskEvents & TriggerWerteBerechnen ) {
 	// Call runnable
-	//runnable_WerteBerechnen();
+	runnable_WerteBerechnen();
 	ClearEvent(TriggerWerteBerechnen);
 }
 
