@@ -236,7 +236,7 @@ TASK(ComTask_receive)
 		{
 			U32 len = com_recv((U8*)buffer + received, sizeof(buffer) - received);
 			if(len == 0)
-				goto break;
+				break;
 			
 			received += len;
 		}
