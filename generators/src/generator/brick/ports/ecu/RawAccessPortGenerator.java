@@ -38,19 +38,19 @@ public class RawAccessPortGenerator extends EcuPortGenerator {
 	}
 
 	public String generateRead() {
-		String result = "#define RTE_<MODE>_READ_<PORT_NAME>()	<MODE>_Read_Value(<INTERN_EXTERN>, <PORT>, <I2C>, <PIN>)";
+		String result = "#define RTE_<MODE>_READ_<PORT_NAME>()	<MODE>_Read_"+ (isADC() ? "Value" : "Pin")+"(<INTERN_EXTERN>, <PORT>, <I2C>, <PIN>)";
 		result = result.replace("<MODE>", getMode())
 				.replace("<PORT_NAME>", port.getName())
-				.replace("<INTERN_EXTERN>", isExtern() ? "1" : "0").replace("<PORT>", getPort())
+				.replace("<INTERN_EXTERN>", isExtern() ? "0" : "1").replace("<PORT>", getPort())
 				.replace("<I2C>", getIC2Address()).replace("<PIN>", getPin() + "");
 		return result;
 	}
 
 	public String generateWrite() {
-		String result = "#define RTE_<MODE>_WRITE_<PORT_NAME>(value)	<MODE>_Read_Value(<INTERN_EXTERN>, <PORT>, <I2C>, <PIN>, value)";
+		String result = "#define RTE_<MODE>_WRITE_<PORT_NAME>(value)	<MODE>_Write_"+(isADC() ? "Value" : "Pin")+"(<INTERN_EXTERN>, <PORT>, <I2C>, <PIN>, value)";
 		result = result.replace("<MODE>", getMode())
 				.replace("<PORT_NAME>", port.getName())
-				.replace("<INTERN_EXTERN>", isExtern() ? "1" : "0").replace("<PORT>", getPort())
+				.replace("<INTERN_EXTERN>", isExtern() ? "0" : "1").replace("<PORT>", getPort())
 				.replace("<I2C>", getIC2Address()).replace("<PIN>", getPin() + "");
 		return result;
 	}
@@ -79,6 +79,10 @@ public class RawAccessPortGenerator extends EcuPortGenerator {
 		}
 
 		throw new RuntimeException();
+	}
+	
+	private boolean isADC() {
+		return getMode().equals("ADC");
 	}
 
 	private boolean isExtern() {
