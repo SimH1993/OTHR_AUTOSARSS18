@@ -69,8 +69,14 @@ CPU ATMEL_AT91SAM7S256
 	ALARM ComAlarm_receive
 	{
 		COUNTER = CounterOne;
-		ACTION = SETEVENT { TASK = ComTask_receive; EVENT = ComEvent_receive; };
-		AUTOSTART = TRUE { ALARMTIME = 50; CYCLETIME = 50; APPMODE = appmode1; };
+		ACTION = SETEVENT { 
+			TASK = ComTask_receive; 
+			EVENT = ComEvent_receive; };
+		AUTOSTART = TRUE { 
+			ALARMTIME = 50; 
+			CYCLETIME = 50; 
+			APPMODE = appmode1; 
+		};
 	};
 	
 	EVENT ComEvent_receive

@@ -1,5 +1,5 @@
 # Target specific macros
-TARGET = brick_2
+TARGET = masterBrick2
 TARGET_SOURCES := master.c \
 					../BSW/ADC/AdcIF.c \
 					../BSW/ComHandler/ComHandler.c \
@@ -11,4 +11,4 @@ TARGET_SOURCES := master.c \
 
 TOPPERS_OSEK_OIL_SOURCE := ./master.oil
 O_PATH ?= build
-include ../../../../../../nxtOSEK/ecrobot/ecrobot.mak 
+include ../../../../../nxtOSEK/ecrobot/ecrobot.mak 

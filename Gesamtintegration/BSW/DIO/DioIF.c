@@ -7,7 +7,7 @@ U8 dio_read_ext(U8 port_id, U8 i2c_address){
 	return dioStatus;
 }
 
-U8 pinState = 0xAA;
+U8 pinState = 0xFF;
 
 void dio_write_ext(U8 port_id, U8 i2c_address, U8 pin, U8 level){
 	pin = pin & 0x07; // Can't select any pin higher than 7 (0-7)

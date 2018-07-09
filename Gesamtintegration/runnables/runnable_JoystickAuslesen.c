@@ -17,7 +17,7 @@ void runnable_JoystickAuslesen(){
 		joystickYRaw = RTE_ADC_READ_JoystickVertical();
 		counter++;
 	} else {
-		joystickButtonRaw = RTE_ADC_READ_Taster();
+		joystickButtonRaw = RTE_ADC_READ_JoystickTaster();
 		counter = 0;
 	}
 	

@@ -1,7 +1,7 @@
+#include "defines.h"
 #include "kernel.h"
 #include "kernel_id.h"
-#include "ecrobot_interface.h"
-#include "defines.h"
+#include "ecrobot_interface.h" 
 
 int localSenderReceiver[4];
 int remotePorts[2];
@@ -14,8 +14,6 @@ const U8 btIsmaster = 0;
 #endif /* COM_CONNECT_IS_MASTER */
 
 DeclareCounter(CounterOne);
-
-
 DeclareAlarm(alarmSWC1_JoystickAuslesen);
 DeclareAlarm(alarmSWC1_UltraschallAuslesen);
 DeclareAlarm(alarmSWC1_FlankenErkennung);
@@ -33,9 +31,10 @@ DeclareTask(SWC_2_Main);
 DeclareTask(SWC_4_Main);
 
 
-
 void rte_set_data(int portId, int data){
 	remotePorts[portId] = data;
+	
+	
 }
 
 void user_1ms_isr_type2(void)
@@ -61,11 +60,8 @@ void ecrobot_device_initialize()
 	#ifdef SONAR_SENSOR_PORT
 	sonar_initialize_sensor(SONAR_SENSOR_PORT);
 	#endif
-	// Init adc intern
+	i2c_init(NXT_PORT_S4);
 	adc_int_init(NXT_PORT_S1);
-	#ifdef I2C_PORT
-	i2c_init(I2C_PORT); //TODO: MIssing, needs merge
-	#endif
 }
 
 void ecrobot_device_terminate()

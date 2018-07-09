@@ -7,5 +7,6 @@ void runnable_Motorsteuerung()
 	S8 motor_left = (S8)(data & 0x000000FF);
 	S8 motor_right = (S8)((data & 0x0000FF00) >> 8);
 
-	motor_set_speed(MOTOR_LEFT, MOTOR_RIGHT, motor_left, motor_right);	
+	RTE_ECR_MOTOR_WRITE_MotorLinks(motor_left);
+	RTE_ECR_MOTOR_WRITE_MotorRechts(motor_right);
 }
