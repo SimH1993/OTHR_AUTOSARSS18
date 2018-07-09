@@ -28,7 +28,7 @@ void runnable_JoystickAuslesen(){
 	joystickButton = (joystickButtonRaw < 16);
 	
 	// Output the joystick values
-	RTE_WRITE_OutJoystickHorizontal(joystickXRaw);
+	RTE_WRITE_OutJoystickHorizontal(joystickXPercent);
 	RTE_WRITE_OutJoystickVertical(joystickYPercent);
 	RTE_WRITE_OutJoystickTaster(joystickButton);
 	
