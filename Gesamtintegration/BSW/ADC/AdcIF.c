@@ -24,4 +24,4 @@ U8 adc_ext(U8 port_id, U8 address, U8 icPin){
 	return data[icPin + 1];
 }
 
-const adc_read_fct_t AdcIfFctPtr[2]={&adc_int, &adc_ext};
+const adc_read_fct_t AdcIfFctPtr[2]={&adc_ext, &adc_int};
