@@ -5,7 +5,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="BaseClass" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ServerClientPort" eSuperTypes="#//SoftwarePort">
+  <eClassifiers xsi:type="ecore:EClass" name="ServerClientPort" abstract="true" eSuperTypes="#//SoftwarePort">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ServerClientPortType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SWC" eSuperTypes="#//BaseClass">
