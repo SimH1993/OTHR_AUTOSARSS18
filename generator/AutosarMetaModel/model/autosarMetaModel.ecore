@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="autosarMetaModel" nsURI="http://www.example.org/autosarMetaModel"
+    nsPrefix="autosarMetaModel">
+  <eClassifiers xsi:type="ecore:EClass" name="BaseClass" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServerClientPort" eSuperTypes="#//SoftwarePort">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ServerClientPortType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SWC" eSuperTypes="#//BaseClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="runnable" upperBound="-1"
+        eType="#//Runnable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="port" upperBound="-1" eType="#//Port"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TriggerPort" eSuperTypes="#//SoftwarePort">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//TriggerPortType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SenderReceiverPort" eSuperTypes="#//SoftwarePort">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//SenderReceiverPortType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Runnable" eSuperTypes="#//BaseClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="triggerevent" lowerBound="1"
+        eType="#//TriggerEvent" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Port" abstract="true" eSuperTypes="#//BaseClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Motor" eSuperTypes="#//ECUPort">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" lowerBound="1" eType="#//MotorKind"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Taster" eSuperTypes="#//ECUPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Ultraschall" eSuperTypes="#//ECUPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AutosarSystem" eSuperTypes="#//BaseClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="swc" upperBound="-1" eType="#//SWC"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="brick" upperBound="-1"
+        eType="#//Brick" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connection" upperBound="-1"
+        eType="#//Connection" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OperationMode">
+    <eLiterals name="MASTER"/>
+    <eLiterals name="SLAVE" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="I2CExpander" eSuperTypes="#//RawAccess">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" lowerBound="1" eType="#//IC2Mode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pin" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ADC" eSuperTypes="#//RawAccess"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Brick" eSuperTypes="#//BaseClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hardwareconnection" upperBound="-1"
+        eType="#//HardwareConnection" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bluetoothMode" lowerBound="1"
+        eType="#//OperationMode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bluetoothMAC" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="swc" upperBound="-1" eType="#//SWC"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TriggerPortType">
+    <eLiterals name="INPUT"/>
+    <eLiterals name="OUTPUT" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ServerClientPortType">
+    <eLiterals name="SERVER"/>
+    <eLiterals name="CLIENT" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SenderReceiverPortType">
+    <eLiterals name="SENDER"/>
+    <eLiterals name="RECEIVER" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ECUPort" abstract="true" eSuperTypes="#//Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SoftwarePort" abstract="true" eSuperTypes="#//Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HardwareConnection" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hardwareport" lowerBound="1"
+        eType="#//ECUPort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="IC2Mode">
+    <eLiterals name="DIO"/>
+    <eLiterals name="ADC" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LED" eSuperTypes="#//ECUPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JoystickTaster" eSuperTypes="#//ECUPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JoystickHorizontal" eSuperTypes="#//ECUPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JoystickVertical" eSuperTypes="#//ECUPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Connection" eSuperTypes="#//BaseClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="input" lowerBound="1" eType="#//SoftwarePort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="output" lowerBound="1"
+        eType="#//SoftwarePort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="BrickPort">
+    <eLiterals name="NXT_PORT_A" literal="NXT_PORT_A"/>
+    <eLiterals name="NXT_PORT_B" value="1"/>
+    <eLiterals name="NXT_PORT_C" value="2"/>
+    <eLiterals name="NXT_PORT_S1" value="3"/>
+    <eLiterals name="NXT_PORT_S2" value="4"/>
+    <eLiterals name="NXT_PORT_S3" value="5" literal="NXT_PORT_S3"/>
+    <eLiterals name="NXT_PORT_S4" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TriggerEvent" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TimeTrigger" eSuperTypes="#//TriggerEvent #//BaseClass">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="milliseconds" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="100"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TriggerPortTrigger" eSuperTypes="#//BaseClass #//TriggerEvent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="triggerport" lowerBound="1"
+        eType="#//TriggerPort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RawAccess" abstract="true" eSuperTypes="#//ActuatorSensor">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="accessMode" lowerBound="1"
+        eType="#//AccessMode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AccessMode">
+    <eLiterals name="READ"/>
+    <eLiterals name="WRITE" value="1"/>
+    <eLiterals name="BOTH" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActuatorSensor" eSuperTypes="#//HardwareConnection #//BaseClass">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="portNr" lowerBound="1"
+        eType="#//BrickPort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MotorKind">
+    <eLiterals name="LEFT"/>
+    <eLiterals name="RIGHT" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HardwareUltraschall" eSuperTypes="#//ECRobotAccess"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HardwareMotor" eSuperTypes="#//ECRobotAccess"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ECRobotAccess" abstract="true" eSuperTypes="#//ActuatorSensor">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="accessMode" lowerBound="1"
+        eType="#//AccessMode"/>
+  </eClassifiers>
+</ecore:EPackage>

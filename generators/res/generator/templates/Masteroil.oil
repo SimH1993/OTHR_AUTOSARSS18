@@ -1,0 +1,98 @@
+//****************************************************************************
+// @Module        master
+// @Filename      master.oil
+// @Project       AUTOSARSS18
+//----------------------------------------------------------------------------
+// @Description   This oil file contains all tasks for 
+//                the Project.
+//
+//----------------------------------------------------------------------------
+// @Date          21.06.2018 11:52:51
+//
+
+//============================================================================
+//@includes
+#include "implementation.oil"
+
+//============================================================================
+CPU ATMEL_AT91SAM7S256
+{
+	OS LEJOS_OSEK
+	{
+		STATUS = EXTENDED;
+		STARTUPHOOK = FALSE;
+		ERRORHOOK = FALSE;
+		SHUTDOWNHOOK = FALSE;
+		PRETASKHOOK = FALSE;
+		POSTTASKHOOK = FALSE;
+		USEGETSERVICEID = FALSE;
+		USEPARAMETERACCESS = FALSE;
+		USERESSCHEDULER = FALSE;
+	}; 
+
+	APPMODE appmode1{};
+	
+
+	TASK ComTask_send
+	{
+		AUTOSTART = TRUE { APPMODE = appmode1; };
+		PRIORITY = 11;
+		ACTIVATION = 1;
+		SCHEDULE = NON;
+		STACKSIZE = 512;
+		
+		EVENT = ComEvent_send;
+	};
+	
+	TASK ComTask_receive
+	{
+		AUTOSTART = TRUE { APPMODE = appmode1; };
+		PRIORITY = 11;
+		ACTIVATION = 1;
+		SCHEDULE = NON;
+		STACKSIZE = 512;
+		EVENT = ComEvent_receive;
+	};
+	
+	EVENT ComEvent_send
+	{
+		MASK = AUTO;
+	};
+	
+	COUNTER CounterOne
+	{
+		MINCYCLE = 1;
+		MAXALLOWEDVALUE = 2000000;
+		TICKSPERBASE = 1;
+	};
+	
+	ALARM ComAlarm_receive
+	{
+		COUNTER = CounterOne;
+		ACTION = SETEVENT { 
+			TASK = ComTask_receive; 
+			EVENT = ComEvent_receive; };
+		AUTOSTART = TRUE { 
+			ALARMTIME = 50; 
+			CYCLETIME = 50; 
+			APPMODE = appmode1; 
+		};
+	};
+	
+	EVENT ComEvent_receive
+	{
+		MASK = AUTO;
+	};
+	
+	//////This is the region for RTE generated Alarms\\\\\\ 
+	___ALARM_REPLACE___
+	//////End of region \\\\\\\\\\\ 
+	
+	//////This is the region for RTE generated events\\\\\\ 
+	___EVENT_REPLACE___
+	//////End of region \\\\\\\\\\\ 
+	
+	//////This is the region for RTE generated TASKS\\\\\\ 
+	___TASKS___
+	//////End of region \\\\\\\\\\\ 
+}; 

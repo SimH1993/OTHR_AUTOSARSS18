@@ -19,3 +19,16 @@ docu/latex/Legosar.toc
 *.bbl
 *.blg
 *.synctex
+
+# Ignore the build stuff
+/Gesamtintegration/Brick_*/*.sh
+/Gesamtintegration/Brick_*/*.rxe
+/Gesamtintegration/Brick_*/*.bin
+/Gesamtintegration/Brick_*/*.map
+/Gesamtintegration/Brick_*/*.elf
+/Gesamtintegration/Brick_*/implementation.oil
+/Gesamtintegration/Brick_*/kernel_cfg.c
+/Gesamtintegration/Brick_*/kernel_id.h
+/Gesamtintegration/Brick_*/build
+/Gesamtintegration/Brick_*/BSW
+

@@ -1,0 +1,5 @@
+if ( taskEvents & <EVENT_NAME> ) {
+	// Call runnable
+	<RUNNABLE_NAME>();
+	ClearEvent(<EVENT_NAME>);
+}

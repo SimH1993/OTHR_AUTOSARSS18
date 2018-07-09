@@ -1,0 +1,1 @@
+#define RTE_TRIGGER_<PORT_NAME>() <MACRO_BODY>
