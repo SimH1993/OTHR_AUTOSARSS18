@@ -1,3 +1,4 @@
+#include "defines.h"
 #include "kernel.h"
 #include "kernel_id.h"
 #include "ecrobot_interface.h" 
@@ -44,9 +45,8 @@ void ecrobot_device_initialize()
 	#ifdef SONAR_SENSOR_PORT
 	sonar_initialize_sensor(SONAR_SENSOR_PORT);
 	#endif
-	#ifdef I2C_PORT
-	i2c_enable(I2C_PORT); //TODO: MIssing, needs merge
-	#endif
+	<I2C_INIT>
+	<ADC_INIT>
 }
 
 void ecrobot_device_terminate()

@@ -30,7 +30,7 @@ public class TriggerPortGenerator extends SoftwarePortGenerator {
 		if (port.getType() == TriggerPortType.OUTPUT) {
 			SWC swc = (SWC) port.eContainer();
 			if (isLocal(port)) {
-				String replace = "SetEvent(" + "SWC_" + swc.getName() + "_Main" + ", " + findTrigger(port).getName()
+				String replace = "SetEvent(" + "SWC_" + findLocalTargetSWC(port).getName() + "_Main" + ", " + findTrigger(port).getName()
 						+ ")";
 				return generateByTemplate("TriggerTemplateOutput.txt").addReplacement("<PORT_NAME>", port.getName())
 						.addReplacement("<MACRO_BODY>", replace).execute();
@@ -76,6 +76,16 @@ public class TriggerPortGenerator extends SoftwarePortGenerator {
 			}
 		}
 		throw new RuntimeException("No TriggertPortTrigger found");
+	}
+	
+	private SWC findLocalTargetSWC(TriggerPort triggerPort) {
+		AutosarSystem container = (AutosarSystem) triggerPort.eContainer().eContainer();
+		for (Connection conn : container.getConnection()) {
+			if (conn.getInput().equals(triggerPort)) {
+				return (SWC) conn.getOutput().eContainer();
+			}
+		}
+		throw new RuntimeException("No TriggerPort Input found");
 	}
 
 	private TriggerPortTrigger findTriggerActivator(TriggerPort port) {
