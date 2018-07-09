@@ -5,7 +5,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="BaseClass" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ServerClientPort" eSuperTypes="#//SoftwarePort">
+  <eClassifiers xsi:type="ecore:EClass" name="ServerClientPort" abstract="true" eSuperTypes="#//SoftwarePort">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ServerClientPortType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SWC" eSuperTypes="#//BaseClass">
@@ -107,18 +107,17 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="triggerport" lowerBound="1"
         eType="#//TriggerPort"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RawAccess" abstract="true" eSuperTypes="#//ActuatorSensor">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="accessMode" lowerBound="1"
-        eType="#//AccessMode"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RawAccess" abstract="true" eSuperTypes="#//ActuatorSensor"/>
   <eClassifiers xsi:type="ecore:EEnum" name="AccessMode">
     <eLiterals name="READ"/>
     <eLiterals name="WRITE" value="1"/>
     <eLiterals name="BOTH" value="2"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ActuatorSensor" eSuperTypes="#//HardwareConnection #//BaseClass">
+  <eClassifiers xsi:type="ecore:EClass" name="ActuatorSensor" abstract="true" eSuperTypes="#//HardwareConnection #//BaseClass">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="portNr" lowerBound="1"
         eType="#//BrickPort"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="accessMode" lowerBound="1"
+        eType="#//AccessMode"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="MotorKind">
     <eLiterals name="LEFT"/>
@@ -126,8 +125,5 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="HardwareUltraschall" eSuperTypes="#//ECRobotAccess"/>
   <eClassifiers xsi:type="ecore:EClass" name="HardwareMotor" eSuperTypes="#//ECRobotAccess"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ECRobotAccess" abstract="true" eSuperTypes="#//ActuatorSensor">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="accessMode" lowerBound="1"
-        eType="#//AccessMode"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ECRobotAccess" abstract="true" eSuperTypes="#//ActuatorSensor"/>
 </ecore:EPackage>

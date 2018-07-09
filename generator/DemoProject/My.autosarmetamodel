@@ -10,7 +10,7 @@
     <runnable name="FlankenErkennung">
       <triggerevent xsi:type="autosarMetaModel:TimeTrigger" name="TriggerFlankenErkennung"/>
     </runnable>
-    <port xsi:type="autosarMetaModel:JoystickTaster" name="Taster"/>
+    <port xsi:type="autosarMetaModel:JoystickTaster" name="JoystickTaster"/>
     <port xsi:type="autosarMetaModel:JoystickHorizontal" name="JostickHorizontal"/>
     <port xsi:type="autosarMetaModel:JoystickVertical" name="JoystickVertical"/>
     <port xsi:type="autosarMetaModel:SenderReceiverPort" name="OutJoystickHorizontal"/>
@@ -37,10 +37,13 @@
       <triggerevent xsi:type="autosarMetaModel:TriggerPortTrigger" name="TriggerBlinkersteuerung" triggerport="//@swc.2/@port.4"/>
     </runnable>
     <port xsi:type="autosarMetaModel:Motor" name="MotorLinks"/>
-    <port xsi:type="autosarMetaModel:Motor" name="MotorRechts"/>
-    <port xsi:type="autosarMetaModel:LED" name="Blinker"/>
+    <port xsi:type="autosarMetaModel:Motor" name="MotorRechts" kind="RIGHT"/>
+    <port xsi:type="autosarMetaModel:LED" name="BlinkerLED1"/>
     <port xsi:type="autosarMetaModel:SenderReceiverPort" name="InMotorspeed" type="RECEIVER"/>
     <port xsi:type="autosarMetaModel:TriggerPort" name="InFlankenerkennung"/>
+    <port xsi:type="autosarMetaModel:LED" name="BlinkerLED2"/>
+    <port xsi:type="autosarMetaModel:LED" name="BlinkerLED3"/>
+    <port xsi:type="autosarMetaModel:LED" name="BlinkerLED4"/>
   </swc>
   <swc name="4">
     <runnable name="DisplayAusgabe">
@@ -52,18 +55,18 @@
     <port xsi:type="autosarMetaModel:SenderReceiverPort" name="InJoystickSound" type="RECEIVER"/>
     <port xsi:type="autosarMetaModel:SenderReceiverPort" name="InUltraschall" type="RECEIVER"/>
   </swc>
-  <brick name="1" bluetoothMode="SLAVE" bluetoothMAC="00:22:83:23:12:65:00" swc="//@swc.0 //@swc.1 //@swc.3">
+  <brick name="1" bluetoothMode="SLAVE" bluetoothMAC="00:22:83:20:32:97:00" swc="//@swc.0 //@swc.1 //@swc.3">
     <hardwareconnection xsi:type="autosarMetaModel:ADC" hardwareport="//@swc.0/@port.7" name="BlinkerTaster" portNr="NXT_PORT_S1"/>
     <hardwareconnection xsi:type="autosarMetaModel:HardwareUltraschall" hardwareport="//@swc.0/@port.6" name="Ultraschall" portNr="NXT_PORT_S2"/>
     <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.0/@port.1" name="JoystickHorizontalPin" portNr="NXT_PORT_S4" address="0x48" mode="ADC"/>
     <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.0/@port.2" name="JoystickVerticalPin" portNr="NXT_PORT_S4" address="0x48" mode="ADC" pin="1"/>
     <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.0/@port.0" name="JoystickButtonPin" portNr="NXT_PORT_S4" address="0x48" mode="ADC" pin="2"/>
   </brick>
-  <brick name="2" bluetoothMAC="00:22:83:26:26:59:00" swc="//@swc.2">
-    <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.2/@port.2" name="LED1" portNr="NXT_PORT_S1" address="0x26"/>
-    <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.2/@port.2" name="LED2" portNr="NXT_PORT_S1" address="0x26" pin="1"/>
-    <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.2/@port.2" name="LED3" portNr="NXT_PORT_S1" address="0x26" pin="2"/>
-    <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.2/@port.2" name="LED4" portNr="NXT_PORT_S1" address="0x26" pin="3"/>
+  <brick name="2" bluetoothMAC="00:22:83:20:32:97:00" swc="//@swc.2">
+    <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.2/@port.2" name="LED1" portNr="NXT_PORT_S1" accessMode="BOTH" address="0x26"/>
+    <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.2/@port.5" name="LED2" portNr="NXT_PORT_S1" accessMode="BOTH" address="0x26" pin="1"/>
+    <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.2/@port.6" name="LED3" portNr="NXT_PORT_S1" accessMode="BOTH" address="0x26" pin="2"/>
+    <hardwareconnection xsi:type="autosarMetaModel:I2CExpander" hardwareport="//@swc.2/@port.7" name="LED4" portNr="NXT_PORT_S1" accessMode="BOTH" address="0x26" pin="3"/>
     <hardwareconnection xsi:type="autosarMetaModel:HardwareMotor" hardwareport="//@swc.2/@port.0" name="MotorLinks" accessMode="WRITE"/>
     <hardwareconnection xsi:type="autosarMetaModel:HardwareMotor" hardwareport="//@swc.2/@port.1" name="MotorRechts" portNr="NXT_PORT_B" accessMode="WRITE"/>
   </brick>
