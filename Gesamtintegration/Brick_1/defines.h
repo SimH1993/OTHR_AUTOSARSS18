@@ -1,7 +1,0 @@
-#ifndef DEFINES
-#define DEFINES
-
-#define COM_CONNECT_SLAVE_ADDRESS		{ 00, 22, 83, 20, 32, 97, 00 }
-#define SONAR_SENSOR_PORT	NXT_PORT_S2
-#define TOUCH_SENSOR_PORT	NXT_PORT_S1
-#endif

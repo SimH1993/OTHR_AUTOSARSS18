@@ -1,0 +1,37 @@
+\chapter{Funktionalitäten}
+Unser Projekt bietet folgende Funktionalitäten.
+%wir verschiedene Funktionalitäten, welche in mehreren Softwarekomponenten eingeteilt sind. Dabei bestehen drei aus Sensor-Aktor-Software-Kompenten und einer als Anwendungssoftwarekomponte. Unter den Funktionalitäten gehören die Kontrolle über Soundwiedergabe, Displayausgabe, dem LED-Blinken, der Motorsteuerung und der Bluetoothkommunikation. Im Folgenden werden wir jetzt weiter auf die einzelnen Funktionalitäten eingehen und ihre Aufgabe beschreiben.
+
+\section{Analog/Digital Wandlung}
+Es ist möglich eine Analog Digital Wandlung in unseren System durchzuführen. Die Werte können dann in den Runnables weiter verwendet werden. Es kann sowohl der interne ADC des NXT, als auch ein ADC eines über I$^2$C angeschlossenen Expanders ausgelesen werden.
+%Für die Flankenerkennung am Taster und das Auslesen der Joystick Werte wird eine ADC (Analog/Digital Wandlung) eingesetzt. Diese ADC ist für die externen und internen Funktionsabläufe zuständig, das heißt für die Analoge Signalwandlung innerhalb des Roboters und dem externen Auslesen von Werten außerhalb des Mindstorms.
+
+\section{Digital Input/Output Steuerung}
+Beim Digital Output wird ein Bit in einem Register gesetzt, sodass ein PIN High oder Low geschalten wird und damit z. B. eine LED zum Leuchten gebracht wird. Ähnlich kann bei Verwendung des Pins als Input der Pegel des Pins aus einem Register ausgelesen werden.
+
+\section{Textausgabe am Display}
+Der NXT besitzt einen Display bei dem es möglich ist Text auszugeben. Hierbei stehen 8 Zeilen mit je 16 Zeichen bereit.
+%Die Runnable Display Ausgabe aus der Softwarekomponente 4 hat die Aufgabe, empfangene Werte des Ultraschalls von der Basissoftware and die Hardware zu senden.
+
+\section{Soundwiedergabe}
+Außerdem bietet der NXT mittels Lautsprecher eine Soundwiedergabe. Hierbei wurden Funktionalitäten implementiert mit denen es möglich einzelne Töne oder eine \dq{}*.wav\dq{} Datei wiederzugeben.
+%Die Soundausgabe, welche einen einzelnen Ton von sich gibt, wird über den Joystick geregelt. Der Jojystick tiggert hierfür lediglich ein Signal an die Soundausgabe, welcher von der Basissoftware ein Signal an den Lautsprecher des Mindstorms überträgt.
+
+
+\section{Motorsteuerung}
+Zwei einzelne Motoren sind hier seperat steuerbar.
+%Die Motorsteuerung wird über eine Anzahl an weitergegebenen Signalen, Ausgangspunkt ein Joystick, geregelt. Dabei wird zu beginn der Joystick ausgelesen, der ausgelesene Wert weiter gegeben, berechnet und über die Motorsteuerung von der Basisstation aus, der jeweilige Motor des Roboters angesteuert.
+
+\section{Kommunikation via Bluetooth}
+Es ist eine Kommunikation zwischen nur zwei NXTs über Bluetooth möglich.
+
+\section{Kommunikation über I$^2$C}
+Der NXT bietet eine I$^2$C Kommunikationschnitstelle. Dadurch bieten wir die Möglichkeit an, Werte über diese Schnittstelle zu empfangen und zu senden. Diese Art der Kommunikation kann aber nur für das Senden und  Empfangen von Werten zu oder von einem anderen Mircocontroller und der Ultraschalleinheit (nur empfangen) genutzt werden und nicht zur Kommunikation zwischen zwei NXTs.
+%Die I$^2$C ist über einen Serverclientport an die erste Softwarekomponente angeschlossen. Dort werden die Daten vom I$^2$C vom Ultraschall ausgelesen und weiter über einen Sender an die Softwarekompontente 4 gesendet.
+
+%\section{LED Blinken}
+%Über ein Signal von der Flankenerkennung an die Blinkersteuerung werden die Signale von der Basisstation an ein Interface gesendet, um von dort aus über ein I$^2$C die LED Ansteuerung  zuregeln.
+
+
+
+

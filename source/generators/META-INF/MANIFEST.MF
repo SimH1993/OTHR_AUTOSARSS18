@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test2
+Bundle-SymbolicName: Generator
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: Test2
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.14.0",
+ org.eclipse.emf.ecore.xmi;bundle-version="2.14.0",
+ AutosarMetaModel;bundle-version="0.1.0",
+ AutosarMetaModel.editor;bundle-version="1.0.0"
